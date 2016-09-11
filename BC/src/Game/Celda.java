@@ -12,6 +12,10 @@ public class Celda {
 		columna = c;
 		objeto = obj;
 	}
+	
+	public GameObject getObstaculo(){
+		return objeto;
+	}
 		
 	public String toString()
 	{

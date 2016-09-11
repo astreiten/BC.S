@@ -7,8 +7,17 @@ import javax.swing.JLabel;
 public class GameObject {
 	protected JLabel grafico;
 	protected Icon image[];
-	protected int ANCHO;
-	protected int ALTO;
+	protected final int ANCHO = 32;
+	protected final int ALTO = 32;
 	protected int velocidad;
-	protected Point posicion;
+	
+	public GameObject(){
+		image = new Icon[5];
+		grafico = new JLabel();				
+	}
+	
+	public JLabel getGrafico(){
+		return grafico;
+	}
+	
 }

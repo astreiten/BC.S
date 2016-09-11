@@ -21,6 +21,10 @@ public class Logica {
 	public Celda[][] getMatriz(){
 		return Matriz;		
 	}
+	
+	public Celda getCelda(int f, int c){
+		return Matriz[f][c];
+	}
 
 	private void cargarMapa(String nombre) {
 
