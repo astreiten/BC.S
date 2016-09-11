@@ -1,5 +1,6 @@
 package Game;
 import Tanques.Tanque;
+import Obstaculo.ParedLadrillos;
 
 public class Celda {
 	protected int fila,columna;
@@ -11,4 +12,22 @@ public class Celda {
 		columna = c;
 		objeto = obj;
 	}
+		
+	public String toString()
+	{
+		if (objeto==null)
+		{
+			return "piso";
+		}
+		else
+		{
+			if (objeto instanceof ParedLadrillos)
+			{
+				return "ladrillos";
+			}
+		}
+		return "asd";
+		
+	}
+	
 }
