@@ -15,15 +15,15 @@ public class Celda {
 		
 	public String toString()
 	{
-		if (objeto==null)
+		if (objeto == null)
 		{
-			return "piso";
+			return " piso "  ;
 		}
 		else
 		{
 			if (objeto instanceof ParedLadrillos)
 			{
-				return "ladrillos";
+				return " ladrillos ";
 			}
 		}
 		return "asd";

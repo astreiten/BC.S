@@ -7,11 +7,20 @@ import Obstaculo.*;
 import Tanques.*;
 
 public class Logica {
-	protected GUI gui;
+//	protected GUI gui;
 	protected TanqueJugador jugador;
 	protected TanqueEnemigo[] enemigos;
 	protected int nivelMapa;
 	protected Celda[][] Matriz;
+	
+	public Logica(String a ){
+		Matriz = new Celda[13][13];
+		cargarMapa(a);
+	}
+	
+	public Celda[][] getMatriz(){
+		return Matriz;		
+	}
 
 	private void cargarMapa(String nombre) {
 
@@ -41,7 +50,7 @@ public class Logica {
 
 					}
 				}
-				System.out.println("");
+				j++;
 			}
 		} catch (IOException e) { // Esto es por si ocurre un error
 			e.printStackTrace();
