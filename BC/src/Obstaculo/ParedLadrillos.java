@@ -7,7 +7,7 @@ public class ParedLadrillos extends Obstaculo{
 
 	public ParedLadrillos() {
 		super();
-		this.image[0] = new ImageIcon(this.getClass().getResource("/BC/Brick.png"));
+		this.image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/Brick.png"));
 		
 		
 	}

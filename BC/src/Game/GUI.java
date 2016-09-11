@@ -48,7 +48,7 @@ public class GUI extends JFrame {
 			for (int j = 0; j < 13; j++) {
 				if (lg.getCelda(i, j).getObstaculo() == null) {
 					JLabel nueva = new JLabel();
-					nueva.setIcon(new ImageIcon(this.getClass().getResource("/BC/Floor.png")));
+					nueva.setIcon(new ImageIcon(this.getClass().getResource("/Imagenes/Floor.png")));
 					contentPane.add(nueva);
 
 				} else {
