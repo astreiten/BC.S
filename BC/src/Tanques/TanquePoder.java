@@ -1,5 +1,5 @@
 package Tanques;
 
-public class TanquePoder {
+public class TanquePoder extends TanqueEnemigo{
 
 }
