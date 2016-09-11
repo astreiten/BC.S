@@ -1,6 +1,6 @@
 package Tanques;
 
-public abstract class TanqueJugador {
+public class TanqueJugador {
 	protected int nivel;
 	protected int disparos_simul;
 }
