@@ -3,5 +3,12 @@ import Tanques.Tanque;
 
 public class Celda {
 	protected int fila,columna;
-	protected Tanque tanque;
+	// protected Tanque tanque;
+	protected GameObject objeto;
+	
+	public Celda(int f, int c, GameObject obj){
+		fila = f;
+		columna = c;
+		objeto = obj;
+	}
 }

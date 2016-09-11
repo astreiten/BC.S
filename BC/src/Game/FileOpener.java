@@ -6,14 +6,10 @@ import java.io.IOException;
 
 public class FileOpener {
 	
-	/**
-	 * Ejemplo de como abrir y recorrer un archivo de texto. 
-	 * El ejemplo recorre el archivo leyendo el contenido y accionando en consecuencia. 
-	 * @param args
-	 */
 	
 	
-    public static void main(String[] args) {
+	
+    
 
         BufferedReader br = null;
 
