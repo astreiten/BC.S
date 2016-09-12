@@ -129,7 +129,7 @@ public class Logica {
 			break;
 		case KeyEvent.VK_RIGHT: // Derecha
 			jugador.setImagen(3);
-			if (y>12) {
+			if (y<12) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 				
 			}

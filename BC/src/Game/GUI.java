@@ -42,6 +42,7 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		super("Super Battle City Reborned");
 		addKeyListener(new KeyAdapter() {
 			   public void keyReleased(KeyEvent arg0) {
 			    mover(arg0);
@@ -71,7 +72,10 @@ public class GUI extends JFrame {
 	}
 	
 	protected void mover(KeyEvent tecla){
-		add(lg.moverJugador(tecla.getKeyCode()));
+		JLabel nueva = lg.moverJugador(tecla.getKeyCode());
+		if( nueva != null){
+			add(nueva);
+		}
 		
 	}
 
