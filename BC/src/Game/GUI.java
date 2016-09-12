@@ -1,6 +1,7 @@
 package Game;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
@@ -38,25 +39,26 @@ public class GUI extends JFrame {
 	public GUI() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 832, 832);
+		setBounds(100, 100, 650, 650 );
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(13, 13));
+		contentPane.setBackground(Color.BLACK);
 		lg = new Logica("prueba.txt.txt");
 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
-				if (lg.getCelda(i, j).getObstaculo() == null) {
-					JLabel nueva = new JLabel();
-					nueva.setIcon(new ImageIcon(this.getClass().getResource("/Imagenes/Floor.png")));
-					contentPane.add(nueva);
-
-				} else {
+				if (lg.getCelda(i, j).getObstaculo()!= null) {
 					contentPane.add(lg.getCelda(i, j).getObstaculo().getGrafico());
+				} 
+				else{
+					contentPane.add(new JLabel());
 				}
 			}
 		}
+		lg.getCelda(12, 4).getObstaculo().setGrafico();
+		
 	}
 
 }

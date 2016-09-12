@@ -16,6 +16,13 @@ public class Celda {
 	public GameObject getObstaculo(){
 		return objeto;
 	}
+	public int getFila(){
+		return fila;
+	}
+	
+	public int getCol(){
+		return columna;
+	}
 		
 	public String toString()
 	{
