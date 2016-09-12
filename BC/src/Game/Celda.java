@@ -42,6 +42,14 @@ public class Celda {
 	public Tanque getTanque(){
 		return tanque;
 	}
+	
+	public void setFila(int f){
+		fila = f;
+	}
+	
+	public void setColumna(int c){
+		columna = c;
+	}
 		
 	public String toString()
 	{

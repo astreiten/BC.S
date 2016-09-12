@@ -86,7 +86,9 @@ public class Logica {
 	}
 
 	public void concretarMovimiento(Celda salida, Celda destino) {
-		salida.getTanque().setCelda(destino);
+		salida.getTanque().getCelda().setColumna(destino.getCol());
+		salida.getTanque().getCelda().setFila(destino.getFila());
+		;
 		destino.setTanque(salida.getTanque());
 		salida.setTanque(null);
 
@@ -99,40 +101,62 @@ public class Logica {
 	public JLabel moverTanque(int key, Tanque t) {
 		JLabel toReturn = null;
 		int x = t.getCelda().getFila();
-		System.out.println("La fila es " + x);
+		System.out.println("La Fila es " + x);
 		int y = t.getCelda().getCol();
+		System.out.println("La Columna es " + y);
 
 		switch (key) {
 		case KeyEvent.VK_UP: // Arriba
 			System.out.println("Entre");
-			jugador.setImagen(0);
+
 			toReturn = jugador.getGrafico();
 			if (x > 0) {
-				System.out.println("Entre if");
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
+				jugador.setImagen(0);
 
+			}
+			else{
+				jugador.setImagen(0);	
 			}
 			break;
 		case KeyEvent.VK_DOWN: // Abajo
-			jugador.setImagen(1);
-			if (x <12) {
+
+			if (x < 12) {
+
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
-				
+				jugador.setImagen(1);
+
+			}
+			else{
+				jugador.setImagen(1);
 			}
 			break;
 		case KeyEvent.VK_LEFT: // Izquierda
-			jugador.setImagen(2);
-			if (y>0) {
+
+			if (y > 0) {
+
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
-				
+				jugador.setImagen(2);
+
 			}
+			else{
+				jugador.setImagen(2);
+
+			}
+				
 			break;
 		case KeyEvent.VK_RIGHT: // Derecha
-			jugador.setImagen(3);
-			if (y<12) {
+
+			if (y < 12) {
+
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
-				
+				jugador.setImagen(3);
+
 			}
+			else{
+				jugador.setImagen(3);
+			}
+				
 			break;
 		}
 

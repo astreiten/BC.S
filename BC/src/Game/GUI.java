@@ -44,39 +44,39 @@ public class GUI extends JFrame {
 	public GUI() {
 		super("Super Battle City Reborned");
 		addKeyListener(new KeyAdapter() {
-			   public void keyReleased(KeyEvent arg0) {
-			    mover(arg0);
-			   }
-			  });
+			public void keyReleased(KeyEvent arg0) {
+				mover(arg0);
+			}
+		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 675 );
+		setBounds(100, 100, 650, 675);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setLayout(null);
-		lg = new Logica("prueba.txt.txt");
+		lg = new Logica("mapa.txt");
 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
-				if (lg.getCelda(i, j).getObstaculo()!= null) {
+				if (lg.getCelda(i, j).getObstaculo() != null) {
 					add(lg.getCelda(i, j).getObstaculo().getGrafico());
-				} 
-				
+				}
+
 			}
 		}
 		contentPane.add(lg.cargarTanque());
-		
-		
+
 	}
-	
-	protected void mover(KeyEvent tecla){
-		JLabel nueva = lg.moverJugador(tecla.getKeyCode());
-		if( nueva != null){
-			add(nueva);
+
+	protected void mover(KeyEvent tecla) {
+		if (lg.moverJugador(tecla.getKeyCode()) != null) {
+			add(lg.moverJugador(tecla.getKeyCode()));
 		}
 		
+		this.repaint();
+
 	}
 
 }
