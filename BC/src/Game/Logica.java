@@ -110,47 +110,32 @@ public class Logica {
 
 			if (x > 0) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
-				jugador.setImagen(0);
-
-			} else {
-				jugador.setImagen(0);
 			}
+			jugador.setImagen(0);
 			break;
+			
 		case KeyEvent.VK_DOWN: // Abajo
 
 			if (x < 12) {
-
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
-				jugador.setImagen(1);
-
-			} else {
-				jugador.setImagen(1);
 			}
+			jugador.setImagen(1);
 			break;
+			
 		case KeyEvent.VK_LEFT: // Izquierda
 
 			if (y > 0) {
-
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
-				jugador.setImagen(2);
-
-			} else {
-				jugador.setImagen(2);
-
-			}
-
+			} 
+			jugador.setImagen(2);
 			break;
+			
 		case KeyEvent.VK_RIGHT: // Derecha
 
 			if (y < 12) {
-
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
-				jugador.setImagen(3);
-
-			} else {
-				jugador.setImagen(3);
 			}
-
+			jugador.setImagen(3);
 			break;
 		}
 
