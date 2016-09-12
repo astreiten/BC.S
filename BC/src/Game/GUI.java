@@ -43,21 +43,20 @@ public class GUI extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(13, 13));
 		contentPane.setBackground(Color.BLACK);
+		contentPane.setLayout(null);
 		lg = new Logica("prueba.txt.txt");
 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
 				if (lg.getCelda(i, j).getObstaculo()!= null) {
-					contentPane.add(lg.getCelda(i, j).getObstaculo().getGrafico());
+					add(lg.getCelda(i, j).getObstaculo().getGrafico());
 				} 
 				else{
-					contentPane.add(new JLabel());
+					add(new JLabel());
 				}
 			}
 		}
-		lg.getCelda(12, 4).getObstaculo().setGrafico();
 		
 	}
 

@@ -49,7 +49,11 @@ public class Logica {
 						Matriz[j][i] = new Celda(j, i, null); // Coloco un piso
 						break;
 					case 'B':
-						Matriz[j][i] = new Celda(j, i, new ParedLadrillos());
+						Celda nueva = new Celda(j,i);
+						ParedLadrillos pared = new ParedLadrillos(nueva);
+						pared.setImagen(0);
+						nueva.setObject(pared);
+						Matriz[j][i] = nueva;
 						break;
 
 					}

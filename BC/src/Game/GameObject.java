@@ -13,9 +13,12 @@ public class GameObject {
 	protected Celda celda;
 	
 	
-	public GameObject(){
+	public GameObject(Celda celdita){
 		image = new Icon[5];
-		grafico = new JLabel();				
+		celda = celdita;
+		grafico = new JLabel();
+		grafico.setBounds(celda.getCol(),celda.getFila(),ANCHO, ALTO);
+		
 	}
 	
 	public JLabel getGrafico(){
@@ -23,6 +26,11 @@ public class GameObject {
 	}
 	public void setGrafico(){
 		grafico.setIcon(null);
+	}
+	
+	public void setImagen(int indice){
+		grafico.setIcon(image[indice]);
+		grafico.setBounds(celda.getCol()*50,celda.getFila()*50,50, 50);
 	}
 	
 }

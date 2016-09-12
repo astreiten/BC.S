@@ -5,8 +5,8 @@ import javax.swing.Icon;
 import Game.*;
 
 public abstract class Obstaculo extends GameObject {
-	public Obstaculo() {
-		super();
+	public Obstaculo(Celda celdita) {
+		super(celdita);
 		
 	}
 	protected boolean esAtravesable;

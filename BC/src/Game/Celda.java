@@ -7,6 +7,11 @@ public class Celda {
 	// protected Tanque tanque;
 	protected GameObject objeto;
 	
+	public Celda(int f,int c){
+		fila = f;
+		columna = c;
+	}
+	
 	public Celda(int f, int c, GameObject obj){
 		fila = f;
 		columna = c;
@@ -22,6 +27,11 @@ public class Celda {
 	
 	public int getCol(){
 		return columna;
+	}
+	
+	public void setObject ( GameObject obj){
+		objeto = obj;
+		
 	}
 		
 	public String toString()
