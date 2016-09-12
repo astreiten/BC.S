@@ -71,11 +71,8 @@ public class GUI extends JFrame {
 	}
 
 	protected void mover(KeyEvent tecla) {
-		if (lg.moverJugador(tecla.getKeyCode()) != null) {
-			add(lg.moverJugador(tecla.getKeyCode()));
-		}
+		lg.moverJugador(tecla.getKeyCode()); 
 		
-		this.repaint();
 
 	}
 
