@@ -4,13 +4,14 @@ import Obstaculo.ParedLadrillos;
 
 public class Celda {
 	protected int fila,columna;
-	// protected Tanque tanque;
+	protected Tanque tanque;
 	protected GameObject objeto;
 	
 	public Celda(int f,int c){
 		fila = f;
 		columna = c;
 	}
+	
 	
 	public Celda(int f, int c, GameObject obj){
 		fila = f;
@@ -32,6 +33,14 @@ public class Celda {
 	public void setObject ( GameObject obj){
 		objeto = obj;
 		
+	}
+	
+	public void setTanque( Tanque tan){
+		tanque= tan;
+	}
+	
+	public Tanque getTanque(){
+		return tanque;
 	}
 		
 	public String toString()

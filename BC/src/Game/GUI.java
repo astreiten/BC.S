@@ -1,9 +1,9 @@
 package Game;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +12,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 
 public class GUI extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Logica lg;
 
@@ -37,9 +42,14 @@ public class GUI extends JFrame {
 	 * Create the frame.
 	 */
 	public GUI() {
+		addKeyListener(new KeyAdapter() {
+			   public void keyReleased(KeyEvent arg0) {
+			    mover(arg0);
+			   }
+			  });
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 650 );
+		setBounds(100, 100, 650, 675 );
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,11 +62,16 @@ public class GUI extends JFrame {
 				if (lg.getCelda(i, j).getObstaculo()!= null) {
 					add(lg.getCelda(i, j).getObstaculo().getGrafico());
 				} 
-				else{
-					add(new JLabel());
-				}
+				
 			}
 		}
+		contentPane.add(lg.cargarTanque());
+		
+		
+	}
+	
+	protected void mover(KeyEvent tecla){
+		add(lg.moverJugador(tecla.getKeyCode()));
 		
 	}
 
