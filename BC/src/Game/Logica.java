@@ -108,7 +108,7 @@ public class Logica {
 		switch (key) {
 		case KeyEvent.VK_UP: // Arriba
 
-			if (x > 0) {
+			if ((x > 0) && getCelda(x-1,y).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
 			}
 			jugador.setImagen(0);
@@ -116,7 +116,7 @@ public class Logica {
 			
 		case KeyEvent.VK_DOWN: // Abajo
 
-			if (x < 12) {
+			if (x < 12 && getCelda(x+1,y).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 			}
 			jugador.setImagen(1);
@@ -124,7 +124,7 @@ public class Logica {
 			
 		case KeyEvent.VK_LEFT: // Izquierda
 
-			if (y > 0) {
+			if (y > 0 && getCelda(x,y-1).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
 			} 
 			jugador.setImagen(2);
@@ -132,7 +132,7 @@ public class Logica {
 			
 		case KeyEvent.VK_RIGHT: // Derecha
 
-			if (y < 12) {
+			if (y < 12 && getCelda(x,y+1).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 			}
 			jugador.setImagen(3);

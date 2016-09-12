@@ -9,7 +9,7 @@ public abstract class Obstaculo extends GameObject {
 		super(celdita);
 		
 	}
-	protected boolean esAtravesable;
+	
 	protected boolean esDestructible;
 	protected int resistencia;
 
