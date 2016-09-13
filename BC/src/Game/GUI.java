@@ -57,9 +57,10 @@ public class GUI extends JFrame {
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setLayout(null);
 		lg = new Logica("Nivel1.txt");
-
-		for (int i = 0; i < 13; i++) {
-			for (int j = 0; j < 13; j++) {
+		int i;
+		for ( i = 0 ; i < 13; i++) {
+			int j = 0;
+			for ( j =0 ; j < 13; j++) {
 				if (lg.getCelda(i, j).getObstaculo() != null) {
 					add(lg.getCelda(i, j).getObstaculo().getGrafico());
 				}

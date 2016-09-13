@@ -12,6 +12,6 @@ public class TanqueJugador extends Tanque{
 	
 	public void setImagen(int indice){
 		grafico.setIcon(image[indice]);
-		grafico.setBounds(celda.getCol()*50,celda.getFila()*50,45, 45);
+		grafico.setBounds(celda.getCol()*50,celda.getFila()*50,50, 50);
 	}
 }
