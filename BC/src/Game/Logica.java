@@ -56,16 +56,47 @@ public class Logica {
 				// Para cada letra de la linea
 				for (int i = 0; i < sCurrentLine.length(); i++) {
 					char letra = sCurrentLine.charAt(i);
+					Celda nueva = new Celda(j, i);
 
 					switch (letra) {
 					case 'F': // Si aparece una F
 						Matriz[j][i] = new Celda(j, i, null); // Coloco un piso
 						break;
 					case 'B':
-						Celda nueva = new Celda(j, i);
+
 						ParedLadrillos pared = new ParedLadrillos(nueva);
 						pared.setImagen(0);
 						nueva.setObject(pared);
+						Matriz[j][i] = nueva;
+						break;
+					case 'S':
+
+						ParedAcero acero = new ParedAcero(nueva);
+						acero.setImagen(0);
+						nueva.setObject(acero);
+						Matriz[j][i] = nueva;
+						break;
+
+					case 'E':
+
+						Aguila ag = new Aguila(nueva);
+						ag.setImagen(0);
+						nueva.setObject(ag);
+						Matriz[j][i] = nueva;
+						break;
+
+					case 'T':
+
+						Arboles ar = new Arboles(nueva);
+						ar.setImagen(0);
+						nueva.setObject(ar);
+						Matriz[j][i] = nueva;
+						break;
+					case 'W':
+
+						Agua agua = new Agua(nueva);
+						agua.setImagen(0);
+						nueva.setObject(agua);
 						Matriz[j][i] = nueva;
 						break;
 
@@ -73,7 +104,9 @@ public class Logica {
 				}
 				j++;
 			}
-		} catch (IOException e) { // Esto es por si ocurre un error
+		} catch (
+
+		IOException e) { // Esto es por si ocurre un error
 			e.printStackTrace();
 		} finally { // Esto es para que, haya ocurrido error o no
 			try {
@@ -108,31 +141,31 @@ public class Logica {
 		switch (key) {
 		case KeyEvent.VK_UP: // Arriba
 
-			if ((x > 0) && getCelda(x-1,y).atravesable()) {
+			if ((x > 0) && getCelda(x - 1, y).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
 			}
 			jugador.setImagen(0);
 			break;
-			
+
 		case KeyEvent.VK_DOWN: // Abajo
 
-			if (x < 12 && getCelda(x+1,y).atravesable()) {
+			if (x < 12 && getCelda(x + 1, y).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 			}
 			jugador.setImagen(1);
 			break;
-			
+
 		case KeyEvent.VK_LEFT: // Izquierda
 
-			if (y > 0 && getCelda(x,y-1).atravesable()) {
+			if (y > 0 && getCelda(x, y - 1).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
-			} 
+			}
 			jugador.setImagen(2);
 			break;
-			
+
 		case KeyEvent.VK_RIGHT: // Derecha
 
-			if (y < 12 && getCelda(x,y+1).atravesable()) {
+			if (y < 12 && getCelda(x, y + 1).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 			}
 			jugador.setImagen(3);

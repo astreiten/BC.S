@@ -56,7 +56,7 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setLayout(null);
-		lg = new Logica("mapa.txt");
+		lg = new Logica("Nivel1.txt");
 
 		for (int i = 0; i < 13; i++) {
 			for (int j = 0; j < 13; j++) {
