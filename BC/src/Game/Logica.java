@@ -20,11 +20,11 @@ public class Logica {
 	public Logica(String a) {
 		Matriz = new Celda[13][13];
 		cargarMapa(a);
-		Celda nueva = new Celda(12, 5);
+		Celda nueva = new Celda(12, 4);
 		jugador = new TanqueJugador(nueva);
 		jugador.setImagen(0);
-		Matriz[12][5].setTanque(jugador);
-		Matriz[12][5].setObject(null);
+		Matriz[12][4].setTanque(jugador);
+		Matriz[12][4].setObject(null);
 	}
 
 	public JLabel cargarTanque() {
