@@ -3,10 +3,17 @@ package Tanques;
 import Game.Celda;
 
 public abstract class TanqueEnemigo extends Tanque{
-	public TanqueEnemigo(Celda celdita) {
+	
+	protected Inteligencia IA;
+	protected int puntos;
+	
+	public TanqueEnemigo(Celda celdita,Inteligencia IA) {
 		super(celdita);
-		// TODO Auto-generated constructor stub
+		this.IA = IA;
 	}
 
-	protected int puntos;
+	public Inteligencia getIA() {
+		return IA;
+	}
+	
 }
