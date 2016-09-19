@@ -16,6 +16,7 @@ public class Logica {
 	protected TanqueEnemigo[] enemigos;
 	protected int nivelMapa;
 	protected Celda[][] Matriz;
+	protected ContadorTiempo tiempo;
 
 	public Logica(String a) {
 		Matriz = new Celda[13][13];
@@ -25,6 +26,8 @@ public class Logica {
 		jugador.setImagen(0);
 		Matriz[12][4].setTanque(jugador);
 		Matriz[12][4].setObject(null);
+		tiempo=new ContadorTiempo(this);
+		tiempo.start();
 	}
 
 	public JLabel cargarTanque() {
