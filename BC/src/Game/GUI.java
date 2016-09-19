@@ -73,10 +73,10 @@ public class GUI extends JFrame {
 
 	}
 
-	protected void mover(KeyEvent tecla) {
+	
 		protected void mover(KeyEvent tecla) {
-			int dir;
-			int tec=tecla.getKeyCode()
+			int dir = 0;
+			int tec=tecla.getKeyCode();
 			switch (tec) {
 			case KeyEvent.VK_UP: // Arriba
 	            dir=0;
@@ -103,4 +103,4 @@ public class GUI extends JFrame {
 
 	}
 
-}
+
