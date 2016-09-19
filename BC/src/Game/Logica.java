@@ -25,7 +25,7 @@ public class Logica {
 		jugador = new TanqueJugador(nueva);
 		jugador.setImagen(0);
 		Matriz[12][4].setTanque(jugador);
-		Matriz[12][4].setObject(null);
+		enemigos = new TanqueEnemigo[4];
 		tiempo=new ContadorTiempo(this);
 		tiempo.start();
 	}
@@ -40,6 +40,12 @@ public class Logica {
 
 	public Celda getCelda(int f, int c) {
 		return Matriz[f][c];
+	}
+	
+	public void cargarEnemigos(){
+		for( int i = 0; i < 4; i++){
+			enemigos[i] = new TanqueBasico();
+		}
 	}
 
 	private void cargarMapa(String nombre) {
@@ -133,19 +139,29 @@ public class Logica {
 	public void moverJugador(int key) {
 		moverTanque(key, jugador);
 	}
+	
+	public void moverEnemigos(){
+		
+		for(int i = 0; i < 4; i++){
+			
+			enemigos[i].getIA().mover();
+		}
+	}
 
-	public void moverTanque(int key, Tanque t) {
+	public boolean moverTanque(int key, Tanque t) {
 
 		int x = t.getCelda().getFila();
 		System.out.println("La Fila es " + x);
 		int y = t.getCelda().getCol();
 		System.out.println("La Columna es " + y);
+		boolean movi = false;
 
 		switch (key) {
 		case KeyEvent.VK_UP: // Arriba
 
 			if ((x > 0) && getCelda(x - 1, y).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
+				movi = true;
 			}
 			jugador.setImagen(0);
 			break;
@@ -154,6 +170,7 @@ public class Logica {
 
 			if (x < 12 && getCelda(x + 1, y).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
+			movi = true;
 			}
 			jugador.setImagen(1);
 			break;
@@ -162,6 +179,7 @@ public class Logica {
 
 			if (y > 0 && getCelda(x, y - 1).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
+				movi = true;
 			}
 			jugador.setImagen(2);
 			break;
@@ -170,10 +188,11 @@ public class Logica {
 
 			if (y < 12 && getCelda(x, y + 1).atravesable()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
+				movi = true;
 			}
 			jugador.setImagen(3);
 			break;
 		}
-
+		return movi;
 	}
 }
