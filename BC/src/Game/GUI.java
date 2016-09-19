@@ -74,7 +74,31 @@ public class GUI extends JFrame {
 	}
 
 	protected void mover(KeyEvent tecla) {
-		lg.moverJugador(tecla.getKeyCode()); 
+		protected void mover(KeyEvent tecla) {
+			int dir;
+			int tec=tecla.getKeyCode()
+			switch (tec) {
+			case KeyEvent.VK_UP: // Arriba
+	            dir=0;
+				break;
+
+			case KeyEvent.VK_DOWN: // Abajo
+	            dir=1;
+				break;
+
+			case KeyEvent.VK_LEFT: // Izquierda
+				dir=2;
+				break;
+
+			case KeyEvent.VK_RIGHT: // Derecha
+	            dir=3;
+				break;
+			}
+			lg.moverJugador(dir);
+			
+
+		}
+
 		
 
 	}
