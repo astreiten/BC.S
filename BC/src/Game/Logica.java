@@ -42,10 +42,12 @@ public class Logica {
 		return Matriz[f][c];
 	}
 	
-	public void cargarEnemigos(){
-		for( int i = 0; i < 4; i++){
-			enemigos[i] = new TanqueBasico();
-		}
+	public JLabel cargarEnemigos(){
+		Celda celdita = new Celda(0,0);
+		Inteligencia intel = new Inteligencia(this);
+		enemigos[0] = new TanqueBasico(celdita, intel);
+		intel.setTanque(enemigos[0]);
+		return enemigos[0].getGrafico();
 	}
 
 	private void cargarMapa(String nombre) {
@@ -144,7 +146,9 @@ public class Logica {
 		
 		for(int i = 0; i < 4; i++){
 			
-			enemigos[i].getIA().mover();
+			if(enemigos[i] != null){
+				enemigos[i].getIA().mover();
+			}
 		}
 	}
 

@@ -7,11 +7,10 @@ public class Inteligencia {
 	protected Logica lg;
 	protected TanqueEnemigo esteTanque;
 	
-	public Inteligencia(Logica log,TanqueEnemigo tanque)
+	public Inteligencia(Logica log)
 	{
 		dir=1;
 		lg=log;
-		esteTanque=tanque;
 	}
 	public void mover()
 	{
@@ -23,4 +22,7 @@ public class Inteligencia {
 		}
 	}
 
+	public void setTanque(TanqueEnemigo tanq){
+		esteTanque = tanq;
+	}
 }
