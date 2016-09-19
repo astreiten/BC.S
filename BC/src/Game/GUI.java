@@ -67,8 +67,9 @@ public class GUI extends JFrame {
 
 			}
 		}
-		contentPane.add(lg.cargarTanque());
 		contentPane.add(lg.cargarEnemigos());
+		contentPane.add(lg.cargarTanque());
+		
 
 	}
 
