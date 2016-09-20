@@ -48,6 +48,7 @@ public class Logica {
 		enemigos[0] = new TanqueBasico(celdita, intel);
 		intel.setTanque(enemigos[0]);
 		enemigos[0].setImagen(0);
+		Matriz[0][0].setTanque(enemigos[0]);
 		return enemigos[0].getGrafico();
 	}
 
@@ -168,7 +169,7 @@ public class Logica {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
 				movi = true;
 			}
-			jugador.setImagen(0);
+			t.setImagen(0);
 			break;
 
 		case 1: // Abajo
@@ -177,7 +178,7 @@ public class Logica {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 			movi = true;
 			}
-			jugador.setImagen(1);
+			t.setImagen(1);
 			break;
 
 		case 2: // Izquierda
@@ -186,7 +187,7 @@ public class Logica {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
 				movi = true;
 			}
-			jugador.setImagen(2);
+			t.setImagen(2);
 			break;
 
 		case 3: // Derecha
@@ -195,7 +196,7 @@ public class Logica {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 				movi = true;
 			}
-			jugador.setImagen(3);
+			t.setImagen(3);
 			break;
 		}
 		return movi;
