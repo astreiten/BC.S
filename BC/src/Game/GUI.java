@@ -77,6 +77,13 @@ public class GUI extends JFrame {
 		panel.setBounds(652, 0, 125, 657);
 		contentPane.add(panel);
 		panel.setBackground(Color.GRAY);
+		panel.setLayout(null);
+		
+		
+		lg.getEtiqueta().setBounds(10, 296, 105, 27);
+		panel.add(lg.getEtiqueta());
+		
+		
 		
 		contentPane.add(lg.insertarPowerUp());
 		

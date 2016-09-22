@@ -4,7 +4,9 @@ import java.awt.Point;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-public class GameObject {
+import Tanques.Tanque;
+
+public abstract class GameObject {
 	protected JLabel grafico;
 	protected Icon image[];
 	protected final int ANCHO = 32;
@@ -37,9 +39,9 @@ public class GameObject {
 		grafico.setIcon(null);
 	}
 	
-	public boolean colision(GameObject obj){
-		return false;
-	}
+	public abstract boolean colision(GameObject obj);
+	
+	
 	
 	public void setImagen(int indice){
 		grafico.setIcon(image[indice]);

@@ -19,6 +19,8 @@ public class Logica {
 	protected int nivelMapa;
 	protected Celda[][] Matriz;
 	protected ContadorTiempo tiempo;
+	protected int puntos;
+	protected JLabel puntosEtiqueta;
 
 	public Logica(String a) {
 		Matriz = new Celda[13][13];
@@ -28,7 +30,10 @@ public class Logica {
 		jugador.setImagen(0);
 		Matriz[12][4].setTanque(jugador);
 		enemigos = new TanqueEnemigo[4];
-		tiempo=new ContadorTiempo(this);
+		puntos = 0;
+		puntosEtiqueta = new JLabel();
+		
+		tiempo = new ContadorTiempo(this);
 		tiempo.start();
 	}
 
@@ -43,27 +48,27 @@ public class Logica {
 	public Celda getCelda(int f, int c) {
 		return Matriz[f][c];
 	}
-	
-	public JLabel[] cargarEnemigos(){
-		
-		JLabel [] arreglo = new JLabel[4];
-		
-		Celda celdita = new Celda(0,0);
+
+	public JLabel[] cargarEnemigos() {
+
+		JLabel[] arreglo = new JLabel[4];
+
+		Celda celdita = new Celda(0, 0);
 		Inteligencia intel = new Inteligencia(this);
 		enemigos[0] = new TanqueBasico(celdita, intel);
 		intel.setTanque(enemigos[0]);
 		enemigos[0].setImagen(0);
 		Matriz[0][0].setTanque(enemigos[0]);
 		arreglo[0] = enemigos[0].getGrafico();
-		
-		Celda celd = new Celda(10,2);
+
+		Celda celd = new Celda(10, 2);
 		Inteligencia intel1 = new Inteligencia(this);
 		enemigos[1] = new TanqueBasico(celd, intel1);
 		intel1.setTanque(enemigos[1]);
 		enemigos[1].setImagen(2);
 		Matriz[10][2].setTanque(enemigos[1]);
 		arreglo[1] = enemigos[1].getGrafico();
-		
+
 		return arreglo;
 	}
 
@@ -145,18 +150,66 @@ public class Logica {
 			}
 		}
 	}
+
+	private void mostrarExplosion() {
+		for (int i = 0; i < 4; i++) {
+			if (enemigos[i] != null) {
+				enemigos[i].setImagen(4);
+			}
+
+		}
+	}
 	
-	public JLabel insertarPowerUp(){
+	public int getPuntos(){
+		return puntos;
+	}
+	
+	public JLabel getEtiqueta(){
+		
+		return puntosEtiqueta;
+	}
+
+	
+	private void sumarPuntos(int n){
+		puntosEtiqueta.setText("" + puntos);
+		puntos += n;
+	}
+	
+	public void destruirEnemigos(int a, int b) {
+		Matriz[a][b].getObstaculo().getGrafico().setIcon(null);
+		Matriz[a][b].setObject(null);
+
+		mostrarExplosion();
+
+		for (int i = 0; i < 4; i++) {
+			if (enemigos[i] != null) {
+				System.out.println("Entre al for");
+
+				int y = enemigos[i].getCelda().getCol();
+				int x = enemigos[i].getCelda().getFila();
+				this.sumarPuntos(100);
+
+				enemigos[i].getGrafico().setIcon(null);
+				Matriz[x][y].setTanque(null);
+
+				enemigos[i] = null;
+			}
+		}
+		
+		System.out.println(puntos);
+		
+		
+
+	}
+
+	public JLabel insertarPowerUp() {
 		Celda celdita = new Celda(0, 7);
-		PowerUp granada = new Granada(celdita);
+		PowerUp granada = new Granada(celdita, this);
 		Matriz[0][7].setObject(granada);
 		granada.setImagen(0);
 		return granada.getGrafico();
-		
+
 	}
-	
-	
-	
 
 	public void concretarMovimiento(Celda salida, Celda destino) {
 		salida.getTanque().getCelda().setColumna(destino.getCol());
@@ -170,12 +223,12 @@ public class Logica {
 	public void moverJugador(int key) {
 		moverTanque(key, jugador);
 	}
-	
-	public void moverEnemigos(){
-		
-		for(int i = 0; i < 4; i++){
-			
-			if(enemigos[i] != null){
+
+	public void moverEnemigos() {
+
+		for (int i = 0; i < 4; i++) {
+
+			if (enemigos[i] != null) {
 				enemigos[i].getIA().mover();
 			}
 		}
@@ -184,9 +237,9 @@ public class Logica {
 	public boolean moverTanque(int key, Tanque t) {
 
 		int x = t.getCelda().getFila();
-		System.out.println("La Fila es " + x);
+		
 		int y = t.getCelda().getCol();
-		System.out.println("La Columna es " + y);
+		
 		boolean movi = false;
 
 		switch (key) {
@@ -203,7 +256,7 @@ public class Logica {
 
 			if (x < 12 && getCelda(x + 1, y).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
-			movi = true;
+				movi = true;
 			}
 			t.setImagen(1);
 			break;

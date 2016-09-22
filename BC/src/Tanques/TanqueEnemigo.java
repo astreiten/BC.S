@@ -10,6 +10,7 @@ public abstract class TanqueEnemigo extends Tanque{
 	public TanqueEnemigo(Celda celdita,Inteligencia IA) {
 		super(celdita);
 		this.IA = IA;
+		
 	}
 
 	public Inteligencia getIA() {
