@@ -37,7 +37,7 @@ public class GameObject {
 		grafico.setIcon(null);
 	}
 	
-	public boolean colision(){
+	public boolean colision(GameObject obj){
 		return false;
 	}
 	

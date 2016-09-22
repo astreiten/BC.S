@@ -18,4 +18,6 @@ public class TanqueJugador extends Tanque{
 		
 	}
 	
+	
+	
 }

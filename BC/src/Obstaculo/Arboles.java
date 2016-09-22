@@ -3,6 +3,7 @@ package Obstaculo;
 import javax.swing.ImageIcon;
 
 import Game.Celda;
+import Game.GameObject;
 
 public class Arboles extends Obstaculo {
 
@@ -12,7 +13,7 @@ public class Arboles extends Obstaculo {
 
 	}
 	
-	public boolean colision(){
+	public boolean colision(GameObject obj){
 		return true;
 	}
 

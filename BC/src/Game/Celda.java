@@ -40,13 +40,13 @@ public class Celda {
 		tanque = tan;
 	}
 
-	public boolean inspeccionar() {
+	public boolean inspeccionar(GameObject obj) {
 		if (tanque != null) {
-			return tanque.colision();
+			return tanque.colision(obj);
 		} else {
 			if (objeto != null) {
 
-				return objeto.colision();
+				return objeto.colision(obj);
 			} else {
 				return true;
 			}

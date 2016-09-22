@@ -8,6 +8,8 @@ import java.io.IOException;
 import javax.swing.JLabel;
 
 import Obstaculo.*;
+import PowerUp.Granada;
+import PowerUp.PowerUp;
 import Tanques.*;
 
 public class Logica {
@@ -58,7 +60,7 @@ public class Logica {
 		Inteligencia intel1 = new Inteligencia(this);
 		enemigos[1] = new TanqueBasico(celd, intel1);
 		intel1.setTanque(enemigos[1]);
-		enemigos[1].setImagen(0);
+		enemigos[1].setImagen(2);
 		Matriz[10][2].setTanque(enemigos[1]);
 		arreglo[1] = enemigos[1].getGrafico();
 		
@@ -143,6 +145,18 @@ public class Logica {
 			}
 		}
 	}
+	
+	public JLabel insertarPowerUp(){
+		Celda celdita = new Celda(0, 7);
+		PowerUp granada = new Granada(celdita);
+		Matriz[0][7].setObject(granada);
+		granada.setImagen(0);
+		return granada.getGrafico();
+		
+	}
+	
+	
+	
 
 	public void concretarMovimiento(Celda salida, Celda destino) {
 		salida.getTanque().getCelda().setColumna(destino.getCol());
@@ -178,7 +192,7 @@ public class Logica {
 		switch (key) {
 		case 0: // Arriba
 
-			if ((x > 0) && getCelda(x - 1, y).inspeccionar()) {
+			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
 				movi = true;
 			}
@@ -187,7 +201,7 @@ public class Logica {
 
 		case 1: // Abajo
 
-			if (x < 12 && getCelda(x + 1, y).inspeccionar()) {
+			if (x < 12 && getCelda(x + 1, y).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 			movi = true;
 			}
@@ -196,7 +210,7 @@ public class Logica {
 
 		case 2: // Izquierda
 
-			if (y > 0 && getCelda(x, y - 1).inspeccionar()) {
+			if (y > 0 && getCelda(x, y - 1).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
 				movi = true;
 			}
@@ -205,7 +219,7 @@ public class Logica {
 
 		case 3: // Derecha
 
-			if (y < 12 && getCelda(x, y + 1).inspeccionar()) {
+			if (y < 12 && getCelda(x, y + 1).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 				movi = true;
 			}

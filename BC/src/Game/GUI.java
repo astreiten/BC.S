@@ -78,6 +78,8 @@ public class GUI extends JFrame {
 		contentPane.add(panel);
 		panel.setBackground(Color.GRAY);
 		
+		contentPane.add(lg.insertarPowerUp());
+		
 
 	}
 
