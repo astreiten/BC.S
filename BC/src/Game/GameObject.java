@@ -11,7 +11,7 @@ public class GameObject {
 	protected final int ALTO = 32;
 	protected int velocidad;
 	protected Celda celda;
-	protected boolean esAtravesable;
+	//protected boolean esAtravesable;
 	
 	
 	public GameObject(Celda celdita){
@@ -37,8 +37,8 @@ public class GameObject {
 		grafico.setIcon(null);
 	}
 	
-	public boolean esAtravesable(){
-		return esAtravesable;
+	public boolean colision(){
+		return false;
 	}
 	
 	public void setImagen(int indice){

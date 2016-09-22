@@ -8,7 +8,7 @@ public class ParedAcero extends Obstaculo {
 
 	public ParedAcero(Celda celdita) {
 		super(celdita);
-		esAtravesable = false;
+	
 		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/Steel.png"));
 	}
 

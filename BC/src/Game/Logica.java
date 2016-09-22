@@ -42,14 +42,27 @@ public class Logica {
 		return Matriz[f][c];
 	}
 	
-	public JLabel cargarEnemigos(){
+	public JLabel[] cargarEnemigos(){
+		
+		JLabel [] arreglo = new JLabel[4];
+		
 		Celda celdita = new Celda(0,0);
 		Inteligencia intel = new Inteligencia(this);
 		enemigos[0] = new TanqueBasico(celdita, intel);
 		intel.setTanque(enemigos[0]);
 		enemigos[0].setImagen(0);
 		Matriz[0][0].setTanque(enemigos[0]);
-		return enemigos[0].getGrafico();
+		arreglo[0] = enemigos[0].getGrafico();
+		
+		Celda celd = new Celda(10,2);
+		Inteligencia intel1 = new Inteligencia(this);
+		enemigos[1] = new TanqueBasico(celd, intel1);
+		intel1.setTanque(enemigos[1]);
+		enemigos[1].setImagen(0);
+		Matriz[10][2].setTanque(enemigos[1]);
+		arreglo[1] = enemigos[1].getGrafico();
+		
+		return arreglo;
 	}
 
 	private void cargarMapa(String nombre) {
@@ -165,7 +178,7 @@ public class Logica {
 		switch (key) {
 		case 0: // Arriba
 
-			if ((x > 0) && getCelda(x - 1, y).atravesable()) {
+			if ((x > 0) && getCelda(x - 1, y).inspeccionar()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
 				movi = true;
 			}
@@ -174,7 +187,7 @@ public class Logica {
 
 		case 1: // Abajo
 
-			if (x < 12 && getCelda(x + 1, y).atravesable()) {
+			if (x < 12 && getCelda(x + 1, y).inspeccionar()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 			movi = true;
 			}
@@ -183,7 +196,7 @@ public class Logica {
 
 		case 2: // Izquierda
 
-			if (y > 0 && getCelda(x, y - 1).atravesable()) {
+			if (y > 0 && getCelda(x, y - 1).inspeccionar()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
 				movi = true;
 			}
@@ -192,7 +205,7 @@ public class Logica {
 
 		case 3: // Derecha
 
-			if (y < 12 && getCelda(x, y + 1).atravesable()) {
+			if (y < 12 && getCelda(x, y + 1).inspeccionar()) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 				movi = true;
 			}

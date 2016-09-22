@@ -8,7 +8,7 @@ public class Aguila extends Obstaculo {
 
 	public Aguila(Celda celdita) {
 		super(celdita);
-		esAtravesable = false;
+		
 		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/Eagle.png"));
 		// TODO Auto-generated constructor stub
 	}

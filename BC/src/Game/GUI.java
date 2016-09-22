@@ -50,7 +50,7 @@ public class GUI extends JFrame {
 		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 675);
+		setBounds(100, 100, 783, 686);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -62,13 +62,21 @@ public class GUI extends JFrame {
 			int j = 0;
 			for ( j =0 ; j < 13; j++) {
 				if (lg.getCelda(i, j).getObstaculo() != null) {
-					add(lg.getCelda(i, j).getObstaculo().getGrafico());
+					getContentPane().add(lg.getCelda(i, j).getObstaculo().getGrafico());
 				}
 
 			}
 		}
-		contentPane.add(lg.cargarEnemigos());
+		JLabel [] arreglo = lg.cargarEnemigos();
+		
+		contentPane.add(arreglo[0]);
+		contentPane.add(arreglo[1]);
 		contentPane.add(lg.cargarTanque());
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(652, 0, 125, 657);
+		contentPane.add(panel);
+		panel.setBackground(Color.GRAY);
 		
 
 	}
@@ -98,9 +106,6 @@ public class GUI extends JFrame {
 			
 
 		}
-
-		
-
 	}
 
 

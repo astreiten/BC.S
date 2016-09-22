@@ -40,11 +40,16 @@ public class Celda {
 		tanque = tan;
 	}
 
-	public boolean atravesable() {
-		if (objeto != null) {
-			return tanque == null && objeto.esAtravesable();
+	public boolean inspeccionar() {
+		if (tanque != null) {
+			return tanque.colision();
 		} else {
-			return true;
+			if (objeto != null) {
+
+				return objeto.colision();
+			} else {
+				return true;
+			}
 		}
 	}
 
