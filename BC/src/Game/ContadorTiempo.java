@@ -19,4 +19,6 @@ public class ContadorTiempo extends Thread {
 			logica.moverEnemigos();
 		}
 	}
+	
+
 }

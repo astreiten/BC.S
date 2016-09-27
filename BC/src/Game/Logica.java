@@ -61,12 +61,12 @@ public class Logica {
 		Matriz[0][0].setTanque(enemigos[0]);
 		arreglo[0] = enemigos[0].getGrafico();
 
-		Celda celd = new Celda(10, 2);
+		Celda celd = new Celda(0, 1);
 		Inteligencia intel1 = new Inteligencia(this);
 		enemigos[1] = new TanqueBasico(celd, intel1);
 		intel1.setTanque(enemigos[1]);
-		enemigos[1].setImagen(2);
-		Matriz[10][2].setTanque(enemigos[1]);
+		enemigos[1].setImagen(0);
+		Matriz[0][1].setTanque(enemigos[1]);
 		arreglo[1] = enemigos[1].getGrafico();
 
 		return arreglo;
@@ -171,13 +171,12 @@ public class Logica {
 
 	
 	private void sumarPuntos(int n){
-		puntosEtiqueta.setText("" + puntos);
 		puntos += n;
+		puntosEtiqueta.setText("" + puntos);
 	}
 	
 	public void destruirEnemigos(int a, int b) {
-		Matriz[a][b].getObstaculo().getGrafico().setIcon(null);
-		Matriz[a][b].setObject(null);
+		eliminarBloque(a,b);
 
 		mostrarExplosion();
 
@@ -188,7 +187,9 @@ public class Logica {
 				int y = enemigos[i].getCelda().getCol();
 				int x = enemigos[i].getCelda().getFila();
 				this.sumarPuntos(100);
-
+				
+				enemigos[i].setImagen(4);
+								
 				enemigos[i].getGrafico().setIcon(null);
 				Matriz[x][y].setTanque(null);
 
@@ -200,6 +201,11 @@ public class Logica {
 		
 		
 
+	}
+	
+	public void eliminarBloque(int a, int b){
+		Matriz[a][b].getObstaculo().getGrafico().setIcon(null);
+		Matriz[a][b].setObject(null);
 	}
 
 	public JLabel insertarPowerUp() {
@@ -214,7 +220,6 @@ public class Logica {
 	public void concretarMovimiento(Celda salida, Celda destino) {
 		salida.getTanque().getCelda().setColumna(destino.getCol());
 		salida.getTanque().getCelda().setFila(destino.getFila());
-		;
 		destino.setTanque(salida.getTanque());
 		salida.setTanque(null);
 

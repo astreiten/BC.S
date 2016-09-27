@@ -10,6 +10,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUI extends JFrame {
 
@@ -85,6 +88,9 @@ public class GUI extends JFrame {
 		
 		
 		
+		
+		
+		
 		contentPane.add(lg.insertarPowerUp());
 		
 
@@ -94,6 +100,7 @@ public class GUI extends JFrame {
 		protected void mover(KeyEvent tecla) {
 			int dir = 0;
 			int tec=tecla.getKeyCode();
+			System.out.println(tec);
 			switch (tec) {
 			case KeyEvent.VK_UP: // Arriba
 	            dir=0;
@@ -109,6 +116,9 @@ public class GUI extends JFrame {
 
 			case KeyEvent.VK_RIGHT: // Derecha
 	            dir=3;
+				break;
+			case 32:
+				lg.eliminarBloque(6,6);
 				break;
 			}
 			lg.moverJugador(dir);

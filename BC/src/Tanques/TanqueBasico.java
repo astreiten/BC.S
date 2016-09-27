@@ -15,6 +15,7 @@ public class TanqueBasico extends TanqueEnemigo{
 		image[1] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicD.gif"));
 		image[2] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicL.gif"));
 		image[3] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicR.gif"));
+		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Explosion.gif"));
 		puntos = 100;
 	}
 	
