@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -24,6 +26,12 @@ public class GUI extends JFrame {
 	private Logica lg;
 
 	private JPanel contentPane;
+
+	private boolean entre = false;
+	private Icon[] arreglo2 = new Icon[9];
+	private JLabel label = new JLabel("");
+	private JLabel label_1 = new JLabel("");
+	private JLabel label_2 = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -59,7 +67,7 @@ public class GUI extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setBackground(Color.BLACK);
 		contentPane.setLayout(null);
-		lg = new Logica("Nivel1.txt");
+		lg = new Logica("Nivel1.txt", this);
 		int i;
 		for ( i = 0 ; i < 13; i++) {
 			int j = 0;
@@ -76,15 +84,41 @@ public class GUI extends JFrame {
 		contentPane.add(arreglo[1]);
 		contentPane.add(lg.cargarTanque());
 		
+		
 		JPanel panel = new JPanel();
 		panel.setBounds(652, 0, 125, 657);
 		contentPane.add(panel);
 		panel.setBackground(Color.GRAY);
 		panel.setLayout(null);
+			
+		arreglo2[0]= new ImageIcon(this.getClass().getResource("/Imagenes/0.png"));
+		
+		arreglo2[2]= new ImageIcon(this.getClass().getResource("/Imagenes/2.png"));
+	
+		
+		
+		
+		
+		
 		
 		
 		lg.getEtiqueta().setBounds(10, 296, 105, 27);
 		panel.add(lg.getEtiqueta());
+		
+		
+		label.setBounds(21, 309, 20, 20);
+		label.setIcon(arreglo2[0]);
+		panel.add(label);
+		
+		
+		label_1.setBounds(51, 309, 20, 20);
+		label_1.setIcon(arreglo2[0]);
+		panel.add(label_1);
+		
+		
+		label_2.setBounds(83, 309, 20, 20);
+		label_2.setIcon(arreglo2[0]);
+		panel.add(label_2);
 		
 		
 		
@@ -96,35 +130,53 @@ public class GUI extends JFrame {
 
 	}
 
-	
-		protected void mover(KeyEvent tecla) {
-			int dir = 0;
-			int tec=tecla.getKeyCode();
-			System.out.println(tec);
-			switch (tec) {
-			case KeyEvent.VK_UP: // Arriba
-	            dir=0;
-				break;
+	protected void mover(KeyEvent tecla) {
+		int dir = 0;
+		int tec = tecla.getKeyCode();
 
-			case KeyEvent.VK_DOWN: // Abajo
-	            dir=1;
-				break;
+		System.out.println(tec);
+		switch (tec) {
+		case KeyEvent.VK_UP: // Arriba
+			dir = 0;
+			break;
 
-			case KeyEvent.VK_LEFT: // Izquierda
-				dir=2;
-				break;
+		case KeyEvent.VK_DOWN: // Abajo
+			dir = 1;
+			break;
 
-			case KeyEvent.VK_RIGHT: // Derecha
-	            dir=3;
-				break;
-			case 32:
-				lg.eliminarBloque(6,6);
-				break;
+		case KeyEvent.VK_LEFT: // Izquierda
+			dir = 2;
+			break;
+
+		case KeyEvent.VK_RIGHT: // Derecha
+			dir = 3;
+			break;
+		case 32:
+			if (!entre) {
+				lg.eliminarBloque(6, 6);
+				lg.eliminarBloque(1, 1);
+				entre = true;
 			}
-			lg.moverJugador(dir);
-			
-
+			break;
 		}
+		lg.moverJugador(dir);
+
 	}
 
+	public Icon[] armarEtiqueta(int n) {
+		Icon [] nuevo = new Icon[3];
+		
+		for(int i = 0; i < nuevo.length; i++){
+			nuevo[i] = arreglo2[n % 10];
+			n /= 10;		
+		}
+		
+		label.setIcon(nuevo[2]);
+		label_1.setIcon(nuevo[1]);
+		label_2.setIcon(nuevo[0]);
+		
+		return nuevo;
+		
 
+	}
+}
