@@ -46,7 +46,7 @@ public class Celda {
 		} else {
 			if (objeto != null) {
 
-				return objeto.colision(obj);
+				return objeto.acept(obj);
 			} else {
 				return true;
 			}

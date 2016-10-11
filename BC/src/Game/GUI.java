@@ -55,13 +55,13 @@ public class GUI extends JFrame {
 	public GUI() {
 		super("Super Battle City Reborned");
 		addKeyListener(new KeyAdapter() {
-			public void keyReleased(KeyEvent arg0) {
+			public void keyPressed(KeyEvent arg0) {
 				mover(arg0);
 			}
 		});
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 783, 686);
+		setBounds(100, 100, 783, 680);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -102,8 +102,7 @@ public class GUI extends JFrame {
 		
 		
 		
-		lg.getEtiqueta().setBounds(10, 296, 105, 27);
-		panel.add(lg.getEtiqueta());
+		
 		
 		
 		label.setBounds(21, 309, 20, 20);
@@ -131,7 +130,7 @@ public class GUI extends JFrame {
 	}
 
 	protected void mover(KeyEvent tecla) {
-		int dir = 0;
+		int dir = -1;
 		int tec = tecla.getKeyCode();
 
 		System.out.println(tec);

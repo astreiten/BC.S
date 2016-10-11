@@ -3,6 +3,9 @@ package Tanques;
 import javax.swing.ImageIcon;
 
 import Game.Celda;
+import Game.Visitante;
+import PowerUp.Estrella;
+import PowerUp.Granada;
 
 public class TanqueBasico extends TanqueEnemigo{
 	
@@ -17,6 +20,24 @@ public class TanqueBasico extends TanqueEnemigo{
 		image[3] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicR.gif"));
 		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Explosion.gif"));
 		puntos = 100;
+	}
+
+	@Override
+	public boolean acept(Visitante v) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitar(Granada gra) {
+		
+		return true;
+	}
+
+	@Override
+	public boolean visitarEst(Estrella est) {
+		
+		return true;
 	}
 	
 	

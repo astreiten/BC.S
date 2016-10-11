@@ -1,10 +1,10 @@
 package Game;
 
-public class ContadorTiempo extends Thread {
+public class ControlEnemigos extends Thread {
 	
 	private Logica logica;
 	
-	public ContadorTiempo(Logica l) {
+	public ControlEnemigos(Logica l) {
 		logica = l;
 	}
 	

@@ -5,6 +5,8 @@ import javax.swing.ImageIcon;
 
 import Game.Celda;
 import Game.GameObject;
+import Game.Visitante;
+import PowerUp.Granada;
 
 public class ParedLadrillos extends Obstaculo {
 
@@ -16,6 +18,18 @@ public class ParedLadrillos extends Obstaculo {
 	}
 
 	public boolean colision(GameObject obj) {
+		return false;
+	}
+
+	@Override
+	public boolean acept(Visitante v) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitar(Granada gra) {
+		// TODO Auto-generated method stub
 		return false;
 	}
 

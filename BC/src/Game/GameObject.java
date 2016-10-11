@@ -1,12 +1,11 @@
 package Game;
 
 import java.awt.Point;
+
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-import Tanques.Tanque;
-
-public abstract class GameObject {
+public abstract class GameObject implements Elementito, Visitante{
 	protected JLabel grafico;
 	protected Icon image[];
 	protected final int ANCHO = 32;

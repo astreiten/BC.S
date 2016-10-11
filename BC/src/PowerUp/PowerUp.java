@@ -12,7 +12,6 @@ public abstract class PowerUp extends GameObject{
 	public PowerUp(Celda celdita, Logica l) {
 		super(celdita);
 		lg = l;
-		// TODO Auto-generated constructor stub
 	}
 	
 	
