@@ -1,24 +1,26 @@
-package Obstaculo;
+package Game;
 
 import javax.swing.ImageIcon;
 
-import Game.Celda;
-import Game.GameObject;
-import Game.Visitante;
 import PowerUp.Estrella;
 import PowerUp.Granada;
+import Tanques.*;
 
-public class Agua extends Obstaculo {
+public class Bala extends GameObject {
+	
+	protected int direccion;
+	protected Tanque fuente;
 
-	public Agua(Celda celdita) {
+	public Bala(Celda celdita, Tanque f, int dir) {
 		super(celdita);
+		fuente = f;
+		direccion = dir;
+		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaUp.gif" ));
 		
-		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/agua.gif"));
-		// TODO Auto-generated constructor stub
 	}
 	
-	public boolean colision(GameObject obj){
-		return false;
+	public int getDir(){
+		return direccion;
 	}
 
 	@Override
@@ -35,6 +37,12 @@ public class Agua extends Obstaculo {
 
 	@Override
 	public boolean visitarEst(Estrella est) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean colision(GameObject obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}

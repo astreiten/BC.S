@@ -5,7 +5,7 @@ import Obstaculo.ParedLadrillos;
 
 public class Celda {
 	protected int fila, columna;
-	protected Tanque tanque;
+	protected GameObject dinamico;
 	protected GameObject objeto;
 
 	public Celda(int f, int c) {
@@ -36,13 +36,13 @@ public class Celda {
 
 	}
 
-	public void setTanque(Tanque tan) {
-		tanque = tan;
+	public void setTanque(GameObject din) {//modificar
+		dinamico= din;
 	}
 
 	public boolean inspeccionar(GameObject obj) {
-		if (tanque != null) {
-			return tanque.colision(obj);
+		if (dinamico != null) {
+			return dinamico.colision(obj);
 		} else {
 			if (objeto != null) {
 
@@ -53,8 +53,8 @@ public class Celda {
 		}
 	}
 
-	public Tanque getTanque() {
-		return tanque;
+	public GameObject getTanque() { //modificar
+		return dinamico;
 	}
 
 	public void setFila(int f) {

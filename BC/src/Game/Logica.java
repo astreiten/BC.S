@@ -24,6 +24,8 @@ public class Logica {
 	protected ControlEnemigos tiempo;
 	protected int puntos;
 	protected ContadorAnimaciones animaciones;
+	protected Bala [] arregloBalas;
+	protected ControlDisparo control;
 	
 	
 
@@ -38,6 +40,11 @@ public class Logica {
 		puntos = 0;
 		gui = g;
 		gui.armarEtiqueta(puntos);
+		
+		arregloBalas = new Bala[7];
+		control= new ControlDisparo(this);
+		control.start();
+		
 
 		tiempo = new ControlEnemigos(this);
 		tiempo.start();
@@ -255,8 +262,29 @@ public class Logica {
 			}
 		}
 	}
+	
+	public void disparoJugador(){
+		Bala nueva = jugador.disparo();
+		nueva.setImagen(0);
+		gui.add(nueva.getGrafico());
+		arregloBalas[0] = nueva;
+	}
+	
+	public void moverBalas(){
+		for(int i =0; i < 7; i++){
+			if(arregloBalas[i] != null){
+			
+				moverTanque(arregloBalas[i].getDir(), arregloBalas[i]);
+				System.out.println("Ubicacion bala: (" + arregloBalas[i].getCelda().getFila()+ " , " + arregloBalas[i].getCelda().getCol() + " ) ");
+			}
+			
+		}
+		
+		
+	}
+	
 
-	public boolean moverTanque(int key, Tanque t) {
+	public boolean moverTanque(int key, GameObject t) {
 
 		int x = t.getCelda().getFila();
 
@@ -269,6 +297,7 @@ public class Logica {
 
 			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
+				
 				movi = true;
 			}
 			t.setImagen(0);
@@ -303,6 +332,8 @@ public class Logica {
 		}
 		return movi;
 	}
+	
+	
 
 	
 }

@@ -151,11 +151,7 @@ public class GUI extends JFrame {
 			dir = 3;
 			break;
 		case 32:
-			if (!entre) {
-				lg.eliminarBloque(6, 6);
-				lg.eliminarBloque(1, 1);
-				entre = true;
-			}
+			lg.disparoJugador();
 			break;
 		}
 		lg.moverJugador(dir);

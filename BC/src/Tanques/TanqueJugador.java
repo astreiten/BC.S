@@ -2,6 +2,7 @@ package Tanques;
 
 import javax.swing.ImageIcon;
 
+import Game.Bala;
 import Game.Celda;
 import Game.Visitante;
 import PowerUp.Estrella;
@@ -13,11 +14,13 @@ public class TanqueJugador extends Tanque implements Visitante{
 	protected int nivel;
 	protected int disparos_simul;
 	protected State estado;
+	protected int dir;
 	
 	public TanqueJugador(Celda celdita) {
 		super(celdita);
 		nivel = 1;
 		estado = new Nivel1(this);
+		dir = 0;
 		
 		
 	}
@@ -50,6 +53,22 @@ public class TanqueJugador extends Tanque implements Visitante{
 	
 	public int getNivel(){
 		return nivel;
+	}
+	
+	public int getDir(){
+		return dir;
+	}
+	
+	public Bala disparo(){
+		Celda celdita = null;
+		int x=this.getCelda().getFila();
+		int y=this.getCelda().getCol();
+	
+		switch(dir){
+		case 0: celdita = new Celda(x+1,y);
+		}
+		Bala nueva = new Bala(celdita, this, dir);
+		return nueva;
 	}
 
 

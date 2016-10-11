@@ -53,6 +53,12 @@ public class Granada extends PowerUp {
 		return false;
 	}
 
+	@Override
+	public boolean visitarEst(Estrella est) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 
 
