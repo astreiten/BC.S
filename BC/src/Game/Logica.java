@@ -214,6 +214,11 @@ public class Logica {
 		Matriz[a][b].getObstaculo().getGrafico().setIcon(null);
 		Matriz[a][b].setObject(null);
 	}
+	
+	public void eliminarTanque(int a, int b) {
+		Matriz[a][b].getTanque().getGrafico().setIcon(null);
+		Matriz[a][b].setTanque(null);
+	}
 
 	public JLabel insertarPowerUp() {
 		Celda celdita = new Celda(0, 7);

@@ -44,4 +44,5 @@ public abstract class Tanque extends GameObject{
 		return puntos;
 	}
 	
+	
 }

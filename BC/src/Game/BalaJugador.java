@@ -5,6 +5,7 @@ import Obstaculo.ParedLadrillos;
 import PowerUp.Estrella;
 import PowerUp.Granada;
 import Tanques.Tanque;
+import Tanques.TanqueEnemigo;
 
 public class BalaJugador extends Bala{
 
@@ -59,6 +60,19 @@ public class BalaJugador extends Bala{
 			 p.setGrafico();
 			 lg.eliminarBloque(p.getCelda().getFila(), p.getCelda().getCol());
 		 }
+		return false;
+	}
+
+	@Override
+	public boolean visitarEnemigo(TanqueEnemigo t) {
+		boolean aux = t.decrementarResistencia();
+		System.out.println("Visite");
+		if(aux){
+			t.setGrafico();
+			lg.eliminarTanque(t.getCelda().getFila(), t.getCelda().getCol());
+			
+		}
+		
 		return false;
 	}
 

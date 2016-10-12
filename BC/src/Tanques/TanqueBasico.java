@@ -23,13 +23,11 @@ public class TanqueBasico extends TanqueEnemigo{
 		image[3] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicR.gif"));
 		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Explosion.gif"));
 		puntos = 100;
+		resistencia = 1;
 	}
 
-	@Override
-	public boolean acept(Visitante v) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
+	
 
 	@Override
 	public boolean visitar(Granada gra) {
@@ -51,6 +49,12 @@ public class TanqueBasico extends TanqueEnemigo{
 
 	@Override
 	public boolean visitarLadrillo(ParedLadrillos p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarEnemigo(TanqueEnemigo t) {
 		// TODO Auto-generated method stub
 		return false;
 	}
