@@ -46,6 +46,15 @@ public class BalaJugador extends Bala{
 	@Override
 	public boolean visitarLadrillo(ParedLadrillos p) {
 		 boolean destruir = p.decrementarResistencia();
+		 int aux = p.getResistencia();
+		 switch(aux){
+		 case 3: p.setImagen(3);
+		 break;
+		 case 2: p.setImagen(2);
+		 break;
+		 case 1: p.setImagen(1);
+		 break;
+		 }
 		 if(destruir){
 			 p.setGrafico();
 			 lg.eliminarBloque(p.getCelda().getFila(), p.getCelda().getCol());

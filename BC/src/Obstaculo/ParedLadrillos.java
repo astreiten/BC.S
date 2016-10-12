@@ -16,6 +16,9 @@ public class ParedLadrillos extends Obstaculo {
 		super(celdita);
 		resistencia = 4;
 		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/Brick.png"));
+		image[3] = new ImageIcon(this.getClass().getResource("/Imagenes/Brick3.png"));
+		image[2] = new ImageIcon(this.getClass().getResource("/Imagenes/Brick2.png"));
+		image[1] = new ImageIcon(this.getClass().getResource("/Imagenes/Brick1.png"));
 
 	}
 
@@ -27,6 +30,10 @@ public class ParedLadrillos extends Obstaculo {
 		resistencia--;
 		boolean destruime = resistencia < 1;
 		return destruime;
+	}
+	
+	public int getResistencia(){
+		return resistencia;
 	}
 
 	@Override
