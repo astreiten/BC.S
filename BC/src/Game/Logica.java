@@ -262,10 +262,9 @@ public class Logica {
 
 	public void disparoJugador() {
 		Bala nueva = jugador.disparo();
-		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(),
-				nueva.getCelda().getCol());
+		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(), nueva.getCelda().getCol());
 		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
-		nueva.setImagen(0);
+		nueva.setImagen(nueva.getDir());
 		gui.add(nueva.getGrafico());
 		arregloBalas[0] = nueva;
 	}

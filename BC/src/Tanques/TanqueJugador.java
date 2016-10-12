@@ -65,13 +65,14 @@ public class TanqueJugador extends Tanque implements Visitante{
 	
 		switch(dir){
 		case 0: celdita = new Celda(x-1,y);
+		break;
 		
 		case 1: celdita = new Celda(x+1,y);
-		
+		break;
 		case 2: celdita = new Celda(x, y-1);
-		
+		break;
 		case 3: celdita = new Celda(x, y+1);
-		
+		break;
 		}
 		Bala nueva = new BalaJugador(celdita, this, dir);
 		return nueva;
