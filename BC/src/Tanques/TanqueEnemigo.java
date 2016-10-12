@@ -33,4 +33,5 @@ public abstract class TanqueEnemigo extends Tanque{
 		return resistencia == 0;
 	}
 	
+	
 }

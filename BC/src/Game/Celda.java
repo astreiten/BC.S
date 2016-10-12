@@ -42,7 +42,7 @@ public class Celda {
 
 	public boolean inspeccionar(GameObject obj) {
 		if (dinamico != null) {
-			return dinamico.colision(obj);
+			return dinamico.acept(obj);
 		} else {
 			if (objeto != null) {
 

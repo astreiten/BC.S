@@ -261,7 +261,12 @@ public class Logica {
 
 			if (enemigos[i] != null) {
 				enemigos[i].getIA().mover();
+			if(enemigos[i].getRes() == 0){
+					System.out.println("Entre al if");
+					enemigos[i] = null;
+				}
 			}
+			
 		}
 	}
 

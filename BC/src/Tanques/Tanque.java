@@ -36,6 +36,10 @@ public abstract class Tanque extends GameObject{
 		return dir;
 	}
 	
+	public int getRes(){
+		return resistencia;
+	}
+	
 	public boolean colision(GameObject obj){
 		return false;
 	}

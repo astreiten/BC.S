@@ -133,7 +133,7 @@ public class GUI extends JFrame {
 	
 		int tec = tecla.getKeyCode();
 
-		System.out.println(tec);
+		
 		switch (tec) {
 		case KeyEvent.VK_UP: // Arriba
 			lg.moverJugador(0);

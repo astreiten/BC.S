@@ -16,7 +16,7 @@ public class ControlDisparo extends Thread{
 			catch(InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.println("Estoy tratando de mover");
+			
 			lg.moverBalas();
 		}
 	}

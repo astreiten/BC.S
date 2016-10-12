@@ -16,7 +16,7 @@ public class BalaJugador extends Bala{
 
 	@Override
 	public boolean acept(Visitante v) {
-		// TODO Auto-generated method stub
+		System.out.println("Acept bala");
 		return false;
 	}
 
@@ -66,8 +66,9 @@ public class BalaJugador extends Bala{
 	@Override
 	public boolean visitarEnemigo(TanqueEnemigo t) {
 		boolean aux = t.decrementarResistencia();
-		System.out.println("Visite");
+		
 		if(aux){
+			System.out.println("Visite");
 			t.setGrafico();
 			lg.eliminarTanque(t.getCelda().getFila(), t.getCelda().getCol());
 			
