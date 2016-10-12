@@ -24,10 +24,8 @@ public class Logica {
 	protected ControlEnemigos tiempo;
 	protected int puntos;
 	protected ContadorAnimaciones animaciones;
-	protected Bala [] arregloBalas;
+	protected Bala[] arregloBalas;
 	protected ControlDisparo control;
-	
-	
 
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
@@ -40,15 +38,14 @@ public class Logica {
 		puntos = 0;
 		gui = g;
 		gui.armarEtiqueta(puntos);
-		
+
 		arregloBalas = new Bala[7];
-		control= new ControlDisparo(this);
+		control = new ControlDisparo(this);
 		control.start();
-		
 
 		tiempo = new ControlEnemigos(this);
 		tiempo.start();
-		
+
 	}
 
 	public JLabel cargarTanque() {
@@ -86,13 +83,12 @@ public class Logica {
 
 		return arreglo;
 	}
-	
-	public void subirNivel(){
+
+	public void subirNivel() {
 		jugador.setImagen(4);
-		jugador.setNivel(jugador.getNivel()+1);
+		jugador.setNivel(jugador.getNivel() + 1);
 		jugador.cambiarEstado();
-		
-		
+
 	}
 
 	private void cargarMapa(String nombre) {
@@ -188,30 +184,23 @@ public class Logica {
 		return puntos;
 	}
 
-	
-
 	private void sumarPuntos(int n) {
 		puntos += n;
 		gui.armarEtiqueta(puntos);
 	}
 
-	
 	public void destruirEnemigos(int a, int b) {
-		eliminarBloque(a, b);	
+		eliminarBloque(a, b);
 		animaciones = new ContadorAnimaciones(this);
-	
+
 		animaciones.start();
-		
-		
-		
+
 		for (int i1 = 0; i1 < 4; i1++) {
 			if (enemigos[i1] != null) {
-				
+
 				int y = enemigos[i1].getCelda().getCol();
 				int x = enemigos[i1].getCelda().getFila();
 				this.sumarPuntos(100);
-				
-				
 
 				enemigos[i1].getGrafico().setIcon(null);
 				Matriz[x][y].setTanque(null);
@@ -219,11 +208,7 @@ public class Logica {
 				enemigos[i1] = null;
 			}
 		}
-		}
-		
-
-
-
+	}
 
 	public void eliminarBloque(int a, int b) {
 		Matriz[a][b].getObstaculo().getGrafico().setIcon(null);
@@ -240,8 +225,7 @@ public class Logica {
 		Matriz[5][12].setObject(estrella);
 		estrella.setImagen(0);
 		gui.add(estrella.getGrafico());
-		
-		
+
 		return granada.getGrafico();
 
 	}
@@ -253,7 +237,7 @@ public class Logica {
 		salida.setTanque(null);
 
 	}
-	
+
 	public void concretarMovimientoBala(Celda salida, Celda destino) {
 		salida.getTanque().getCelda().setColumna(destino.getCol());
 		salida.getTanque().getCelda().setFila(destino.getFila());
@@ -261,7 +245,6 @@ public class Logica {
 		salida.setTanque(null);
 
 	}
-	
 
 	public void moverJugador(int key) {
 		moverTanque(key, jugador);
@@ -276,50 +259,76 @@ public class Logica {
 			}
 		}
 	}
-	
-	public void disparoJugador(){
+
+	public void disparoJugador() {
 		Bala nueva = jugador.disparo();
-		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(),nueva.getCelda().getCol());
+		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(),
+				nueva.getCelda().getCol());
 		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
 		nueva.setImagen(0);
 		gui.add(nueva.getGrafico());
 		arregloBalas[0] = nueva;
 	}
-	
-	public void moverBalas(){
-		for(int i =0; i < 7; i++){
-			if(arregloBalas[i] != null){
-			
+
+	public void moverBalas() {
+		for (int i = 0; i < 7; i++) {
+			if (arregloBalas[i] != null) {
+
 				moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
-				System.out.println("Ubicacion bala: (" + arregloBalas[i].getCelda().getFila()+ " , " + arregloBalas[i].getCelda().getCol() + " ) ");
+				System.out.println("Ubicacion bala: (" + arregloBalas[i].getCelda().getFila() + " , "
+						+ arregloBalas[i].getCelda().getCol() + " ) ");
 			}
-			
+
 		}
-		
-		
+
 	}
-	
-public void moverBala(int dir, Bala t){
-	int x = t.getCelda().getFila();
 
-	int y = t.getCelda().getCol();
+	public void moverBala(int dir, Bala t) {
+		int x = t.getCelda().getFila();
 
-	switch (dir) {
-	case 0: // Arriba
+		int y = t.getCelda().getCol();
 
-		if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
-			concretarMovimientoBala(getCelda(x, y), getCelda(x - 1, y));
-			
-			
+		switch (dir) {
+		case 0: // Arriba
+
+			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
+				concretarMovimientoBala(getCelda(x, y), getCelda(x - 1, y));
+
+			}
+			t.setImagen(0);
+			break;
+
+		case 1: // Abajo
+
+			if (x < 12 && getCelda(x + 1, y).inspeccionar(t)) {
+				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
+
+			}
+			t.setImagen(1);
+			break;
+
+		case 2: // Izquierda
+
+			if (y > 0 && getCelda(x, y - 1).inspeccionar(t)) {
+				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
+
+			}
+			t.setImagen(2);
+			break;
+
+		case 3: // Derecha
+
+			if (y < 12 && getCelda(x, y + 1).inspeccionar(t)) {
+				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
+
+			}
+			t.setImagen(3);
+			break;
 		}
-		t.setImagen(0);
-		break;
-	}
-	
-}
-	
 
-	public boolean moverTanque(int key, GameObject t) {
+	}
+
+	public boolean moverTanque(int key, Tanque t) {
 
 		int x = t.getCelda().getFila();
 
@@ -332,9 +341,10 @@ public void moverBala(int dir, Bala t){
 
 			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
-				
+
 				movi = true;
 			}
+			t.setDir(0);
 			t.setImagen(0);
 			break;
 
@@ -344,6 +354,7 @@ public void moverBala(int dir, Bala t){
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 				movi = true;
 			}
+			t.setDir(1);
 			t.setImagen(1);
 			break;
 
@@ -353,6 +364,7 @@ public void moverBala(int dir, Bala t){
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
 				movi = true;
 			}
+			t.setDir(2);
 			t.setImagen(2);
 			break;
 
@@ -362,13 +374,11 @@ public void moverBala(int dir, Bala t){
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 				movi = true;
 			}
+			t.setDir(3);
 			t.setImagen(3);
 			break;
 		}
 		return movi;
 	}
-	
-	
 
-	
 }

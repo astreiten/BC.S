@@ -130,7 +130,7 @@ public class GUI extends JFrame {
 	}
 
 	protected void mover(KeyEvent tecla) {
-		int dir = -1;
+	
 		int tec = tecla.getKeyCode();
 
 		System.out.println(tec);

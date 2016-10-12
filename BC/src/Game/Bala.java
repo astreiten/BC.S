@@ -6,7 +6,7 @@ import PowerUp.Estrella;
 import PowerUp.Granada;
 import Tanques.*;
 
-public class Bala extends GameObject {
+public abstract class Bala extends GameObject {
 	
 	protected int direccion;
 	protected Tanque fuente;
@@ -16,6 +16,10 @@ public class Bala extends GameObject {
 		fuente = f;
 		direccion = dir;
 		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaUp.gif" ));
+		image[1] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaDw.gif" ));
+		image[2] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaIzq.gif" ));
+		image[3] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaDer.gif" ));
+		
 		
 	}
 	
@@ -23,28 +27,5 @@ public class Bala extends GameObject {
 		return direccion;
 	}
 
-	@Override
-	public boolean acept(Visitante v) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean visitar(Granada gra) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean visitarEst(Estrella est) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean colision(GameObject obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 }
