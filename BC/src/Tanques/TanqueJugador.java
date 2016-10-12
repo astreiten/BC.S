@@ -65,7 +65,7 @@ public class TanqueJugador extends Tanque implements Visitante{
 		int y=this.getCelda().getCol();
 	
 		switch(dir){
-		case 0: celdita = new Celda(x+1,y);
+		case 0: celdita = new Celda(x-1,y);
 		}
 		Bala nueva = new Bala(celdita, this, dir);
 		return nueva;

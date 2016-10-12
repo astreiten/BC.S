@@ -136,25 +136,25 @@ public class GUI extends JFrame {
 		System.out.println(tec);
 		switch (tec) {
 		case KeyEvent.VK_UP: // Arriba
-			dir = 0;
+			lg.moverJugador(0);
 			break;
 
 		case KeyEvent.VK_DOWN: // Abajo
-			dir = 1;
+			lg.moverJugador(1);
 			break;
 
 		case KeyEvent.VK_LEFT: // Izquierda
-			dir = 2;
+			lg.moverJugador(2);
 			break;
 
 		case KeyEvent.VK_RIGHT: // Derecha
-			dir = 3;
+			lg.moverJugador(3);
 			break;
 		case 32:
 			lg.disparoJugador();
 			break;
 		}
-		lg.moverJugador(dir);
+	
 
 	}
 

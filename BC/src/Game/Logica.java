@@ -177,6 +177,7 @@ public class Logica {
 	public void mostrarExplosion() {
 		for (int i = 0; i < 4; i++) {
 			if (enemigos[i] != null) {
+				System.out.println("E");
 				enemigos[i].setImagen(4);
 			}
 
@@ -194,31 +195,35 @@ public class Logica {
 		gui.armarEtiqueta(puntos);
 	}
 
+	
 	public void destruirEnemigos(int a, int b) {
 		eliminarBloque(a, b);	
 		animaciones = new ContadorAnimaciones(this);
-		animaciones.setCond(true);
+	
 		animaciones.start();
 		
-		for (int i = 0; i < 4; i++) {
-			if (enemigos[i] != null) {
+		
+		
+		for (int i1 = 0; i1 < 4; i1++) {
+			if (enemigos[i1] != null) {
 				
-				int y = enemigos[i].getCelda().getCol();
-				int x = enemigos[i].getCelda().getFila();
+				int y = enemigos[i1].getCelda().getCol();
+				int x = enemigos[i1].getCelda().getFila();
 				this.sumarPuntos(100);
 				
 				
 
-				enemigos[i].getGrafico().setIcon(null);
+				enemigos[i1].getGrafico().setIcon(null);
 				Matriz[x][y].setTanque(null);
 
-				enemigos[i] = null;
+				enemigos[i1] = null;
 			}
 		}
+		}
+		
 
-		System.out.println(puntos);
 
-	}
+
 
 	public void eliminarBloque(int a, int b) {
 		Matriz[a][b].getObstaculo().getGrafico().setIcon(null);
@@ -248,6 +253,15 @@ public class Logica {
 		salida.setTanque(null);
 
 	}
+	
+	public void concretarMovimientoBala(Celda salida, Celda destino) {
+		salida.getTanque().getCelda().setColumna(destino.getCol());
+		salida.getTanque().getCelda().setFila(destino.getFila());
+		destino.setTanque(salida.getTanque());
+		salida.setTanque(null);
+
+	}
+	
 
 	public void moverJugador(int key) {
 		moverTanque(key, jugador);
@@ -265,6 +279,8 @@ public class Logica {
 	
 	public void disparoJugador(){
 		Bala nueva = jugador.disparo();
+		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(),nueva.getCelda().getCol());
+		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
 		nueva.setImagen(0);
 		gui.add(nueva.getGrafico());
 		arregloBalas[0] = nueva;
@@ -274,7 +290,7 @@ public class Logica {
 		for(int i =0; i < 7; i++){
 			if(arregloBalas[i] != null){
 			
-				moverTanque(arregloBalas[i].getDir(), arregloBalas[i]);
+				moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
 				System.out.println("Ubicacion bala: (" + arregloBalas[i].getCelda().getFila()+ " , " + arregloBalas[i].getCelda().getCol() + " ) ");
 			}
 			
@@ -282,6 +298,25 @@ public class Logica {
 		
 		
 	}
+	
+public void moverBala(int dir, Bala t){
+	int x = t.getCelda().getFila();
+
+	int y = t.getCelda().getCol();
+
+	switch (dir) {
+	case 0: // Arriba
+
+		if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
+			concretarMovimientoBala(getCelda(x, y), getCelda(x - 1, y));
+			
+			
+		}
+		t.setImagen(0);
+		break;
+	}
+	
+}
 	
 
 	public boolean moverTanque(int key, GameObject t) {

@@ -13,7 +13,7 @@ public abstract class Tanque extends GameObject{
 	
 	public Tanque(Celda celdita) {
 		super(celdita);
-		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
+		//image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
 		
 	}
 	
