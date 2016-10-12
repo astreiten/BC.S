@@ -9,5 +9,6 @@ public interface Visitante {
 	public boolean visitar(Granada gra);
 	public boolean visitarEst(Estrella est);
 	public boolean visitarArbol(Arboles arb);
+	public boolean visitarLadrillo(ParedLadrillos p);
 
 }

@@ -31,7 +31,7 @@ public class Logica {
 		Matriz = new Celda[13][13];
 		cargarMapa(a);
 		Celda nueva = new Celda(12, 4);
-		jugador = new TanqueJugador(nueva);
+		jugador = new TanqueJugador(nueva,this);
 		jugador.setImagen(0);
 		Matriz[12][4].setTanque(jugador);
 		enemigos = new TanqueEnemigo[4];
@@ -67,7 +67,7 @@ public class Logica {
 
 		Celda celdita = new Celda(0, 0);
 		Inteligencia intel = new Inteligencia(this);
-		enemigos[0] = new TanqueBasico(celdita, intel);
+		enemigos[0] = new TanqueBasico(celdita, intel, this);
 		intel.setTanque(enemigos[0]);
 		enemigos[0].setImagen(0);
 		Matriz[0][0].setTanque(enemigos[0]);
@@ -75,7 +75,7 @@ public class Logica {
 
 		Celda celd = new Celda(3, 0);
 		Inteligencia intel1 = new Inteligencia(this);
-		enemigos[1] = new TanqueBasico(celd, intel1);
+		enemigos[1] = new TanqueBasico(celd, intel1, this);
 		intel1.setTanque(enemigos[1]);
 		enemigos[1].setImagen(0);
 		Matriz[3][0].setTanque(enemigos[1]);
@@ -265,7 +265,7 @@ public class Logica {
 		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(), nueva.getCelda().getCol());
 		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
 		nueva.setImagen(nueva.getDir());
-		gui.add(nueva.getGrafico());
+		gui.add(nueva.getGrafico());		
 		arregloBalas[0] = nueva;
 	}
 
@@ -273,26 +273,31 @@ public class Logica {
 		for (int i = 0; i < 7; i++) {
 			if (arregloBalas[i] != null) {
 
-				moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
-				System.out.println("Ubicacion bala: (" + arregloBalas[i].getCelda().getFila() + " , "
-						+ arregloBalas[i].getCelda().getCol() + " ) ");
+				boolean destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
+				if(destroy){
+					arregloBalas[i].setGrafico();
+					Matriz[arregloBalas[i].getCelda().getFila()][arregloBalas[i].getCelda().getCol()].setTanque(null);
+					arregloBalas[i] = null;
+				}
+				
 			}
 
 		}
 
 	}
 
-	public void moverBala(int dir, Bala t) {
+	public boolean moverBala(int dir, Bala t) {
 		int x = t.getCelda().getFila();
 
 		int y = t.getCelda().getCol();
+		boolean movi =false;
 
 		switch (dir) {
 		case 0: // Arriba
 
 			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
 				concretarMovimientoBala(getCelda(x, y), getCelda(x - 1, y));
-
+				movi = true;
 			}
 			t.setImagen(0);
 			break;
@@ -301,7 +306,7 @@ public class Logica {
 
 			if (x < 12 && getCelda(x + 1, y).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
-
+				movi = true;
 			}
 			t.setImagen(1);
 			break;
@@ -310,7 +315,7 @@ public class Logica {
 
 			if (y > 0 && getCelda(x, y - 1).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
-
+				movi = true;
 			}
 			t.setImagen(2);
 			break;
@@ -319,11 +324,12 @@ public class Logica {
 
 			if (y < 12 && getCelda(x, y + 1).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
-
+				movi = true;
 			}
 			t.setImagen(3);
 			break;
 		}
+		return movi;
 
 	}
 

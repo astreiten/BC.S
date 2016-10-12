@@ -7,18 +7,20 @@ import Game.BalaJugador;
 import Game.Celda;
 import Game.Visitante;
 import Obstaculo.Arboles;
+import Obstaculo.ParedLadrillos;
 import PowerUp.Estrella;
 import PowerUp.Granada;
 import PowerUp.PowerUp;
-
+import Game.*;
 public class TanqueJugador extends Tanque implements Visitante{
 	
 	protected int nivel;
 	protected int disparos_simul;
 	protected State estado;
+	
 
-	public TanqueJugador(Celda celdita) {
-		super(celdita);
+	public TanqueJugador(Celda celdita, Logica lg) {
+		super(celdita, lg);
 		nivel = 1;
 		estado = new Nivel1(this);
 		dir = 0;
@@ -74,7 +76,7 @@ public class TanqueJugador extends Tanque implements Visitante{
 		case 3: celdita = new Celda(x, y+1);
 		break;
 		}
-		Bala nueva = new BalaJugador(celdita, this, dir);
+		Bala nueva = new BalaJugador(celdita, this, dir, lg);
 		return nueva;
 	}
 
@@ -105,6 +107,12 @@ public class TanqueJugador extends Tanque implements Visitante{
 
 	@Override
 	public boolean visitarArbol(Arboles arb) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarLadrillo(ParedLadrillos p) {
 		// TODO Auto-generated method stub
 		return false;
 	}

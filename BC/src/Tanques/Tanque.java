@@ -1,6 +1,7 @@
 package Tanques;
 
 import javax.swing.ImageIcon;
+import Game.*;
 
 import Game.Celda;
 import Game.GameObject;
@@ -11,10 +12,12 @@ public abstract class Tanque extends GameObject{
 	protected int vel_dispa;
 	protected int puntos;
 	protected int dir;
+	protected Logica lg;
 	
 	
-	public Tanque(Celda celdita) {
+	public Tanque(Celda celdita, Logica l) {
 		super(celdita);
+		lg = l;
 		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
 		
 	}
