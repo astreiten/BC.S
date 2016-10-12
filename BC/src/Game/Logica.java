@@ -274,7 +274,7 @@ public class Logica {
 			if (arregloBalas[i] != null) {
 
 				boolean destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
-				if(destroy){
+				if(!destroy){
 					arregloBalas[i].setGrafico();
 					Matriz[arregloBalas[i].getCelda().getFila()][arregloBalas[i].getCelda().getCol()].setTanque(null);
 					arregloBalas[i] = null;
