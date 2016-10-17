@@ -18,12 +18,15 @@ public class TanqueJugador extends Tanque implements Visitante{
 	protected int disparos_simul;
 	protected State estado;
 	
+	
 
 	public TanqueJugador(Celda celdita, Logica lg) {
 		super(celdita, lg);
 		nivel = 1;
 		estado = new Nivel1(this);
 		dir = 0;
+		disparos_simul = 1;
+		realizados = 0;
 		
 		
 	}
@@ -45,6 +48,7 @@ public class TanqueJugador extends Tanque implements Visitante{
 		case 2:
 			estado = new Nivel2(this);
 			nivel = 2;
+			disparos_simul = 2;			
 			break;
 		
 		}
@@ -61,6 +65,7 @@ public class TanqueJugador extends Tanque implements Visitante{
 	
 	
 	public Bala disparo(){
+		if(realizados < disparos_simul){
 		Celda celdita = null;
 		int x=this.getCelda().getFila();
 		int y=this.getCelda().getCol();
@@ -78,7 +83,11 @@ public class TanqueJugador extends Tanque implements Visitante{
 		}
 		
 		Bala nueva = new BalaJugador(celdita, this, dir, lg);
+		realizados++;
 		return nueva;
+		}
+		return null;
+		
 	}
 
 

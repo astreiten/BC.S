@@ -26,12 +26,13 @@ public class Logica {
 	protected ContadorAnimaciones animaciones;
 	protected Bala[] arregloBalas;
 	protected ControlDisparo control;
+	protected int contador = 0;
 
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
 		cargarMapa(a);
 		Celda nueva = new Celda(12, 4);
-		jugador = new TanqueJugador(nueva,this);
+		jugador = new TanqueJugador(nueva, this);
 		jugador.setImagen(0);
 		Matriz[12][4].setTanque(jugador);
 		enemigos = new TanqueEnemigo[4];
@@ -213,7 +214,7 @@ public class Logica {
 		Matriz[a][b].getObstaculo().getGrafico().setIcon(null);
 		Matriz[a][b].setObject(null);
 	}
-	
+
 	public void eliminarTanque(int a, int b) {
 		Matriz[a][b].getTanque().getGrafico().setIcon(null);
 		Matriz[a][b].setTanque(null);
@@ -235,11 +236,11 @@ public class Logica {
 	}
 
 	public void concretarMovimiento(Celda salida, Celda destino) {
-		if(salida.getTanque()!= null){
-		salida.getTanque().getCelda().setColumna(destino.getCol());
-		salida.getTanque().getCelda().setFila(destino.getFila());
-		destino.setTanque(salida.getTanque());
-		salida.setTanque(null);
+		if (salida.getTanque() != null) {
+			salida.getTanque().getCelda().setColumna(destino.getCol());
+			salida.getTanque().getCelda().setFila(destino.getFila());
+			destino.setTanque(salida.getTanque());
+			salida.setTanque(null);
 		}
 
 	}
@@ -262,44 +263,52 @@ public class Logica {
 
 			if (enemigos[i] != null) {
 				enemigos[i].getIA().mover();
-			if(enemigos[i].getRes() == 0){
+				if (enemigos[i].getRes() == 0) {
 					enemigos[i].setImagen(4);
 					enemigos[i] = null;
 				}
 			}
-			
+
 		}
 	}
 
 	public void disparoJugador() {
 		Bala nueva = jugador.disparo();
-		
-		if(getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol() ).getObstaculo() != null){
-			boolean aux = getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol() ).getObstaculo().acept(nueva);
-			if(aux){
-				nueva.eraseLbl();				
+		if (nueva != null) {
+
+			if (getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getObstaculo() != null) {
+				getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getObstaculo().acept(nueva);
+				nueva.getFuente().decrementarRealizados();
+			} else {
+				if (getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getTanque() != null) {
+					getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getTanque().acept(nueva);
+					nueva.getFuente().decrementarRealizados();
+				} else {
+					nueva.setImagen(nueva.getDir());
+					gui.add(nueva.getGrafico());
+					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(
+							nueva.getCelda().getFila(), nueva.getCelda().getCol());
+					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
+					instPrimerLibre(nueva);
+
+				}
 			}
 		}
-		else{
-		nueva.setImagen(nueva.getDir());
-		gui.add(nueva.getGrafico());
-		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(), nueva.getCelda().getCol());
-		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
-		
-		arregloBalas[0] = nueva;
-	}}
+	}
 
 	public void moverBalas() {
 		for (int i = 0; i < 7; i++) {
 			if (arregloBalas[i] != null) {
 
 				boolean destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
-				if(!destroy){
+				if (!destroy) {
 					arregloBalas[i].setGrafico();
+					arregloBalas[i].getFuente().decrementarRealizados();
 					Matriz[arregloBalas[i].getCelda().getFila()][arregloBalas[i].getCelda().getCol()].setTanque(null);
 					arregloBalas[i] = null;
+
 				}
-				
+
 			}
 
 		}
@@ -309,9 +318,8 @@ public class Logica {
 	public boolean moverBala(int dir, Bala t) {
 		int x = t.getCelda().getFila();
 		int y = t.getCelda().getCol();
-		
-	
-		boolean movi =false;
+
+		boolean movi = false;
 
 		switch (dir) {
 		case 0: // Arriba
@@ -407,4 +415,13 @@ public class Logica {
 		return movi;
 	}
 
+	private void instPrimerLibre(Bala b) {
+
+		for (int i = 0; i < arregloBalas.length; i++) {
+			if (arregloBalas[i] != null) {
+				arregloBalas[i] = b;
+			}
+		}
+
+	}
 }

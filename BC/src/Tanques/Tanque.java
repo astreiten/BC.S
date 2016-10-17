@@ -13,6 +13,7 @@ public abstract class Tanque extends GameObject{
 	protected int puntos;
 	protected int dir;
 	protected Logica lg;
+	protected int realizados;
 	
 	
 	public Tanque(Celda celdita, Logica l) {
@@ -46,6 +47,10 @@ public abstract class Tanque extends GameObject{
 	
 	public int getPuntos(){
 		return puntos;
+	}
+	
+	public void decrementarRealizados(){
+		realizados--;
 	}
 	
 	

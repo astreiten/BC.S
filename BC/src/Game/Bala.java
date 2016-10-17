@@ -28,6 +28,10 @@ public abstract class Bala extends GameObject {
 	public int getDir(){
 		return direccion;
 	}
+	
+	public Tanque getFuente(){
+		return fuente;
+	}
 
 
 }
