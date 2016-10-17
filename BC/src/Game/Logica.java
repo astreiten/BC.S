@@ -173,7 +173,6 @@ public class Logica {
 	public void mostrarExplosion() {
 		for (int i = 0; i < 4; i++) {
 			if (enemigos[i] != null) {
-				System.out.println("E");
 				enemigos[i].setImagen(4);
 			}
 
@@ -236,10 +235,12 @@ public class Logica {
 	}
 
 	public void concretarMovimiento(Celda salida, Celda destino) {
+		if(salida.getTanque()!= null){
 		salida.getTanque().getCelda().setColumna(destino.getCol());
 		salida.getTanque().getCelda().setFila(destino.getFila());
 		destino.setTanque(salida.getTanque());
 		salida.setTanque(null);
+		}
 
 	}
 
@@ -262,7 +263,7 @@ public class Logica {
 			if (enemigos[i] != null) {
 				enemigos[i].getIA().mover();
 			if(enemigos[i].getRes() == 0){
-					System.out.println("Entre al if");
+					enemigos[i].setImagen(4);
 					enemigos[i] = null;
 				}
 			}
@@ -272,12 +273,21 @@ public class Logica {
 
 	public void disparoJugador() {
 		Bala nueva = jugador.disparo();
+		
+		if(getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol() ).getObstaculo() != null){
+			boolean aux = getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol() ).getObstaculo().acept(nueva);
+			if(aux){
+				nueva.eraseLbl();				
+			}
+		}
+		else{
 		nueva.setImagen(nueva.getDir());
 		gui.add(nueva.getGrafico());
 		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(nueva.getCelda().getFila(), nueva.getCelda().getCol());
 		Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
+		
 		arregloBalas[0] = nueva;
-	}
+	}}
 
 	public void moverBalas() {
 		for (int i = 0; i < 7; i++) {

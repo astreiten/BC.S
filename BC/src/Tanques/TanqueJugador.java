@@ -76,6 +76,7 @@ public class TanqueJugador extends Tanque implements Visitante{
 		case 3: celdita = new Celda(x, y+1);
 		break;
 		}
+		
 		Bala nueva = new BalaJugador(celdita, this, dir, lg);
 		return nueva;
 	}
@@ -113,6 +114,12 @@ public class TanqueJugador extends Tanque implements Visitante{
 
 	@Override
 	public boolean visitarLadrillo(ParedLadrillos p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarEnemigo(TanqueEnemigo t) {
 		// TODO Auto-generated method stub
 		return false;
 	}

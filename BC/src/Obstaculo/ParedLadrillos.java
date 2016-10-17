@@ -38,8 +38,8 @@ public class ParedLadrillos extends Obstaculo {
 
 	@Override
 	public boolean acept(Visitante v) {
-		v.visitarLadrillo(this);
-		return false;
+		return v.visitarLadrillo(this);
+		
 	}
 
 	@Override

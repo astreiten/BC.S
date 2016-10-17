@@ -23,13 +23,13 @@ public class BalaJugador extends Bala{
 	@Override
 	public boolean visitar(Granada gra) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean visitarEst(Estrella est) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -58,7 +58,9 @@ public class BalaJugador extends Bala{
 		 }
 		 if(destruir){
 			 p.setGrafico();
+			 System.out.println("ENTRE");
 			 lg.eliminarBloque(p.getCelda().getFila(), p.getCelda().getCol());
+			 return true;
 		 }
 		return false;
 	}
@@ -69,7 +71,7 @@ public class BalaJugador extends Bala{
 		
 		if(aux){
 			System.out.println("Visite");
-			t.setGrafico();
+			t.setImagen(4);
 			lg.eliminarTanque(t.getCelda().getFila(), t.getCelda().getCol());
 			
 		}

@@ -38,6 +38,10 @@ public abstract class GameObject implements Elementito, Visitante{
 		grafico.setIcon(null);
 	}
 	
+	public void eraseLbl(){
+		grafico = null;
+	}
+	
 	public abstract boolean colision(GameObject obj);
 	
 	

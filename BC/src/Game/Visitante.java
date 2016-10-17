@@ -14,4 +14,5 @@ public interface Visitante {
 	public boolean visitarLadrillo(ParedLadrillos p);
 	public boolean visitarEnemigo(TanqueEnemigo t);
 
+
 }

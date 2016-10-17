@@ -7,6 +7,7 @@ import Game.GameObject;
 import Game.Visitante;
 import PowerUp.Estrella;
 import PowerUp.Granada;
+import Tanques.TanqueEnemigo;
 
 public class Agua extends Obstaculo {
 
@@ -35,6 +36,24 @@ public class Agua extends Obstaculo {
 
 	@Override
 	public boolean visitarEst(Estrella est) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarArbol(Arboles arb) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarLadrillo(ParedLadrillos p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarEnemigo(TanqueEnemigo t) {
 		// TODO Auto-generated method stub
 		return false;
 	}

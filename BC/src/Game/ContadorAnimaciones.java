@@ -15,7 +15,7 @@ public class ContadorAnimaciones extends Thread {
 	public void run() {
 		
 		while(true) {
-				System.out.println("entre run");
+				
 			try {
 				Thread.sleep(1000);
 			}
