@@ -21,6 +21,7 @@ public abstract class Bala extends GameObject {
 		image[1] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaDw.gif" ));
 		image[2] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaIzq.gif" ));
 		image[3] = new ImageIcon(this.getClass().getResource("/Imagenes/BalaDer.gif" ));
+		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Explosion.gif"));
 		
 		
 	}

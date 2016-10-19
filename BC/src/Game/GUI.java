@@ -83,6 +83,10 @@ public class GUI extends JFrame {
 		contentPane.add(arreglo[0]);
 		contentPane.add(arreglo[1]);
 		contentPane.add(lg.cargarTanque());
+		long millis = System.currentTimeMillis() + 500;
+		while(System.currentTimeMillis() <= millis){
+		}		
+		lg.jugador.setImagen(0);
 		
 		
 		JPanel panel = new JPanel();

@@ -33,7 +33,10 @@ public class Logica {
 		cargarMapa(a);
 		Celda nueva = new Celda(12, 4);
 		jugador = new TanqueJugador(nueva, this);
-		jugador.setImagen(0);
+		
+		long millis = System.currentTimeMillis() + 500;
+		while(System.currentTimeMillis() <= millis){
+		}
 		Matriz[12][4].setTanque(jugador);
 		enemigos = new TanqueEnemigo[4];
 		puntos = 0;
@@ -50,7 +53,7 @@ public class Logica {
 	}
 
 	public JLabel cargarTanque() {
-		jugador.setImagen(4);
+		jugador.setImagen(4);		
 		return jugador.getGrafico();
 	}
 
@@ -265,6 +268,11 @@ public class Logica {
 				enemigos[i].getIA().mover();
 				if (enemigos[i].getRes() == 0) {
 					enemigos[i].setImagen(4);
+					long millis = System.currentTimeMillis() + 500;
+					while(System.currentTimeMillis() <= millis){
+					}
+					enemigos[i].setGrafico();				
+					
 					enemigos[i] = null;
 				}
 			}
@@ -289,8 +297,12 @@ public class Logica {
 					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(
 							nueva.getCelda().getFila(), nueva.getCelda().getCol());
 					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
+					jugador.setImagen(5);
+					long millis = System.currentTimeMillis() + 500;
+					while(System.currentTimeMillis() <= millis){
+											}
+					jugador.setImagen(0);
 					instPrimerLibre(nueva);
-
 				}
 			}
 		}
@@ -301,10 +313,14 @@ public class Logica {
 			if (arregloBalas[i] != null) {
 
 				boolean destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
-				if (!destroy) {
-					arregloBalas[i].setGrafico();
+				if (!destroy) { 
+					arregloBalas[i].setImagen(4);
 					arregloBalas[i].getFuente().decrementarRealizados();
 					Matriz[arregloBalas[i].getCelda().getFila()][arregloBalas[i].getCelda().getCol()].setTanque(null);
+					long millis = System.currentTimeMillis() + 500;
+					while(System.currentTimeMillis() <= millis){
+					}
+					arregloBalas[i].setGrafico();
 					arregloBalas[i] = null;
 
 				}
@@ -416,10 +432,11 @@ public class Logica {
 	}
 
 	private void instPrimerLibre(Bala b) {
-
-		for (int i = 0; i < arregloBalas.length; i++) {
-			if (arregloBalas[i] != null) {
+		boolean ins = false;
+		for (int i = 0; i < arregloBalas.length && !ins; i++) {
+			if (arregloBalas[i] == null) {
 				arregloBalas[i] = b;
+				ins = true;
 			}
 		}
 

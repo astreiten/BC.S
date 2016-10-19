@@ -16,7 +16,7 @@ public abstract class GameObject implements Elementito, Visitante{
 	
 	
 	public GameObject(Celda celdita){
-		image = new Icon[5];
+		image = new Icon[8];
 		celda = celdita;
 		grafico = new JLabel();
 		grafico.setBounds(celda.getCol(),celda.getFila(),50, 50);

@@ -20,6 +20,7 @@ public abstract class Tanque extends GameObject{
 		super(celdita);
 		lg = l;
 		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
+		image[5] = new ImageIcon(this.getClass().getResource("/Imagenes/picasion.com_33e3de578cf843c270f5c3d7c53c79a1.gif"));
 		
 	}
 	

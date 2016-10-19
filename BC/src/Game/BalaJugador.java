@@ -58,8 +58,8 @@ public class BalaJugador extends Bala{
 		 }
 		 if(destruir){
 			 p.setGrafico();
-			 System.out.println("ENTRE");
 			 lg.eliminarBloque(p.getCelda().getFila(), p.getCelda().getCol());
+			
 			 return true;
 		 }
 		return false;
