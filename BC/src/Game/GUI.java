@@ -78,10 +78,7 @@ public class GUI extends JFrame {
 
 			}
 		}
-		JLabel [] arreglo = lg.cargarEnemigos();
-		
-		contentPane.add(arreglo[0]);
-		contentPane.add(arreglo[1]);
+	
 		contentPane.add(lg.cargarTanque());
 		long millis = System.currentTimeMillis() + 500;
 		while(System.currentTimeMillis() <= millis){
@@ -102,7 +99,10 @@ public class GUI extends JFrame {
 		
 		
 		
+		JLabel [] arregloet = lg.cargarEnemigos();
 		
+		contentPane.add(arregloet[0]);
+		contentPane.add(arregloet[1]);
 		
 		
 		

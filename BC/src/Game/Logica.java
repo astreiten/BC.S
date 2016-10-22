@@ -1,12 +1,11 @@
 package Game;
 
-import java.awt.event.KeyEvent;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
 import javax.swing.JLabel;
 
 import Obstaculo.*;
@@ -34,9 +33,7 @@ public class Logica {
 		Celda nueva = new Celda(12, 4);
 		jugador = new TanqueJugador(nueva, this);
 		
-		long millis = System.currentTimeMillis() + 500;
-		while(System.currentTimeMillis() <= millis){
-		}
+		
 		Matriz[12][4].setTanque(jugador);
 		enemigos = new TanqueEnemigo[4];
 		puntos = 0;
@@ -53,8 +50,7 @@ public class Logica {
 	}
 
 	public JLabel cargarTanque() {
-		jugador.setImagen(4);		
-		return jugador.getGrafico();
+				return jugador.getGrafico();
 	}
 
 	public Celda[][] getMatriz() {
@@ -191,6 +187,11 @@ public class Logica {
 		puntos += n;
 		gui.armarEtiqueta(puntos);
 	}
+	
+	public void detenerTiempo(int sec){
+		
+	
+	}
 
 	public void destruirEnemigos(int a, int b) {
 		eliminarBloque(a, b);
@@ -204,9 +205,13 @@ public class Logica {
 				int y = enemigos[i1].getCelda().getCol();
 				int x = enemigos[i1].getCelda().getFila();
 				this.sumarPuntos(100);
-
-				enemigos[i1].getGrafico().setIcon(null);
+				enemigos[i1].setImagen(4); 
+				long millis = System.currentTimeMillis() + 500;
+				while(System.currentTimeMillis() <= millis){
+				}
+				enemigos[i1].setGrafico(); 
 				Matriz[x][y].setTanque(null);
+				
 
 				enemigos[i1] = null;
 			}
