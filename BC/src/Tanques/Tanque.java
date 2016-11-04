@@ -3,56 +3,98 @@ package Tanques;
 import javax.swing.ImageIcon;
 import Game.*;
 
-import Game.Celda;
-import Game.GameObject;
+public abstract class Tanque extends GameObject {
 
-public abstract class Tanque extends GameObject{
-	
 	protected int resistencia;
 	protected int vel_dispa;
 	protected int puntos;
 	protected int dir;
 	protected Logica lg;
 	protected int realizados;
-	
-	
+	protected int disparos_simul;
+
 	public Tanque(Celda celdita, Logica l) {
 		super(celdita);
 		lg = l;
-		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
-		image[5] = new ImageIcon(this.getClass().getResource("/Imagenes/picasion.com_33e3de578cf843c270f5c3d7c53c79a1.gif"));
-		
+		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/Explosion.gif"));
+		image[5] = new ImageIcon(
+				this.getClass().getResource("/Imagenes/picasion.com_33e3de578cf843c270f5c3d7c53c79a1.gif"));
+
 	}
-	
-	public void setImagen(int indice){
+
+	public void setImagen(int indice) {
 		grafico.setIcon(image[indice]);
-		grafico.setBounds(celda.getCol()*50,celda.getFila()*50,50, 50);
-		
+		grafico.setBounds(celda.getCol() * 50, celda.getFila() * 50, 50, 50);
+
 	}
-	
-	public void setDir(int n){
+
+	public void setDir(int n) {
 		dir = n;
 	}
-	
-	public int getDir(){
+
+	public int getDir() {
 		return dir;
 	}
-	
-	public int getRes(){
+
+	public int getRes() {
 		return resistencia;
 	}
-	
-	public boolean colision(GameObject obj){
+
+	public boolean colision(GameObject obj) {
 		return false;
 	}
-	
-	public int getPuntos(){
+
+	public int getPuntos() {
 		return puntos;
 	}
-	
-	public void decrementarRealizados(){
+
+	public void decrementarRealizados() {
 		realizados--;
 	}
-	
-	
+
+	public Bala disparo() {
+		// Poner condiciones para no disparar en bordes
+		if (realizados < disparos_simul) {
+			Celda celdita = null;
+			int x = this.getCelda().getFila();
+			int y = this.getCelda().getCol();
+
+			switch (dir) {
+			case 0:
+				if (x == 0) {
+					return null;
+				}
+				celdita = new Celda(x - 1, y);
+				break;
+
+			case 1:
+				if (x == 12) {
+					return null;
+				}
+				celdita = new Celda(x + 1, y);
+				break;
+			case 2:
+				if (y == 0) {
+					return null;
+				}
+				celdita = new Celda(x, y - 1);
+				break;
+			case 3:
+				if (y == 12) {
+					return null;
+				}
+				celdita = new Celda(x, y + 1);
+				break;
+			}
+
+			Bala nueva = crearBala(celdita, this, dir, lg);
+			realizados++;
+			return nueva;
+		}
+		return null;
+
+	}
+
+	public abstract Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg);
+
 }

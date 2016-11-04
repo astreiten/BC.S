@@ -48,6 +48,7 @@ public class GUI extends JFrame {
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -99,11 +100,11 @@ public class GUI extends JFrame {
 		
 		
 		
-		JLabel [] arregloet = lg.cargarEnemigos();
+		lg.cargarEnemigos();
 		
-		contentPane.add(arregloet[0]);
-		contentPane.add(arregloet[1]);
-		
+//		contentPane.add(arregloet[0]);
+//		contentPane.add(arregloet[1]);
+//		
 		
 		
 		
@@ -155,7 +156,7 @@ public class GUI extends JFrame {
 			lg.moverJugador(3);
 			break;
 		case 32:
-			lg.disparoJugador();
+			lg.disparoTanque(null);
 			break;
 		}
 	

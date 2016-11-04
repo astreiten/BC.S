@@ -1,5 +1,8 @@
 package Tanques;
 
+import Game.Bala;
+import Game.BalaEnemigo;
+import Game.BalaJugador;
 import Game.Celda;
 import Game.Logica;
 import Game.Visitante;
@@ -12,6 +15,7 @@ public abstract class TanqueEnemigo extends Tanque{
 	public TanqueEnemigo(Celda celdita,Inteligencia IA, Logica lg) {
 		super(celdita,lg);
 		this.IA = IA;
+		disparos_simul = 1;
 		
 	}
 
@@ -31,6 +35,10 @@ public abstract class TanqueEnemigo extends Tanque{
 		System.out.println("Res "+ resistencia);
 	
 		return resistencia == 0;
+	}
+	
+	public Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg){
+		return new BalaEnemigo(celdita,t,dir,lg);
 	}
 	
 	

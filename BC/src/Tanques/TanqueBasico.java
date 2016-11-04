@@ -58,6 +58,15 @@ public class TanqueBasico extends TanqueEnemigo{
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+
+
+
+	@Override
+	public boolean visitarJugador(TanqueJugador t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }

@@ -7,13 +7,12 @@ import javax.swing.JLabel;
 
 public class ContadorAnimaciones extends Thread {
 	
-	private Logica logica;
-	private JLabel obj;
+	
+	private JLabel eti;
 
 	
-	public ContadorAnimaciones(Logica l) {
-		logica = l;
-		obj = null;
+	public ContadorAnimaciones() {
+		eti = null;
 	
 	}
 	
@@ -24,23 +23,20 @@ public class ContadorAnimaciones extends Thread {
 		while(true) {
 				
 			try {
-				Thread.sleep(200);
+				Thread.sleep(2000);
 			}
 			catch(InterruptedException e) {
 				e.printStackTrace();
 			}
 			
-			if(obj != null){
-			ImageIcon  a = new ImageIcon(this.getClass().getResource("/Imagenes/Explosion.gif"));
-			obj.setIcon(a);
-			obj = null;
-			}
+			eti.setIcon(null);
+			
 			
 		}
 	}
 	
-	public void setObject(JLabel a){
-		obj = a;
+	public void setLabel(JLabel a){
+		eti = a;
 				
 	}
 

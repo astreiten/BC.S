@@ -1,11 +1,11 @@
 package Game;
 
-
+import java.awt.Rectangle;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Obstaculo.*;
@@ -26,14 +26,14 @@ public class Logica {
 	protected Bala[] arregloBalas;
 	protected ControlDisparo control;
 	protected int contador = 0;
+	protected Celda[] apariciones = new Celda[4];
 
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
 		cargarMapa(a);
 		Celda nueva = new Celda(12, 4);
 		jugador = new TanqueJugador(nueva, this);
-		
-		
+
 		Matriz[12][4].setTanque(jugador);
 		enemigos = new TanqueEnemigo[4];
 		puntos = 0;
@@ -41,16 +41,25 @@ public class Logica {
 		gui.armarEtiqueta(puntos);
 
 		arregloBalas = new Bala[7];
-		control = new ControlDisparo(this);
-		control.start();
 
-		tiempo = new ControlEnemigos(this);
-		tiempo.start();
-
+		apariciones[0] = new Celda(0, 0);
+		apariciones[1] = new Celda(0, 12);
+		apariciones[2] = new Celda(3, 6);
+		apariciones[3] = new Celda(0, 6);
 	}
 
 	public JLabel cargarTanque() {
-				return jugador.getGrafico();
+		ContadorAnimaciones cont = new ContadorAnimaciones();
+		JLabel eti = new JLabel();
+		eti.setBounds(jugador.getCelda().getCol()*50, jugador.getCelda().getFila()*50,50, 50);
+		ImageIcon nueva = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
+		eti.setIcon(nueva);
+		gui.add(eti);
+		
+		cont.setLabel(eti);
+		cont.start();
+		
+		return jugador.getGrafico();
 	}
 
 	public Celda[][] getMatriz() {
@@ -61,27 +70,59 @@ public class Logica {
 		return Matriz[f][c];
 	}
 
-	public JLabel[] cargarEnemigos() {
+	public void cargarEnemigos() {
 
-		JLabel[] arreglo = new JLabel[4];
+		TanqueFactory fabrica = new BasicoFactory();
 
-		Celda celdita = new Celda(0, 0);
-		Inteligencia intel = new Inteligencia(this);
-		enemigos[0] = new TanqueBasico(celdita, intel, this);
-		intel.setTanque(enemigos[0]);
-		enemigos[0].setImagen(0);
-		Matriz[0][0].setTanque(enemigos[0]);
-		arreglo[0] = enemigos[0].getGrafico();
+		for (int i = 0; i < 4; i++) {
+			Celda nueva = new Celda(apariciones[i].getFila(), apariciones[i].getCol());
+			Inteligencia intel = new Inteligencia(this);
+			enemigos[i] = fabrica.crearTanque(nueva, intel, this);
+			intel.setTanque(enemigos[i]);
+			enemigos[i].setImagen(0);
+			Matriz[nueva.getFila()][nueva.getCol()].setTanque(enemigos[i]);
+			ContadorAnimaciones cont = new ContadorAnimaciones();
+			JLabel eti = new JLabel();
+			eti.setBounds(enemigos[i].getCelda().getCol()*50, enemigos[i].getCelda().getFila()*50,50, 50);
+			ImageIcon nuevaIm = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
+			eti.setIcon(nuevaIm);
+			gui.add(eti);
+			
+			cont.setLabel(eti);
+			cont.start();
+			gui.add(enemigos[i].getGrafico());
 
-		Celda celd = new Celda(3, 0);
-		Inteligencia intel1 = new Inteligencia(this);
-		enemigos[1] = new TanqueBasico(celd, intel1, this);
-		intel1.setTanque(enemigos[1]);
-		enemigos[1].setImagen(0);
-		Matriz[3][0].setTanque(enemigos[1]);
-		arreglo[1] = enemigos[1].getGrafico();
+		}
+		tiempo = new ControlEnemigos(this);
+		tiempo.start();
+		
+		control = new ControlDisparo(this);
+		control.start();
 
-		return arreglo;
+		//
+		//
+		//
+		//
+		//
+		// JLabel[] arreglo = new JLabel[4];
+		//
+		// Celda celdita = new Celda(0, 0);
+		// Inteligencia intel = new Inteligencia(this);
+		// enemigos[0] = new TanqueBasico(celdita, intel, this);
+		// intel.setTanque(enemigos[0]);
+		// enemigos[0].setImagen(0);
+		// Matriz[0][0].setTanque(enemigos[0]);
+		// arreglo[0] = enemigos[0].getGrafico();
+		//
+		// Celda celd = new Celda(3, 0);
+		// Inteligencia intel1 = new Inteligencia(this);
+		// enemigos[1] = new TanqueBasico(celd, intel1, this);
+		// intel1.setTanque(enemigos[1]);
+		// enemigos[1].setImagen(0);
+		// Matriz[3][0].setTanque(enemigos[1]);
+		// arreglo[1] = enemigos[1].getGrafico();
+		//
+		// return arreglo;
 	}
 
 	public void subirNivel() {
@@ -90,6 +131,8 @@ public class Logica {
 		jugador.cambiarEstado();
 
 	}
+
+	
 
 	private void cargarMapa(String nombre) {
 
@@ -170,14 +213,7 @@ public class Logica {
 		}
 	}
 
-	public void mostrarExplosion() {
-		for (int i = 0; i < 4; i++) {
-			if (enemigos[i] != null) {
-				enemigos[i].setImagen(4);
-			}
-
-		}
-	}
+	
 
 	public int getPuntos() {
 		return puntos;
@@ -187,17 +223,9 @@ public class Logica {
 		puntos += n;
 		gui.armarEtiqueta(puntos);
 	}
-	
-	public void detenerTiempo(int sec){
-		
-	
-	}
 
 	public void destruirEnemigos(int a, int b) {
 		eliminarBloque(a, b);
-		animaciones = new ContadorAnimaciones(this);
-
-		animaciones.start();
 
 		for (int i1 = 0; i1 < 4; i1++) {
 			if (enemigos[i1] != null) {
@@ -205,13 +233,11 @@ public class Logica {
 				int y = enemigos[i1].getCelda().getCol();
 				int x = enemigos[i1].getCelda().getFila();
 				this.sumarPuntos(100);
-				enemigos[i1].setImagen(4); 
-				long millis = System.currentTimeMillis() + 500;
-				while(System.currentTimeMillis() <= millis){
-				}
-				enemigos[i1].setGrafico(); 
-				Matriz[x][y].setTanque(null);
+				enemigos[i1].setImagen(4);
 				
+				
+				enemigos[i1].setGrafico();
+				Matriz[x][y].setTanque(null);
 
 				enemigos[i1] = null;
 			}
@@ -238,7 +264,7 @@ public class Logica {
 		Matriz[5][12].setObject(estrella);
 		estrella.setImagen(0);
 		gui.add(estrella.getGrafico());
-
+		
 		return granada.getGrafico();
 
 	}
@@ -254,10 +280,12 @@ public class Logica {
 	}
 
 	public void concretarMovimientoBala(Celda salida, Celda destino) {
-		salida.getTanque().getCelda().setColumna(destino.getCol());
-		salida.getTanque().getCelda().setFila(destino.getFila());
-		destino.setTanque(salida.getTanque());
-		salida.setTanque(null);
+		if (salida.getTanque() != null) {
+			salida.getTanque().getCelda().setColumna(destino.getCol());
+			salida.getTanque().getCelda().setFila(destino.getFila());
+			destino.setTanque(salida.getTanque());
+			salida.setTanque(null);
+		}
 
 	}
 
@@ -270,23 +298,58 @@ public class Logica {
 		for (int i = 0; i < 4; i++) {
 
 			if (enemigos[i] != null) {
+			System.out.println("La celda " + i + " ( " + apariciones[i].getFila() + " " + apariciones[i].getCol() + " )");
 				enemigos[i].getIA().mover();
+				disparoTanque(enemigos[i]);
 				if (enemigos[i].getRes() == 0) {
-					enemigos[i].setImagen(4);
-					long millis = System.currentTimeMillis() + 500;
-					while(System.currentTimeMillis() <= millis){
-					}
-					enemigos[i].setGrafico();				
+					enemigos[i].setImagen(4);	
+
 					
+					eliminarTanque(enemigos[i].getCelda().getFila(), enemigos[i].getCelda().getCol());
+					sumarPuntos(enemigos[i].getPuntos());
 					enemigos[i] = null;
+					reponerTanque(i);
 				}
 			}
 
 		}
 	}
 
-	public void disparoJugador() {
-		Bala nueva = jugador.disparo();
+	public void reponerTanque(int i) {
+
+		TanqueFactory fabrica = new BasicoFactory();
+		Celda nueva = new Celda(apariciones[i].getFila(), apariciones[i].getFila());
+		Inteligencia intel = new Inteligencia(this);
+		enemigos[i] = fabrica.crearTanque(nueva, intel, this);
+		intel.setTanque(enemigos[i]);
+		enemigos[i].setImagen(0);
+		Matriz[nueva.getFila()][nueva.getCol()].setTanque(enemigos[i]);
+		gui.add(enemigos[i].getGrafico());
+
+	}
+	
+	public void reespawn(){
+		int  x = jugador.getCelda().getFila();
+		int  y = jugador.getCelda().getCol();
+		
+		Matriz[x][y].setTanque(null);
+		jugador.setGrafico();
+		
+		jugador.getCelda().setFila(12);
+		jugador.getCelda().setColumna(4);
+		
+		Matriz[12][4].setTanque(jugador);
+		jugador.setImagen(1);
+		
+		
+		
+	}
+
+	public void disparoTanque(Tanque t) {
+		if (t == null) {
+			t = jugador;
+		}
+		Bala nueva = t.disparo();
 		if (nueva != null) {
 
 			if (getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getObstaculo() != null) {
@@ -302,11 +365,11 @@ public class Logica {
 					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(
 							nueva.getCelda().getFila(), nueva.getCelda().getCol());
 					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
-					jugador.setImagen(5);
-					long millis = System.currentTimeMillis() + 500;
-					while(System.currentTimeMillis() <= millis){
-											}
-					jugador.setImagen(0);
+					// t.setImagen(5);
+					// long millis = System.currentTimeMillis() + 500;
+					// while(System.currentTimeMillis() <= millis){
+					// }
+					// t.setImagen(0);
 					instPrimerLibre(nueva);
 				}
 			}
@@ -318,13 +381,13 @@ public class Logica {
 			if (arregloBalas[i] != null) {
 
 				boolean destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
-				if (!destroy) { 
+				if (!destroy) {
 					arregloBalas[i].setImagen(4);
 					arregloBalas[i].getFuente().decrementarRealizados();
 					Matriz[arregloBalas[i].getCelda().getFila()][arregloBalas[i].getCelda().getCol()].setTanque(null);
-					long millis = System.currentTimeMillis() + 500;
-					while(System.currentTimeMillis() <= millis){
-					}
+//					long millis = System.currentTimeMillis() + 500;
+//					while (System.currentTimeMillis() <= millis) {
+//					}
 					arregloBalas[i].setGrafico();
 					arregloBalas[i] = null;
 
@@ -347,6 +410,7 @@ public class Logica {
 
 			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
 				concretarMovimientoBala(getCelda(x, y), getCelda(x - 1, y));
+
 				movi = true;
 			}
 			t.setImagen(0);
@@ -395,6 +459,7 @@ public class Logica {
 		case 0: // Arriba
 
 			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
+
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
 
 				movi = true;
@@ -406,6 +471,7 @@ public class Logica {
 		case 1: // Abajo
 
 			if (x < 12 && getCelda(x + 1, y).inspeccionar(t)) {
+
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 				movi = true;
 			}
@@ -416,6 +482,7 @@ public class Logica {
 		case 2: // Izquierda
 
 			if (y > 0 && getCelda(x, y - 1).inspeccionar(t)) {
+
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
 				movi = true;
 			}
@@ -426,6 +493,7 @@ public class Logica {
 		case 3: // Derecha
 
 			if (y < 12 && getCelda(x, y + 1).inspeccionar(t)) {
+
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 				movi = true;
 			}

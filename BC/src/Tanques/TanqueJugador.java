@@ -2,10 +2,6 @@ package Tanques;
 
 import javax.swing.ImageIcon;
 
-import Game.Bala;
-import Game.BalaJugador;
-import Game.Celda;
-import Game.Visitante;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
 import PowerUp.Estrella;
@@ -15,8 +11,9 @@ import Game.*;
 public class TanqueJugador extends Tanque implements Visitante{
 	
 	protected int nivel;
-	protected int disparos_simul;
+	
 	protected State estado;
+	protected int vidas;
 	
 	
 
@@ -27,14 +24,23 @@ public class TanqueJugador extends Tanque implements Visitante{
 		dir = 0;
 		disparos_simul = 1;
 		realizados = 0;
+		vidas = 3;
 		
 		
 	}
 	
 	public void cargarImagen(int n, String s){
-		String a = "/Imagenes/" + s;
+		
 		image[n] = new ImageIcon(this.getClass().getResource("/Imagenes/" + s));
 		
+	}
+	
+	public void  setVidas(int n){
+		vidas = n;
+	}
+	
+	public void decrementarVidas(){
+		vidas-=1;
 	}
 	
 	public void cambiarEstado(){
@@ -64,31 +70,7 @@ public class TanqueJugador extends Tanque implements Visitante{
 	
 	
 	
-	public Bala disparo(){
-		if(realizados < disparos_simul){
-		Celda celdita = null;
-		int x=this.getCelda().getFila();
-		int y=this.getCelda().getCol();
 	
-		switch(dir){
-		case 0: celdita = new Celda(x-1,y);
-		break;
-		
-		case 1: celdita = new Celda(x+1,y);
-		break;
-		case 2: celdita = new Celda(x, y-1);
-		break;
-		case 3: celdita = new Celda(x, y+1);
-		break;
-		}
-		
-		Bala nueva = new BalaJugador(celdita, this, dir, lg);
-		realizados++;
-		return nueva;
-		}
-		return null;
-		
-	}
 
 
 
@@ -105,8 +87,8 @@ public class TanqueJugador extends Tanque implements Visitante{
 
 	@Override
 	public boolean acept(Visitante v) {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return v.visitarJugador(this);
 	}
 
 	@Override
@@ -131,6 +113,12 @@ public class TanqueJugador extends Tanque implements Visitante{
 	public boolean visitarEnemigo(TanqueEnemigo t) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg) {
+		
+		return new BalaJugador(celdita,t,dir,lg);
 	}
 
 	

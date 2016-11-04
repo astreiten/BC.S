@@ -13,6 +13,7 @@ public interface Visitante {
 	public boolean visitarArbol(Arboles arb);
 	public boolean visitarLadrillo(ParedLadrillos p);
 	public boolean visitarEnemigo(TanqueEnemigo t);
+	public boolean visitarJugador(TanqueJugador t);
 
 
 }

@@ -16,7 +16,7 @@ public class BalaJugador extends Bala{
 
 	@Override
 	public boolean acept(Visitante v) {
-		System.out.println("Acept bala");
+	
 		return false;
 	}
 
@@ -59,10 +59,8 @@ public class BalaJugador extends Bala{
 		 if(destruir){
 			 p.setGrafico();
 			 lg.eliminarBloque(p.getCelda().getFila(), p.getCelda().getCol());
-			
-			 return true;
 		 }
-		return false;
+		 return false;
 	}
 
 	@Override
@@ -70,13 +68,10 @@ public class BalaJugador extends Bala{
 		boolean aux = t.decrementarResistencia();
 		
 		if(aux){
-			System.out.println("Visite");
 			t.setImagen(4);
-			lg.eliminarTanque(t.getCelda().getFila(), t.getCelda().getCol());
-			
-		}
+					}
 		
-		return false;
+		return aux;
 	}
 
 }
