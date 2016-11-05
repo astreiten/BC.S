@@ -1,6 +1,6 @@
 package Game;
 
-import java.awt.Rectangle;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -51,20 +51,18 @@ public class Logica {
 	public JLabel cargarTanque() {
 		ContadorAnimaciones cont = new ContadorAnimaciones();
 		JLabel eti = new JLabel();
-		eti.setBounds(jugador.getCelda().getCol()*50, jugador.getCelda().getFila()*50,50, 50);
+		eti.setBounds(jugador.getCelda().getCol() * 50, jugador.getCelda().getFila() * 50, 50, 50);
 		ImageIcon nueva = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
 		eti.setIcon(nueva);
 		gui.add(eti);
-		
+
 		cont.setLabel(eti);
 		cont.start();
-		
+
 		return jugador.getGrafico();
 	}
-
-	public Celda[][] getMatriz() {
-		return Matriz;
-	}
+	
+	
 
 	public Celda getCelda(int f, int c) {
 		return Matriz[f][c];
@@ -83,11 +81,11 @@ public class Logica {
 			Matriz[nueva.getFila()][nueva.getCol()].setTanque(enemigos[i]);
 			ContadorAnimaciones cont = new ContadorAnimaciones();
 			JLabel eti = new JLabel();
-			eti.setBounds(enemigos[i].getCelda().getCol()*50, enemigos[i].getCelda().getFila()*50,50, 50);
+			eti.setBounds(enemigos[i].getCelda().getCol() * 50, enemigos[i].getCelda().getFila() * 50, 50, 50);
 			ImageIcon nuevaIm = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
 			eti.setIcon(nuevaIm);
 			gui.add(eti);
-			
+
 			cont.setLabel(eti);
 			cont.start();
 			gui.add(enemigos[i].getGrafico());
@@ -95,34 +93,10 @@ public class Logica {
 		}
 		tiempo = new ControlEnemigos(this);
 		tiempo.start();
-		
+
 		control = new ControlDisparo(this);
 		control.start();
 
-		//
-		//
-		//
-		//
-		//
-		// JLabel[] arreglo = new JLabel[4];
-		//
-		// Celda celdita = new Celda(0, 0);
-		// Inteligencia intel = new Inteligencia(this);
-		// enemigos[0] = new TanqueBasico(celdita, intel, this);
-		// intel.setTanque(enemigos[0]);
-		// enemigos[0].setImagen(0);
-		// Matriz[0][0].setTanque(enemigos[0]);
-		// arreglo[0] = enemigos[0].getGrafico();
-		//
-		// Celda celd = new Celda(3, 0);
-		// Inteligencia intel1 = new Inteligencia(this);
-		// enemigos[1] = new TanqueBasico(celd, intel1, this);
-		// intel1.setTanque(enemigos[1]);
-		// enemigos[1].setImagen(0);
-		// Matriz[3][0].setTanque(enemigos[1]);
-		// arreglo[1] = enemigos[1].getGrafico();
-		//
-		// return arreglo;
 	}
 
 	public void subirNivel() {
@@ -131,8 +105,6 @@ public class Logica {
 		jugador.cambiarEstado();
 
 	}
-
-	
 
 	private void cargarMapa(String nombre) {
 
@@ -213,8 +185,6 @@ public class Logica {
 		}
 	}
 
-	
-
 	public int getPuntos() {
 		return puntos;
 	}
@@ -234,8 +204,7 @@ public class Logica {
 				int x = enemigos[i1].getCelda().getFila();
 				this.sumarPuntos(100);
 				enemigos[i1].setImagen(4);
-				
-				
+
 				enemigos[i1].setGrafico();
 				Matriz[x][y].setTanque(null);
 
@@ -264,7 +233,7 @@ public class Logica {
 		Matriz[5][12].setObject(estrella);
 		estrella.setImagen(0);
 		gui.add(estrella.getGrafico());
-		
+
 		return granada.getGrafico();
 
 	}
@@ -298,13 +267,13 @@ public class Logica {
 		for (int i = 0; i < 4; i++) {
 
 			if (enemigos[i] != null) {
-			System.out.println("La celda " + i + " ( " + apariciones[i].getFila() + " " + apariciones[i].getCol() + " )");
+				System.out.println(
+						"La celda " + i + " ( " + apariciones[i].getFila() + " " + apariciones[i].getCol() + " )");
 				enemigos[i].getIA().mover();
 				disparoTanque(enemigos[i]);
 				if (enemigos[i].getRes() == 0) {
-					enemigos[i].setImagen(4);	
+					enemigos[i].setImagen(4);
 
-					
 					eliminarTanque(enemigos[i].getCelda().getFila(), enemigos[i].getCelda().getCol());
 					sumarPuntos(enemigos[i].getPuntos());
 					enemigos[i] = null;
@@ -322,27 +291,33 @@ public class Logica {
 		Inteligencia intel = new Inteligencia(this);
 		enemigos[i] = fabrica.crearTanque(nueva, intel, this);
 		intel.setTanque(enemigos[i]);
-		enemigos[i].setImagen(0);
+		ContadorAnimaciones cont = new ContadorAnimaciones();
+		JLabel eti = new JLabel();
+		eti.setBounds(enemigos[i].getCelda().getCol() * 50, enemigos[i].getCelda().getFila() * 50, 50, 50);
+		ImageIcon nuevaIm = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
+		eti.setIcon(nuevaIm);
+		gui.add(eti);
+		cont.setLabel(eti);
+		cont.start();
+
 		Matriz[nueva.getFila()][nueva.getCol()].setTanque(enemigos[i]);
 		gui.add(enemigos[i].getGrafico());
 
 	}
-	
-	public void reespawn(){
-		int  x = jugador.getCelda().getFila();
-		int  y = jugador.getCelda().getCol();
-		
+
+	public void reespawn() {
+		int x = jugador.getCelda().getFila();
+		int y = jugador.getCelda().getCol();
+
 		Matriz[x][y].setTanque(null);
 		jugador.setGrafico();
-		
+
 		jugador.getCelda().setFila(12);
 		jugador.getCelda().setColumna(4);
-		
+
 		Matriz[12][4].setTanque(jugador);
 		jugador.setImagen(1);
-		
-		
-		
+
 	}
 
 	public void disparoTanque(Tanque t) {
@@ -385,9 +360,9 @@ public class Logica {
 					arregloBalas[i].setImagen(4);
 					arregloBalas[i].getFuente().decrementarRealizados();
 					Matriz[arregloBalas[i].getCelda().getFila()][arregloBalas[i].getCelda().getCol()].setTanque(null);
-//					long millis = System.currentTimeMillis() + 500;
-//					while (System.currentTimeMillis() <= millis) {
-//					}
+					// long millis = System.currentTimeMillis() + 500;
+					// while (System.currentTimeMillis() <= millis) {
+					// }
 					arregloBalas[i].setGrafico();
 					arregloBalas[i] = null;
 

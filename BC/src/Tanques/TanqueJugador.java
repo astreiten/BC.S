@@ -8,14 +8,13 @@ import PowerUp.Estrella;
 import PowerUp.Granada;
 import PowerUp.PowerUp;
 import Game.*;
-public class TanqueJugador extends Tanque implements Visitante{
-	
+
+public class TanqueJugador extends Tanque implements Visitante {
+
 	protected int nivel;
-	
+
 	protected State estado;
 	protected int vidas;
-	
-	
 
 	public TanqueJugador(Celda celdita, Logica lg) {
 		super(celdita, lg);
@@ -25,28 +24,27 @@ public class TanqueJugador extends Tanque implements Visitante{
 		disparos_simul = 1;
 		realizados = 0;
 		vidas = 3;
-		
-		
+
 	}
-	
-	public void cargarImagen(int n, String s){
-		
+
+	public void cargarImagen(int n, String s) {
+
 		image[n] = new ImageIcon(this.getClass().getResource("/Imagenes/" + s));
-		
+
 	}
-	
-	public void  setVidas(int n){
+
+	public void setVidas(int n) {
 		vidas = n;
 	}
-	
-	public void decrementarVidas(){
-		vidas-=1;
+
+	public void decrementarVidas() {
+		vidas -= 1;
 	}
-	
-	public void cambiarEstado(){
+
+	public void cambiarEstado() {
 		int n = nivel;
-		switch(n){
-		
+		switch (n) {
+
 		case 1:
 			estado = new Nivel1(this);
 			nivel = 1;
@@ -54,30 +52,19 @@ public class TanqueJugador extends Tanque implements Visitante{
 		case 2:
 			estado = new Nivel2(this);
 			nivel = 2;
-			disparos_simul = 2;			
+			disparos_simul = 2;
 			break;
-		
+
 		}
 	}
-	
-	public void setNivel(int n){
+
+	public void setNivel(int n) {
 		nivel = n;
 	}
-	
-	public int getNivel(){
+
+	public int getNivel() {
 		return nivel;
 	}
-	
-	
-	
-	
-
-
-
-
-
-
-
 
 	@Override
 	public boolean visitar(Granada gra) {
@@ -87,7 +74,7 @@ public class TanqueJugador extends Tanque implements Visitante{
 
 	@Override
 	public boolean acept(Visitante v) {
-		
+
 		return v.visitarJugador(this);
 	}
 
@@ -117,11 +104,14 @@ public class TanqueJugador extends Tanque implements Visitante{
 
 	@Override
 	public Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg) {
-		
-		return new BalaJugador(celdita,t,dir,lg);
+
+		return new BalaJugador(celdita, t, dir, lg);
 	}
 
-	
-	
-	
+	@Override
+	public boolean visitarJugador(TanqueJugador t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

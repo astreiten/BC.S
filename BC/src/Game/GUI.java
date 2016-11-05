@@ -28,7 +28,7 @@ public class GUI extends JFrame {
 	private JPanel contentPane;
 
 	private boolean entre = false;
-	private Icon[] arreglo2 = new Icon[9];
+	private Icon[] arreglo2 = new Icon[10];
 	private JLabel label = new JLabel("");
 	private JLabel label_1 = new JLabel("");
 	private JLabel label_2 = new JLabel("");
@@ -94,17 +94,24 @@ public class GUI extends JFrame {
 		panel.setLayout(null);
 			
 		arreglo2[0]= new ImageIcon(this.getClass().getResource("/Imagenes/0.png"));
-		
+		arreglo2[1]= new ImageIcon(this.getClass().getResource("/Imagenes/1.png"));
 		arreglo2[2]= new ImageIcon(this.getClass().getResource("/Imagenes/2.png"));
+		arreglo2[3]= new ImageIcon(this.getClass().getResource("/Imagenes/3.png"));
+		arreglo2[4]= new ImageIcon(this.getClass().getResource("/Imagenes/4.png"));
+		arreglo2[5]= new ImageIcon(this.getClass().getResource("/Imagenes/5.png"));
+		arreglo2[6]= new ImageIcon(this.getClass().getResource("/Imagenes/6.png"));
+		arreglo2[7]= new ImageIcon(this.getClass().getResource("/Imagenes/7.png"));
+		arreglo2[8]= new ImageIcon(this.getClass().getResource("/Imagenes/8.png"));
+		arreglo2[9]= new ImageIcon(this.getClass().getResource("/Imagenes/9.png"));
+		
 	
 		
 		
 		
 		lg.cargarEnemigos();
 		
-//		contentPane.add(arregloet[0]);
-//		contentPane.add(arregloet[1]);
-//		
+
+	
 		
 		
 		
