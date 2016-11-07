@@ -97,6 +97,12 @@ public abstract class Tanque extends GameObject {
 
 	}
 
+	public boolean getMovilidad() {
+		return movilidad;
+	}
+
+	public abstract int getSleep();
+
 	public abstract Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg);
 
 	public void setMovilidad(boolean a) {

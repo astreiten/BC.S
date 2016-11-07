@@ -10,13 +10,10 @@ import Obstaculo.ParedLadrillos;
 import PowerUp.Estrella;
 import PowerUp.Granada;
 
-public class TanqueBasico extends TanqueEnemigo{
-	
-	
+public class TanqueBasico extends TanqueEnemigo {
 
-	
-	public TanqueBasico(Celda celdita,Inteligencia IA,Logica lg) {
-		super(celdita,IA, lg);
+	public TanqueBasico(Celda celdita, Inteligencia IA, Logica lg) {
+		super(celdita, IA, lg);
 		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicU.gif"));
 		image[1] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicD.gif"));
 		image[2] = new ImageIcon(this.getClass().getResource("/Imagenes/BasicL.gif"));
@@ -26,19 +23,22 @@ public class TanqueBasico extends TanqueEnemigo{
 		resistencia = 1;
 	}
 
-	
-	
-
 	@Override
 	public boolean visitar(Granada gra) {
-		
+
 		return true;
 	}
 
 	@Override
 	public boolean visitarEst(Estrella est) {
-		
+
 		return true;
+	}
+
+	public int getSleep() {
+		
+		return 4;
+
 	}
 
 	@Override
@@ -59,14 +59,10 @@ public class TanqueBasico extends TanqueEnemigo{
 		return false;
 	}
 
-
-
-
 	@Override
 	public boolean visitarJugador(TanqueJugador t) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
-	
+
 }

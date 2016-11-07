@@ -70,9 +70,7 @@ public class TanqueJugador extends Tanque implements Visitante {
 		return estado.getSleep();
 	}
 	
-	public boolean getMovilidad(){
-		return movilidad;
-	}
+	
 
 	@Override
 	public boolean visitar(Granada gra) {

@@ -27,6 +27,7 @@ public class Logica {
 	protected int contador = 0;
 	protected Celda[] apariciones = new Celda[4];
 	protected ContadorMovimiento contadorMov;
+	protected ContadorMovimiento [] arregloCont;
 
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
@@ -48,6 +49,15 @@ public class Logica {
 		apariciones[3] = new Celda(0, 6);
 		contadorMov = new ContadorMovimiento(jugador);
 		contadorMov.start();
+		
+		arregloCont = new ContadorMovimiento[4];
+		
+				
+		for ( int  i = 0; i < 4; i ++){
+			arregloCont[i] = new ContadorMovimiento(null);
+			arregloCont[i].start();
+		}
+						
 
 	}
 
@@ -264,7 +274,7 @@ public class Logica {
 		if (jugador.getMovilidad()) {
 			moverTanque(key, jugador);
 			contadorMov.empezar();
-			
+
 		}
 	}
 
@@ -273,9 +283,13 @@ public class Logica {
 		for (int i = 0; i < 4; i++) {
 
 			if (enemigos[i] != null) {
+				arregloCont[i].setTanque(enemigos[i]);
+								
+				if (enemigos[i].getMovilidad()) {
+					enemigos[i].getIA().mover();
+					arregloCont[i].empezar();
 
-				enemigos[i].getIA().mover();
-
+				}
 				disparoTanque(enemigos[i]);
 				if (enemigos[i].getRes() == 0) {
 					enemigos[i].setImagen(4);

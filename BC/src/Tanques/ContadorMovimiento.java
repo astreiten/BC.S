@@ -4,19 +4,17 @@ import Game.Logica;
 
 public class ContadorMovimiento extends Thread {
 
-	private TanqueJugador tan;
+	private Tanque tan;
 	private boolean puedo = false;
 	private int contador = 0;
 
-	public ContadorMovimiento(TanqueJugador tanq) {
+	public ContadorMovimiento(Tanque tanq) {
 		tan = tanq;
 	}
 
 	public void run() {
 		while (true) {
 
-		
-			
 			if (puedo) {
 				try {
 					Thread.sleep(100 * tan.getSleep());
@@ -60,6 +58,10 @@ public class ContadorMovimiento extends Thread {
 
 	public void empezar() {
 		puedo = true;
+	}
+
+	public void setTanque(Tanque t) {
+		tan = t;
 	}
 
 }
