@@ -1,6 +1,5 @@
 package Game;
 
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -27,6 +26,7 @@ public class Logica {
 	protected ControlDisparo control;
 	protected int contador = 0;
 	protected Celda[] apariciones = new Celda[4];
+	protected ContadorMovimiento contadorMov;
 
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
@@ -46,6 +46,9 @@ public class Logica {
 		apariciones[1] = new Celda(0, 12);
 		apariciones[2] = new Celda(3, 6);
 		apariciones[3] = new Celda(0, 6);
+		contadorMov = new ContadorMovimiento(jugador);
+		contadorMov.start();
+
 	}
 
 	public JLabel cargarTanque() {
@@ -61,8 +64,6 @@ public class Logica {
 
 		return jugador.getGrafico();
 	}
-	
-	
 
 	public Celda getCelda(int f, int c) {
 		return Matriz[f][c];
@@ -259,7 +260,12 @@ public class Logica {
 	}
 
 	public void moverJugador(int key) {
-		moverTanque(key, jugador);
+
+		if (jugador.getMovilidad()) {
+			moverTanque(key, jugador);
+			contadorMov.empezar();
+			
+		}
 	}
 
 	public void moverEnemigos() {
@@ -267,9 +273,9 @@ public class Logica {
 		for (int i = 0; i < 4; i++) {
 
 			if (enemigos[i] != null) {
-				System.out.println(
-						"La celda " + i + " ( " + apariciones[i].getFila() + " " + apariciones[i].getCol() + " )");
+
 				enemigos[i].getIA().mover();
+
 				disparoTanque(enemigos[i]);
 				if (enemigos[i].getRes() == 0) {
 					enemigos[i].setImagen(4);
@@ -436,7 +442,7 @@ public class Logica {
 			if ((x > 0) && getCelda(x - 1, y).inspeccionar(t)) {
 
 				concretarMovimiento(getCelda(x, y), getCelda(x - 1, y));
-
+				t.setMovilidad(false);
 				movi = true;
 			}
 			t.setDir(0);
@@ -448,6 +454,7 @@ public class Logica {
 			if (x < 12 && getCelda(x + 1, y).inspeccionar(t)) {
 
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
+				t.setMovilidad(false);
 				movi = true;
 			}
 			t.setDir(1);
@@ -459,6 +466,7 @@ public class Logica {
 			if (y > 0 && getCelda(x, y - 1).inspeccionar(t)) {
 
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
+				t.setMovilidad(false);
 				movi = true;
 			}
 			t.setDir(2);
@@ -470,6 +478,7 @@ public class Logica {
 			if (y < 12 && getCelda(x, y + 1).inspeccionar(t)) {
 
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
+				t.setMovilidad(false);
 				movi = true;
 			}
 			t.setDir(3);

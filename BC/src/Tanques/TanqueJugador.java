@@ -65,6 +65,14 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public int getNivel() {
 		return nivel;
 	}
+	
+	public int getSleep(){
+		return estado.getSleep();
+	}
+	
+	public boolean getMovilidad(){
+		return movilidad;
+	}
 
 	@Override
 	public boolean visitar(Granada gra) {

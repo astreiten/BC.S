@@ -12,6 +12,7 @@ public abstract class Tanque extends GameObject {
 	protected Logica lg;
 	protected int realizados;
 	protected int disparos_simul;
+	protected boolean movilidad;
 
 	public Tanque(Celda celdita, Logica l) {
 		super(celdita);
@@ -20,6 +21,7 @@ public abstract class Tanque extends GameObject {
 		image[5] = new ImageIcon(
 				this.getClass().getResource("/Imagenes/picasion.com_33e3de578cf843c270f5c3d7c53c79a1.gif"));
 
+		movilidad = true;
 	}
 
 	public void setImagen(int indice) {
@@ -96,5 +98,9 @@ public abstract class Tanque extends GameObject {
 	}
 
 	public abstract Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg);
+
+	public void setMovilidad(boolean a) {
+		movilidad = a;
+	}
 
 }

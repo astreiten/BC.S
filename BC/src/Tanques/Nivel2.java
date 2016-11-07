@@ -5,10 +5,11 @@ import javax.swing.ImageIcon;
 public class Nivel2 extends State{
 	
 	public Nivel2(TanqueJugador tanque){
-		tanque.cargarImagen(0,"Nivel_2_Arriba.png");
-		tanque.cargarImagen(1,"Nivel_2_Abajo.png");
-		tanque.cargarImagen(2,"Nivel_2_Izq.png");
-		tanque.cargarImagen(3,"Nivel_2_Der.png");
+		tanque.cargarImagen(0,"JugadorLvl2Up.gif");
+		tanque.cargarImagen(1,"JugadorLvl2Down.gif");
+		tanque.cargarImagen(2,"JugadorLvl2Left.gif");
+		tanque.cargarImagen(3,"JugadorLvl2Right.gif");
+		velocidad = 5;
 	}
 
 }
