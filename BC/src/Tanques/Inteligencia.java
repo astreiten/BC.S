@@ -19,7 +19,7 @@ public class Inteligencia {
 		}
 		else
 		{
-			Random r = new Random();
+			
 			dir =  0 + (int)(Math.random() * 4);
 	
 		}

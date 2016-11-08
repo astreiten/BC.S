@@ -10,6 +10,7 @@ public class Nivel1 extends State{
 		tanque.cargarImagen(2,"JugadorIzq.gif");
 		tanque.cargarImagen(3,"JugadorDer.gif");
 		velocidad = 5;
+		vd = 5;
 	}
 
 }

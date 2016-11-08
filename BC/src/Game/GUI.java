@@ -27,7 +27,7 @@ public class GUI extends JFrame {
 
 	private JPanel contentPane;
 
-	private boolean entre = false;
+	
 	private Icon[] arreglo2 = new Icon[10];
 	private JLabel label = new JLabel("");
 	private JLabel label_1 = new JLabel("");

@@ -6,7 +6,7 @@ import Game.*;
 public abstract class Tanque extends GameObject {
 
 	protected int resistencia;
-	protected int vel_dispa;
+	
 	protected int puntos;
 	protected int dir;
 	protected Logica lg;
@@ -102,6 +102,8 @@ public abstract class Tanque extends GameObject {
 	}
 
 	public abstract int getSleep();
+	
+	public abstract int getVd();
 
 	public abstract Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg);
 

@@ -27,13 +27,13 @@ public class BalaEnemigo extends Bala{
 	@Override
 	public boolean visitar(Granada gra) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean visitarEst(Estrella est) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

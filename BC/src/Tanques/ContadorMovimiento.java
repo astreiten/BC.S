@@ -14,6 +14,12 @@ public class ContadorMovimiento extends Thread {
 
 	public void run() {
 		while (true) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 			if (puedo) {
 				try {
@@ -48,10 +54,7 @@ public class ContadorMovimiento extends Thread {
 				}
 
 				tan.setMovilidad(true);
-				if (contador == tan.getSleep()) {
-
-					puedo = false;
-				}
+				
 			}
 		}
 	}

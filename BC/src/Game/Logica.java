@@ -27,7 +27,8 @@ public class Logica {
 	protected int contador = 0;
 	protected Celda[] apariciones = new Celda[4];
 	protected ContadorMovimiento contadorMov;
-	protected ContadorMovimiento [] arregloCont;
+	protected ContadorMovimiento[] arregloCont;
+	protected ContadorDisparo[] contDisp;
 
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
@@ -49,15 +50,19 @@ public class Logica {
 		apariciones[3] = new Celda(0, 6);
 		contadorMov = new ContadorMovimiento(jugador);
 		contadorMov.start();
-		
+
 		arregloCont = new ContadorMovimiento[4];
-		
-				
-		for ( int  i = 0; i < 4; i ++){
+
+		for (int i = 0; i < 4; i++) {
 			arregloCont[i] = new ContadorMovimiento(null);
 			arregloCont[i].start();
 		}
-						
+		
+		contDisp = new ContadorDisparo[7];
+		for (int i = 0; i < 7; i++) {
+			contDisp[i] = new ContadorDisparo(null);
+			contDisp[i].start();
+		}
 
 	}
 
@@ -284,7 +289,7 @@ public class Logica {
 
 			if (enemigos[i] != null) {
 				arregloCont[i].setTanque(enemigos[i]);
-								
+
 				if (enemigos[i].getMovilidad()) {
 					enemigos[i].getIA().mover();
 					arregloCont[i].empezar();
@@ -374,15 +379,17 @@ public class Logica {
 	public void moverBalas() {
 		for (int i = 0; i < 7; i++) {
 			if (arregloBalas[i] != null) {
-
-				boolean destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
+				boolean destroy = false;
+				contDisp[i].setBala(arregloBalas[i]);
+				if (arregloBalas[i].getMovilidad()) {
+					destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
+					contDisp[i].empezar();
+				}
 				if (!destroy) {
 					arregloBalas[i].setImagen(4);
 					arregloBalas[i].getFuente().decrementarRealizados();
 					Matriz[arregloBalas[i].getCelda().getFila()][arregloBalas[i].getCelda().getCol()].setTanque(null);
-					// long millis = System.currentTimeMillis() + 500;
-					// while (System.currentTimeMillis() <= millis) {
-					// }
+
 					arregloBalas[i].setGrafico();
 					arregloBalas[i] = null;
 
@@ -407,6 +414,7 @@ public class Logica {
 				concretarMovimientoBala(getCelda(x, y), getCelda(x - 1, y));
 
 				movi = true;
+				t.setMovilidad(false);
 			}
 			t.setImagen(0);
 			break;
@@ -416,6 +424,7 @@ public class Logica {
 			if (x < 12 && getCelda(x + 1, y).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x + 1, y));
 				movi = true;
+				t.setMovilidad(false);
 			}
 			t.setImagen(1);
 			break;
@@ -425,6 +434,7 @@ public class Logica {
 			if (y > 0 && getCelda(x, y - 1).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y - 1));
 				movi = true;
+				t.setMovilidad(false);
 			}
 			t.setImagen(2);
 			break;
@@ -434,6 +444,7 @@ public class Logica {
 			if (y < 12 && getCelda(x, y + 1).inspeccionar(t)) {
 				concretarMovimiento(getCelda(x, y), getCelda(x, y + 1));
 				movi = true;
+				t.setMovilidad(false);
 			}
 			t.setImagen(3);
 			break;

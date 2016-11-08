@@ -70,6 +70,10 @@ public class TanqueJugador extends Tanque implements Visitante {
 		return estado.getSleep();
 	}
 	
+	public int getVd(){
+		return estado.getVd();
+	}
+	
 	
 
 	@Override

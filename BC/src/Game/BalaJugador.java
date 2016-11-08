@@ -6,6 +6,7 @@ import PowerUp.Estrella;
 import PowerUp.Granada;
 import Tanques.Tanque;
 import Tanques.TanqueEnemigo;
+import Tanques.TanqueJugador;
 
 public class BalaJugador extends Bala{
 
@@ -72,6 +73,12 @@ public class BalaJugador extends Bala{
 					}
 		
 		return aux;
+	}
+
+	@Override
+	public boolean visitarJugador(TanqueJugador t) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
