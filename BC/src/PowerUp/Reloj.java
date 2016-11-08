@@ -1,42 +1,38 @@
-package Game;
+package PowerUp;
 
+import javax.swing.ImageIcon;
+
+import Game.Celda;
+import Game.GameObject;
+import Game.Logica;
+import Game.Visitante;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
-import PowerUp.Casco;
-import PowerUp.Estrella;
-import PowerUp.Granada;
-import PowerUp.Reloj;
-import Tanques.Tanque;
 import Tanques.TanqueEnemigo;
 import Tanques.TanqueJugador;
 
-public class BalaJugador extends Bala{
+public class Reloj  extends PowerUp{
 
-	public BalaJugador(Celda celdita, Tanque f, int dir, Logica lg) {
-		super(celdita, f, dir, lg);
-		
+	public Reloj(Celda celdita, Logica l) {
+		super(celdita, l);
+		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/Reloj.png"));
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean acept(Visitante v) {
-	
-		return false;
+		// TODO Auto-generated method stub
+		return v.visitarReloj(this);
 	}
 
 	@Override
 	public boolean visitar(Granada gra) {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean visitarEst(Estrella est) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean colision(GameObject obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -49,32 +45,14 @@ public class BalaJugador extends Bala{
 
 	@Override
 	public boolean visitarLadrillo(ParedLadrillos p) {
-		 boolean destruir = p.decrementarResistencia();
-		 int aux = p.getResistencia();
-		 switch(aux){
-		 case 3: p.setImagen(3);
-		 break;
-		 case 2: p.setImagen(2);
-		 break;
-		 case 1: p.setImagen(1);
-		 break;
-		 }
-		 if(destruir){
-			 p.setGrafico();
-			 lg.eliminarBloque(p.getCelda().getFila(), p.getCelda().getCol());
-		 }
-		 return false;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean visitarEnemigo(TanqueEnemigo t) {
-		boolean aux = t.decrementarResistencia();
-		
-		if(aux){
-			t.setImagen(4);
-					}
-		
-		return aux;
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -86,13 +64,25 @@ public class BalaJugador extends Bala{
 	@Override
 	public boolean visitarCasco(Casco c) {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
+	}
+
+	@Override
+	public boolean colision(GameObject obj) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public boolean visitarReloj(Reloj r) {
 		// TODO Auto-generated method stub
-		return true;
+		return false;
+	}
+
+	public void afectar() {
+		lg.detenerEnemigos();
+		lg.eliminarBloque(celda.getFila(), celda.getCol());
+		
 	}
 
 }

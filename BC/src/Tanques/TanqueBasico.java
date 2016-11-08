@@ -7,8 +7,10 @@ import Game.Logica;
 import Game.Visitante;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
+import PowerUp.Casco;
 import PowerUp.Estrella;
 import PowerUp.Granada;
+import PowerUp.Reloj;
 
 public class TanqueBasico extends TanqueEnemigo {
 
@@ -69,6 +71,18 @@ public class TanqueBasico extends TanqueEnemigo {
 	public int getVd() {
 		// TODO Auto-generated method stub
 		return 5;
+	}
+
+	@Override
+	public boolean visitarCasco(Casco c) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean visitarReloj(Reloj r) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

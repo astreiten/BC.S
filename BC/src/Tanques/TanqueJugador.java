@@ -4,9 +4,11 @@ import javax.swing.ImageIcon;
 
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
+import PowerUp.Casco;
 import PowerUp.Estrella;
 import PowerUp.Granada;
 import PowerUp.PowerUp;
+import PowerUp.Reloj;
 import Game.*;
 
 public class TanqueJugador extends Tanque implements Visitante {
@@ -15,6 +17,7 @@ public class TanqueJugador extends Tanque implements Visitante {
 
 	protected State estado;
 	protected int vidas;
+	protected boolean invul;
 
 	public TanqueJugador(Celda celdita, Logica lg) {
 		super(celdita, lg);
@@ -24,6 +27,7 @@ public class TanqueJugador extends Tanque implements Visitante {
 		disparos_simul = 1;
 		realizados = 0;
 		vidas = 3;
+		invul = false;
 
 	}
 
@@ -39,6 +43,14 @@ public class TanqueJugador extends Tanque implements Visitante {
 
 	public void decrementarVidas() {
 		vidas -= 1;
+	}
+
+	public void setInvul(boolean a) {
+		invul = a;
+	}
+	
+	public boolean getInvul() {
+		return invul ;
 	}
 
 	public void cambiarEstado() {
@@ -65,16 +77,14 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public int getNivel() {
 		return nivel;
 	}
-	
-	public int getSleep(){
+
+	public int getSleep() {
 		return estado.getSleep();
 	}
-	
-	public int getVd(){
+
+	public int getVd() {
 		return estado.getVd();
 	}
-	
-	
 
 	@Override
 	public boolean visitar(Granada gra) {
@@ -122,6 +132,21 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public boolean visitarJugador(TanqueJugador t) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean visitarCasco(Casco c) {
+
+		c.afectar();
+
+		return true;
+	}
+
+	@Override
+	public boolean visitarReloj(Reloj r) {
+		r.afectar();
+		
+		return true;
 	}
 
 }

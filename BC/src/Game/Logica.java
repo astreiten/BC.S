@@ -8,9 +8,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Obstaculo.*;
+import PowerUp.Casco;
 import PowerUp.Estrella;
 import PowerUp.Granada;
 import PowerUp.PowerUp;
+import PowerUp.Reloj;
 import Tanques.*;
 
 public class Logica {
@@ -19,7 +21,7 @@ public class Logica {
 	protected TanqueEnemigo[] enemigos;
 	protected int nivelMapa;
 	protected Celda[][] Matriz;
-	protected ControlEnemigos tiempo;
+	protected ControlEnemigos controlEnemigos;
 	protected int puntos;
 	protected ContadorAnimaciones animaciones;
 	protected Bala[] arregloBalas;
@@ -107,8 +109,8 @@ public class Logica {
 			gui.add(enemigos[i].getGrafico());
 
 		}
-		tiempo = new ControlEnemigos(this);
-		tiempo.start();
+		controlEnemigos = new ControlEnemigos(this);
+		controlEnemigos.start();
 
 		control = new ControlDisparo(this);
 		control.start();
@@ -244,11 +246,29 @@ public class Logica {
 		PowerUp granada = new Granada(celdita, this);
 		Matriz[0][7].setObject(granada);
 		granada.setImagen(0);
+		
+		
 		Celda celdita1 = new Celda(5, 12);
 		PowerUp estrella = new Estrella(celdita1, this);
 		Matriz[5][12].setObject(estrella);
 		estrella.setImagen(0);
 		gui.add(estrella.getGrafico());
+		
+		Celda celdita2 = new Celda(0,1);
+		PowerUp casco = new Casco(celdita2, this);
+		Matriz[0][1].setObject(casco);
+		casco.setImagen(0);
+		gui.add(casco.getGrafico());
+		
+//		Celda celdita3 = new Celda(0,4);
+//		PowerUp reloj = new Reloj(celdita3, this);
+//		Matriz[0][1].setObject(reloj);
+//		reloj.setImagen(0);
+//		gui.add(reloj.getGrafico());
+		
+		
+		
+		
 
 		return granada.getGrafico();
 
@@ -379,7 +399,7 @@ public class Logica {
 	public void moverBalas() {
 		for (int i = 0; i < 7; i++) {
 			if (arregloBalas[i] != null) {
-				boolean destroy = false;
+				boolean destroy = true;
 				contDisp[i].setBala(arregloBalas[i]);
 				if (arregloBalas[i].getMovilidad()) {
 					destroy = moverBala(arregloBalas[i].getDir(), arregloBalas[i]);
@@ -522,5 +542,20 @@ public class Logica {
 			}
 		}
 
+	}
+	
+	public void setInvul( boolean a){
+		jugador.setInvul(a);
+	}
+
+	public void detenerEnemigos() {
+		
+		try {
+			controlEnemigos.sleep(5000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

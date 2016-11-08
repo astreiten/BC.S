@@ -21,12 +21,6 @@ public class ContadorDisparo extends Thread {
 				}
 				
 				
-				try {
-					Thread.sleep(10);
-				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
 
 				if (puedo) {
 					try {
@@ -42,21 +36,21 @@ public class ContadorDisparo extends Thread {
 					switch (b.getDir()) {
 					case 0: // Arriba
 
-						b.getGrafico().setBounds(y * 50, x * 50 - 6, 50, 50);
+						b.getGrafico().setBounds(y * 50, x * 50 - 4, 50, 50);
 						break;
 
 					case 1: // Abajo
 
-						b.getGrafico().setBounds(y * 50, x * 50 + 6, 50, 50);
+						b.getGrafico().setBounds(y * 50, x * 50 + 4, 50, 50);
 						break;
 
 					case 2: // Izquierda
 
-						b.getGrafico().setBounds(y * 50 - 6, x * 50, 50, 50);
+						b.getGrafico().setBounds(y * 50 - 4, x * 50, 50, 50);
 						break;
 
 					case 3: // Derecha
-						b.getGrafico().setBounds(y * 50 + 6, x * 50, 50, 50);
+						b.getGrafico().setBounds(y * 50 + 4, x * 50, 50, 50);
 						break;
 					}
 
