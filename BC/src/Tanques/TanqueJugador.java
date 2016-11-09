@@ -7,6 +7,7 @@ import Obstaculo.ParedLadrillos;
 import PowerUp.Casco;
 import PowerUp.Estrella;
 import PowerUp.Granada;
+import PowerUp.Pala;
 import PowerUp.PowerUp;
 import PowerUp.Reloj;
 import Game.*;
@@ -146,6 +147,12 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public boolean visitarReloj(Reloj r) {
 		r.afectar();
 		
+		return true;
+	}
+
+	@Override
+	public boolean visitarPala(Pala p) {
+		p.afectar();
 		return true;
 	}
 

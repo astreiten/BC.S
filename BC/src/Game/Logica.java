@@ -11,6 +11,7 @@ import Obstaculo.*;
 import PowerUp.Casco;
 import PowerUp.Estrella;
 import PowerUp.Granada;
+import PowerUp.Pala;
 import PowerUp.PowerUp;
 import PowerUp.Reloj;
 import Tanques.*;
@@ -264,6 +265,14 @@ public class Logica {
 		Matriz[0][4].setObject(reloj);
 		reloj.setImagen(0);
 		gui.add(reloj.getGrafico());
+		
+		
+		Celda celdita4 = new Celda(11,4);
+		PowerUp pala = new Pala(celdita4, this);
+		Matriz[11][4].setObject(pala);
+		pala.setImagen(0);
+		gui.add(pala.getGrafico());
+		
 
 		return granada.getGrafico();
 
@@ -546,6 +555,74 @@ public class Logica {
 	public void detenerEnemigos() {
 
 		controlEnemigos.frenar();
+
+	}
+
+	public void ponerAcero() {
+
+		eliminarBloque(12, 5);
+		ParedAcero p1 = new ParedAcero(Matriz[12][5]);
+		Matriz[12][5].setObject(p1);
+		p1.setImagen(0);
+		gui.add(p1.getGrafico());
+
+		eliminarBloque(11, 5);
+		ParedAcero p2 = new ParedAcero(Matriz[11][5]);
+		Matriz[11][5].setObject(p2);
+		p2.setImagen(0);
+		gui.add(p2.getGrafico());
+
+		eliminarBloque(11, 6);
+		ParedAcero p3 = new ParedAcero(Matriz[11][6]);
+		Matriz[11][6].setObject(p3);
+		p3.setImagen(0);
+		gui.add(p3.getGrafico());
+
+		eliminarBloque(11, 7);
+		ParedAcero p4 = new ParedAcero(Matriz[11][7]);
+		Matriz[11][7].setObject(p4);
+		p4.setImagen(0);
+		gui.add(p4.getGrafico());
+
+		eliminarBloque(12, 7);
+		ParedAcero p5 = new ParedAcero(Matriz[12][7]);
+		Matriz[12][7].setObject(p5);
+		p5.setImagen(0);
+		gui.add(p5.getGrafico());
+
+	}
+	
+	public void ponerLadrillos() {
+
+		eliminarBloque(12, 5);
+		ParedLadrillos p1 = new ParedLadrillos(Matriz[12][5]);
+		Matriz[12][5].setObject(p1);
+		p1.setImagen(0);
+		gui.add(p1.getGrafico());
+
+		eliminarBloque(11, 5);
+		ParedLadrillos p2 = new ParedLadrillos(Matriz[11][5]);
+		Matriz[11][5].setObject(p2);
+		p2.setImagen(0);
+		gui.add(p2.getGrafico());
+
+		eliminarBloque(11, 6);
+		ParedLadrillos p3 = new ParedLadrillos(Matriz[11][6]);
+		Matriz[11][6].setObject(p3);
+		p3.setImagen(0);
+		gui.add(p3.getGrafico());
+
+		eliminarBloque(11, 7);
+		ParedLadrillos p4 = new ParedLadrillos(Matriz[11][7]);
+		Matriz[11][7].setObject(p4);
+		p4.setImagen(0);
+		gui.add(p4.getGrafico());
+
+		eliminarBloque(12, 7);
+		ParedLadrillos p5 = new ParedLadrillos(Matriz[12][7]);
+		Matriz[12][7].setObject(p5);
+		p5.setImagen(0);
+		gui.add(p5.getGrafico());
 
 	}
 }

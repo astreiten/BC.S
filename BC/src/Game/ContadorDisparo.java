@@ -13,18 +13,12 @@ public class ContadorDisparo extends Thread {
 		public void run() {
 			while (true) {
 				
-				try {
-					Thread.sleep(50);
-				} catch (InterruptedException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
 				
 				
 
 				if (puedo) {
 					try {
-						Thread.sleep(100 * b.getFuente().getVd());
+						Thread.sleep(10 * b.getFuente().getVd());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -55,6 +49,15 @@ public class ContadorDisparo extends Thread {
 					}
 
 					b.setMovilidad(true);
+					
+				}
+				else{
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
 					
 				}
 			}
