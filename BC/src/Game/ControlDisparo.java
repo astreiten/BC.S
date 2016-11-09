@@ -11,7 +11,7 @@ public class ControlDisparo extends Thread{
 	public void run() {
 		while(true) {
 			try {
-				Thread.sleep(500);
+				Thread.sleep(200);
 			}
 			catch(InterruptedException e) {
 				e.printStackTrace();
@@ -22,3 +22,4 @@ public class ControlDisparo extends Thread{
 	}
 
 }
+

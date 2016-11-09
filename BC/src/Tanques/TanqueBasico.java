@@ -73,7 +73,7 @@ public class TanqueBasico extends TanqueEnemigo {
 	@Override
 	public int getVd() {
 		
-		return 5;
+		return 3;
 	}
 
 	@Override

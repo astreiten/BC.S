@@ -123,23 +123,6 @@ public class GUI extends JFrame {
 		label_3.setBounds(36, 74, 20, 20);
 		panel.add(label_3);
 		
-		Panel panel_2 = new Panel();
-		panel_2.setBounds(21, 10, 82, 293);
-		panel.add(panel_2);
-		panel_2.setLayout(new GridLayout(0,2));
-		
-		JLabel [][] matriz = new JLabel[16][2];
-		
-		for(int o = 0; i < 2 ;i++){
-			for(int p = 0; p < 16; p++){
-				matriz[o][p] = new JLabel();
-				matriz[o][p].setIcon();
-			}
-			
-		}
-		
-		
-
 		
 
 		panel_1 = new JPanel();

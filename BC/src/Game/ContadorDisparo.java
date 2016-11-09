@@ -18,7 +18,7 @@ public class ContadorDisparo extends Thread {
 
 				if (puedo) {
 					try {
-						Thread.sleep(10 * b.getFuente().getVd());
+						Thread.sleep(100 * b.getFuente().getVd());
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
