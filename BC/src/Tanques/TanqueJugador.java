@@ -2,6 +2,7 @@ package Tanques;
 
 import javax.swing.ImageIcon;
 
+import Obstaculo.Aguila;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
 import PowerUp.Casco;
@@ -173,6 +174,11 @@ public class TanqueJugador extends Tanque implements Visitante {
 	
 	public int getVidas(){
 		return vidas;
+	}
+
+	@Override
+	public boolean visitarAguila(Aguila a) {
+		return false;
 	}
 
 }

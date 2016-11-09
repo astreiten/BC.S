@@ -7,6 +7,7 @@ import Game.GameObject;
 import Game.Logica;
 import Game.Tiempo;
 import Game.Visitante;
+import Obstaculo.Aguila;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
 import Tanques.TanqueEnemigo;
@@ -103,6 +104,12 @@ public class Pala extends PowerUpTemp {
 
 	@Override
 	public boolean visitarTanquePw(TanquePw t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarAguila(Aguila a) {
 		// TODO Auto-generated method stub
 		return false;
 	}

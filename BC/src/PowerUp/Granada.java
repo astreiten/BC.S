@@ -17,7 +17,11 @@ import Game.Celda;
 import Game.GameObject;
 import Game.Logica;
 import Game.Visitante;
+import Obstaculo.Aguila;
+import Obstaculo.Arboles;
+import Obstaculo.ParedLadrillos;
 import Tanques.Tanque;
+import Tanques.TanqueEnemigo;
 import Tanques.TanqueJugador;
 
 
@@ -55,6 +59,60 @@ public class Granada extends PowerUp {
 
 	@Override
 	public boolean visitarEst(Estrella est) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarArbol(Arboles arb) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarLadrillo(ParedLadrillos p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarEnemigo(TanqueEnemigo t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarJugador(TanqueJugador t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarCasco(Casco c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarReloj(Reloj r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarPala(Pala p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarTanquePw(TanquePw t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarAguila(Aguila a) {
 		// TODO Auto-generated method stub
 		return false;
 	}

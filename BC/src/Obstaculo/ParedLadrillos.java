@@ -6,8 +6,14 @@ import javax.swing.ImageIcon;
 import Game.Celda;
 import Game.GameObject;
 import Game.Visitante;
+import PowerUp.Casco;
 import PowerUp.Estrella;
 import PowerUp.Granada;
+import PowerUp.Pala;
+import PowerUp.Reloj;
+import PowerUp.TanquePw;
+import Tanques.TanqueEnemigo;
+import Tanques.TanqueJugador;
 
 public class ParedLadrillos extends Obstaculo {
 	
@@ -62,6 +68,48 @@ public class ParedLadrillos extends Obstaculo {
 
 	@Override
 	public boolean visitarLadrillo(ParedLadrillos p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarEnemigo(TanqueEnemigo t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarJugador(TanqueJugador t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarCasco(Casco c) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarReloj(Reloj r) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarPala(Pala p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarTanquePw(TanquePw t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarAguila(Aguila a) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -17,25 +17,26 @@ public class TanqueBlindado extends TanqueEnemigo{
 
 	public TanqueBlindado(Celda celdita, Inteligencia IA, Logica lg) {
 		super(celdita, IA, lg);
+		puntos = 400;
+		resistencia = 4;
 		// TODO Auto-generated constructor stub
 	}
-
-	@Override
-	public boolean acept(Visitante v) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 	@Override
 	public boolean visitar(Granada gra) {
-		// TODO Auto-generated method stub
-		return false;
+
+		return true;
 	}
 
 	@Override
 	public boolean visitarEst(Estrella est) {
-		// TODO Auto-generated method stub
-		return false;
+
+		return true;
+	}
+
+	public int getSleep() {
+		
+		return 4;
+
 	}
 
 	@Override
@@ -63,27 +64,33 @@ public class TanqueBlindado extends TanqueEnemigo{
 	}
 
 	@Override
+	public int getVd() {
+		
+		return 5;
+	}
+
+	@Override
 	public boolean visitarCasco(Casco c) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean visitarReloj(Reloj r) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean visitarPala(Pala p) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean visitarTanquePw(TanquePw t) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -92,16 +99,5 @@ public class TanqueBlindado extends TanqueEnemigo{
 		return false;
 	}
 
-	@Override
-	public int getSleep() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getVd() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 }
+
