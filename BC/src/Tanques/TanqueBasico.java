@@ -12,6 +12,7 @@ import PowerUp.Estrella;
 import PowerUp.Granada;
 import PowerUp.Pala;
 import PowerUp.Reloj;
+import PowerUp.TanquePw;
 
 public class TanqueBasico extends TanqueEnemigo {
 
@@ -88,6 +89,12 @@ public class TanqueBasico extends TanqueEnemigo {
 
 	@Override
 	public boolean visitarPala(Pala p) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean visitarTanquePw(TanquePw t) {
 		// TODO Auto-generated method stub
 		return true;
 	}

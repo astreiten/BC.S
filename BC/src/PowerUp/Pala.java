@@ -101,4 +101,10 @@ public class Pala extends PowerUpTemp {
 		return false;
 	}
 
+	@Override
+	public boolean visitarTanquePw(TanquePw t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

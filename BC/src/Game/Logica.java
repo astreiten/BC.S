@@ -14,6 +14,7 @@ import PowerUp.Granada;
 import PowerUp.Pala;
 import PowerUp.PowerUp;
 import PowerUp.Reloj;
+import PowerUp.TanquePw;
 import Tanques.*;
 
 public class Logica {
@@ -272,6 +273,12 @@ public class Logica {
 		Matriz[11][4].setObject(pala);
 		pala.setImagen(0);
 		gui.add(pala.getGrafico());
+		
+		Celda celdita5 = new Celda(12,3);
+		PowerUp tanquePw = new TanquePw(celdita5, this);
+		Matriz[12][3].setObject(tanquePw);
+		tanquePw.setImagen(0);
+		gui.add(tanquePw.getGrafico());
 		
 
 		return granada.getGrafico();
@@ -624,5 +631,11 @@ public class Logica {
 		p5.setImagen(0);
 		gui.add(p5.getGrafico());
 
+	}
+	
+	public void aumentarVida(){
+		System.out.println("La vida es " + jugador.getVidas());
+		jugador.aumentarVida();
+		System.out.println("La vida es " + jugador.getVidas());
 	}
 }

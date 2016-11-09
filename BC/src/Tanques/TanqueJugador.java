@@ -10,6 +10,7 @@ import PowerUp.Granada;
 import PowerUp.Pala;
 import PowerUp.PowerUp;
 import PowerUp.Reloj;
+import PowerUp.TanquePw;
 import Game.*;
 
 public class TanqueJugador extends Tanque implements Visitante {
@@ -40,6 +41,10 @@ public class TanqueJugador extends Tanque implements Visitante {
 
 	public void setVidas(int n) {
 		vidas = n;
+	}
+	
+	public void aumentarVida(){
+		vidas++;
 	}
 
 	public void decrementarVidas() {
@@ -154,6 +159,16 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public boolean visitarPala(Pala p) {
 		p.afectar();
 		return true;
+	}
+
+	@Override
+	public boolean visitarTanquePw(TanquePw t) {
+		t.afectar();
+		return true;
+	}
+	
+	public int getVidas(){
+		return vidas;
 	}
 
 }

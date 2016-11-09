@@ -85,4 +85,16 @@ public class Reloj  extends PowerUp{
 		
 	}
 
+	@Override
+	public boolean visitarPala(Pala p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarTanquePw(TanquePw t) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

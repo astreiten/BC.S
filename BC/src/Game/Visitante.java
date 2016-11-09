@@ -6,6 +6,7 @@ import Obstaculo.*;
 import PowerUp.Granada;
 import PowerUp.Pala;
 import PowerUp.Reloj;
+import PowerUp.TanquePw;
 import Tanques.*;
 
 
@@ -20,6 +21,7 @@ public interface Visitante {
 	public boolean visitarCasco(Casco c);
 	public boolean visitarReloj(Reloj r);
 	public boolean visitarPala(Pala p);
+	public boolean visitarTanquePw(TanquePw t);
 	
 
 

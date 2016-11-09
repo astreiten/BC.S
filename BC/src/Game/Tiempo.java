@@ -5,6 +5,7 @@ import PowerUp.PowerUpTemp;
 public class Tiempo extends Thread {
 
 	protected PowerUpTemp pw;
+	protected boolean cond = false;
 
 	public Tiempo() {
 
@@ -17,12 +18,15 @@ public class Tiempo extends Thread {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-
-			pw.desafectar();
+			if (cond) {
+				pw.desafectar();
+				cond = false;
+			}
 		}
 	}
 
 	public void setPw(PowerUpTemp a) {
 		pw = a;
+		cond = true;
 	}
 }

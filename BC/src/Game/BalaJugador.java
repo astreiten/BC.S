@@ -5,7 +5,9 @@ import Obstaculo.ParedLadrillos;
 import PowerUp.Casco;
 import PowerUp.Estrella;
 import PowerUp.Granada;
+import PowerUp.Pala;
 import PowerUp.Reloj;
+import PowerUp.TanquePw;
 import Tanques.Tanque;
 import Tanques.TanqueEnemigo;
 import Tanques.TanqueJugador;
@@ -93,6 +95,18 @@ public class BalaJugador extends Bala{
 	public boolean visitarReloj(Reloj r) {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public boolean visitarPala(Pala p) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarTanquePw(TanquePw t) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
