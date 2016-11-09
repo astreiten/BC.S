@@ -16,7 +16,7 @@ public class Timer extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(10000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

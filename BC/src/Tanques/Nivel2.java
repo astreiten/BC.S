@@ -11,6 +11,7 @@ public class Nivel2 extends State{
 		tanque.cargarImagen(3,"JugadorLvl2Right.gif");
 		velocidad = 1;
 		vd = 1;
+		simul = 1;
 	}
 
 }

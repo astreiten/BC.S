@@ -25,9 +25,9 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public TanqueJugador(Celda celdita, Logica lg) {
 		super(celdita, lg);
 		nivel = 1;
-		estado = new Nivel2(this);
+		estado = new Nivel3(this);
 		dir = 0;
-		disparos_simul = 1;
+		disparos_simul = 2;
 		realizados = 0;
 		vidas = 3;
 		invul = false;
@@ -67,11 +67,22 @@ public class TanqueJugador extends Tanque implements Visitante {
 		case 1:
 			estado = new Nivel1(this);
 			nivel = 1;
+			disparos_simul = estado.getSimul();
 			break;
 		case 2:
 			estado = new Nivel2(this);
 			nivel = 2;
-			disparos_simul = 2;
+			disparos_simul = estado.getSimul();
+			break;
+		case 3:
+			estado = new Nivel3(this);
+			nivel = 3;		
+			disparos_simul = estado.getSimul();
+			break;
+		case 4:
+			estado = new Nivel4(this);
+			nivel = 4;
+			disparos_simul = estado.getSimul();
 			break;
 
 		}
