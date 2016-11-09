@@ -15,6 +15,7 @@ import java.awt.GridLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Panel;
 
 public class GUI extends JFrame {
 
@@ -117,6 +118,27 @@ public class GUI extends JFrame {
 		label_2.setBounds(83, 309, 20, 20);
 		label_2.setIcon(arreglo2[0]);
 		panel.add(label_2);
+		
+		JLabel label_3 = new JLabel("");
+		label_3.setBounds(36, 74, 20, 20);
+		panel.add(label_3);
+		
+		Panel panel_2 = new Panel();
+		panel_2.setBounds(21, 10, 82, 293);
+		panel.add(panel_2);
+		panel_2.setLayout(new GridLayout(0,2));
+		
+		JLabel [][] matriz = new JLabel[16][2];
+		
+		for(int o = 0; i < 2 ;i++){
+			for(int p = 0; p < 16; p++){
+				matriz[o][p] = new JLabel();
+				matriz[o][p].setIcon();
+			}
+			
+		}
+		
+		
 
 		
 

@@ -86,7 +86,10 @@ public class Logica {
 		powers[5] = new Casco(nuevac, this);
 		
 		cola = new LinkedList<TanqueFactory>();
-		cola.add(new BasicoFactory());
+		cola.add(new RapidoFactory());
+		cola.add(new PoderFactory());
+		cola.add(new BlindadoFactory());
+		fabrica = new BasicoFactory();
 		
 		
 
@@ -335,6 +338,9 @@ public class Logica {
 					sumarPuntos(enemigos[i].getPuntos());
 					enemigos[i] = null;
 					enemigos_kill++;
+					if(enemigos_kill == 16){
+						cargarMapa("prueba.txt.txt");
+					}
 
 					if (enemigos_kill % 4 == 0) {
 						insertarPowerUp();
@@ -348,7 +354,7 @@ public class Logica {
 
 	public void reponerTanque(int i) {
 		if(enemigos_kill % 9 == 0){
-			fabrica = cola.dequeue();
+			fabrica = cola.remove();
 		}
 		 
 		Celda nueva = new Celda(apariciones[i].getFila(), apariciones[i].getFila());

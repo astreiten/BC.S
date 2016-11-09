@@ -1,5 +1,7 @@
 package Tanques;
 
+import javax.swing.ImageIcon;
+
 import Game.Celda;
 import Game.Logica;
 import Game.Visitante;
@@ -19,6 +21,11 @@ public class TanqueBlindado extends TanqueEnemigo{
 		super(celdita, IA, lg);
 		puntos = 400;
 		resistencia = 4;
+		image[0] = new ImageIcon(this.getClass().getResource("/Imagenes/BlindadoUp.gif"));
+		image[1] = new ImageIcon(this.getClass().getResource("/Imagenes/BlindadoDw.gif"));
+		image[2] = new ImageIcon(this.getClass().getResource("/Imagenes/BlindadoL.gif"));
+		image[3] = new ImageIcon(this.getClass().getResource("/Imagenes/BlindadoR.gif"));
+		image[4] = new ImageIcon(this.getClass().getResource("/Imagenes/ExplosionEnemigo.gif"));
 		// TODO Auto-generated constructor stub
 	}
 	@Override
