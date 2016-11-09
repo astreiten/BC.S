@@ -40,6 +40,10 @@ public abstract class TanqueEnemigo extends Tanque{
 	public Bala crearBala(Celda celdita, Tanque t, int dir, Logica lg){
 		return new BalaEnemigo(celdita,t,dir,lg);
 	}
+	public int getPuntos()
+	{
+		return puntos;
+	}
 	
 	
 }

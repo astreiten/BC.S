@@ -7,7 +7,7 @@ public abstract class Tanque extends GameObject {
 
 	protected int resistencia;
 	
-	protected int puntos;
+
 	protected int dir;
 	protected Logica lg;
 	protected int realizados;
@@ -46,9 +46,6 @@ public abstract class Tanque extends GameObject {
 		return false;
 	}
 
-	public int getPuntos() {
-		return puntos;
-	}
 
 	public void decrementarRealizados() {
 		realizados--;

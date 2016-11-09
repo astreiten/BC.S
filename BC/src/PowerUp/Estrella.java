@@ -36,6 +36,7 @@ public class Estrella extends PowerUp {
 	public boolean afectar(){
 		lg.subirNivel();
 		lg.eliminarBloque(celda.getFila(), celda.getCol());
+		lg.sumarPuntos(this.getPuntaje());
 		return true;
 	}
 

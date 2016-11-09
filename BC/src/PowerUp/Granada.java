@@ -43,6 +43,7 @@ public class Granada extends PowerUp {
 	
 	public void afectar(){
 		lg.destruirEnemigos(celda.getFila(), celda.getCol());
+		lg.sumarPuntos(this.getPuntaje());
 	}
 
 	@Override

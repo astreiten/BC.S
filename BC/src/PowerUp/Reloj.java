@@ -83,6 +83,7 @@ public class Reloj  extends PowerUp{
 	public void afectar() {
 		lg.detenerEnemigos();
 		lg.eliminarBloque(celda.getFila(), celda.getCol());
+		lg.sumarPuntos(this.getPuntaje());
 		
 	}
 

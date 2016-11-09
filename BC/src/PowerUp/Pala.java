@@ -88,6 +88,7 @@ public class Pala extends PowerUpTemp {
 		Tiempo t = new Tiempo();
 		t.setPw(this);
 		t.start();
+		lg.sumarPuntos(this.getPuntaje());
 	}
 
 	@Override

@@ -75,6 +75,7 @@ public class Casco extends PowerUpTemp{
 		time.setPw(this);
 		time.start();
 		lg.eliminarBloque(celda.getFila(), celda.getCol());
+		lg.sumarPuntos(this.getPuntaje());
 	}
 	
 	public void desafectar(){

@@ -88,6 +88,7 @@ public class TanquePw extends PowerUp {
 		
 		lg.aumentarVida();
 		lg.eliminarBloque(celda.getFila(), celda.getCol());
+		lg.sumarPuntos(this.getPuntaje());
 	}
 
 	@Override

@@ -234,7 +234,7 @@ public class Logica {
 		return puntos;
 	}
 
-	private void sumarPuntos(int n) {
+	public void sumarPuntos(int n) {
 		puntos += n;
 		gui.armarEtiqueta(puntos);
 	}
@@ -338,6 +338,7 @@ public class Logica {
 					sumarPuntos(enemigos[i].getPuntos());
 					enemigos[i] = null;
 					enemigos_kill++;
+					System.out.println("El punataje es "+puntos);
 					if(enemigos_kill == 16){
 						cargarMapa("prueba.txt.txt");
 					}
