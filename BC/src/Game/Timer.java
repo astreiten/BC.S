@@ -1,10 +1,11 @@
 package Game;
 
+import PowerUp.PowerUp;
 import PowerUp.PowerUpTemp;
 
 public class Timer extends Thread {
 
-	protected PowerUpTemp pw;
+	protected PowerUp pw;
 	protected Logica lg;
 	
 
@@ -15,17 +16,18 @@ public class Timer extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				Thread.sleep(10000);
+				Thread.sleep(3000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 			if(!pw.getAgarrado()){
 				lg.eliminarBloque(2, 6);
+				pw.setAgarrado(true);
 			}
 		}
 	}
 
-	public void setPw(PowerUpTemp a) {
+	public void setPw(PowerUp a) {
 		pw = a;		
 	}
 }

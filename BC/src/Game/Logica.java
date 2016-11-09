@@ -3,6 +3,8 @@ package Game;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
@@ -36,8 +38,10 @@ public class Logica {
 	protected ContadorMovimiento[] arregloCont;
 	protected ContadorDisparo[] contDisp;
 	protected int enemigos_kill;
-	protected PowerUp [] powers;
-
+	protected PowerUp[] powers;
+	protected TanqueFactory fabrica;
+	protected Queue<TanqueFactory> cola; 
+	
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
 		cargarMapa(a);
@@ -71,15 +75,18 @@ public class Logica {
 			contDisp[i] = new ContadorDisparo(null);
 			contDisp[i].start();
 		}
-		
+
 		powers = new PowerUp[6];
-		Celda nuevac = new Celda(2,6);
+		Celda nuevac = new Celda(2, 6);
 		powers[0] = new Granada(nuevac, this);
 		powers[1] = new Pala(nuevac, this);
 		powers[2] = new Reloj(nuevac, this);
 		powers[3] = new TanquePw(nuevac, this);
 		powers[4] = new Estrella(nuevac, this);
 		powers[5] = new Casco(nuevac, this);
+		
+		cola = new LinkedList<TanqueFactory>();
+		cola.add(new BasicoFactory());
 		
 		
 
@@ -234,7 +241,9 @@ public class Logica {
 
 		for (int i1 = 0; i1 < 4; i1++) {
 			if (enemigos[i1] != null) {
-
+				
+				enemigos_kill++;
+				
 				int y = enemigos[i1].getCelda().getCol();
 				int x = enemigos[i1].getCelda().getFila();
 				this.sumarPuntos(100);
@@ -244,6 +253,7 @@ public class Logica {
 				Matriz[x][y].setTanque(null);
 
 				enemigos[i1] = null;
+				reponerTanque(i1);
 			}
 		}
 	}
@@ -257,22 +267,22 @@ public class Logica {
 		AudioClip sonido;
 		sonido = java.applet.Applet.newAudioClip(getClass().getResource("/Imagenes/boom.wav"));
 		sonido.play();
-		
+
 		Matriz[a][b].getTanque().getGrafico().setIcon(null);
 		Matriz[a][b].setTanque(null);
 	}
 
 	public void insertarPowerUp() {
-		
+
 		Random rnd = new Random();
-		int i =  (int) (rnd.nextDouble() *6 + 0);
+		int i = (int) (rnd.nextDouble() * 6 + 0);
 		Matriz[2][6].setObject(powers[i]);
 		powers[i].setImagen(0);
 		gui.add(powers[i].getGrafico());
-		
-		
 
-		
+		Timer time = new Timer(this);
+		time.setPw(powers[i]);
+		time.start();
 
 	}
 
@@ -337,8 +347,10 @@ public class Logica {
 	}
 
 	public void reponerTanque(int i) {
-
-		TanqueFactory fabrica = new BasicoFactory();
+		if(enemigos_kill % 9 == 0){
+			fabrica = cola.dequeue();
+		}
+		 
 		Celda nueva = new Celda(apariciones[i].getFila(), apariciones[i].getFila());
 		Inteligencia intel = new Inteligencia(this);
 		enemigos[i] = fabrica.crearTanque(nueva, intel, this);
@@ -386,7 +398,6 @@ public class Logica {
 		}
 		Bala nueva = t.disparo();
 		if (nueva != null) {
-			
 
 			if (getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getObstaculo() != null) {
 				getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getObstaculo().acept(nueva);
@@ -647,5 +658,5 @@ public class Logica {
 	public void gameOver() {
 		gui.gameOver();
 	}
-	
+
 }

@@ -72,7 +72,7 @@ public class TanqueBasico extends TanqueEnemigo {
 
 	@Override
 	public int getVd() {
-		// TODO Auto-generated method stub
+		
 		return 5;
 	}
 
