@@ -3,6 +3,7 @@ package Game;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import PowerUp.PowerUp;
 import PowerUp.Reloj;
 import PowerUp.TanquePw;
 import Tanques.*;
+import java.applet.AudioClip;
 
 public class Logica {
 	protected GUI gui;
@@ -33,6 +35,8 @@ public class Logica {
 	protected ContadorMovimiento contadorMov;
 	protected ContadorMovimiento[] arregloCont;
 	protected ContadorDisparo[] contDisp;
+	protected int enemigos_kill;
+	protected PowerUp [] powers;
 
 	public Logica(String a, GUI g) {
 		Matriz = new Celda[13][13];
@@ -67,6 +71,17 @@ public class Logica {
 			contDisp[i] = new ContadorDisparo(null);
 			contDisp[i].start();
 		}
+		
+		powers = new PowerUp[6];
+		Celda nuevac = new Celda(2,6);
+		powers[0] = new Granada(nuevac, this);
+		powers[1] = new Pala(nuevac, this);
+		powers[2] = new Reloj(nuevac, this);
+		powers[3] = new TanquePw(nuevac, this);
+		powers[4] = new Estrella(nuevac, this);
+		powers[5] = new Casco(nuevac, this);
+		
+		
 
 	}
 
@@ -166,7 +181,7 @@ public class Logica {
 
 					case 'E':
 
-						Aguila ag = new Aguila(nueva);
+						Aguila ag = new Aguila(nueva, this);
 						ag.setImagen(0);
 						nueva.setObject(ag);
 						Matriz[j][i] = nueva;
@@ -239,49 +254,25 @@ public class Logica {
 	}
 
 	public void eliminarTanque(int a, int b) {
+		AudioClip sonido;
+		sonido = java.applet.Applet.newAudioClip(getClass().getResource("/Imagenes/boom.wav"));
+		sonido.play();
+		
 		Matriz[a][b].getTanque().getGrafico().setIcon(null);
 		Matriz[a][b].setTanque(null);
 	}
 
-	public JLabel insertarPowerUp() {
-		Celda celdita = new Celda(0, 7);
-		PowerUp granada = new Granada(celdita, this);
-		Matriz[0][7].setObject(granada);
-		granada.setImagen(0);
-
-		Celda celdita1 = new Celda(5, 12);
-		PowerUp estrella = new Estrella(celdita1, this);
-		Matriz[5][12].setObject(estrella);
-		estrella.setImagen(0);
-		gui.add(estrella.getGrafico());
-
-		Celda celdita2 = new Celda(0, 1);
-		PowerUp casco = new Casco(celdita2, this);
-		Matriz[0][1].setObject(casco);
-		casco.setImagen(0);
-		gui.add(casco.getGrafico());
-
-		Celda celdita3 = new Celda(0, 4);
-		PowerUp reloj = new Reloj(celdita3, this);
-		Matriz[0][4].setObject(reloj);
-		reloj.setImagen(0);
-		gui.add(reloj.getGrafico());
+	public void insertarPowerUp() {
+		
+		Random rnd = new Random();
+		int i =  (int) (rnd.nextDouble() *6 + 0);
+		Matriz[2][6].setObject(powers[i]);
+		powers[i].setImagen(0);
+		gui.add(powers[i].getGrafico());
 		
 		
-		Celda celdita4 = new Celda(11,4);
-		PowerUp pala = new Pala(celdita4, this);
-		Matriz[11][4].setObject(pala);
-		pala.setImagen(0);
-		gui.add(pala.getGrafico());
-		
-		Celda celdita5 = new Celda(12,3);
-		PowerUp tanquePw = new TanquePw(celdita5, this);
-		Matriz[12][3].setObject(tanquePw);
-		tanquePw.setImagen(0);
-		gui.add(tanquePw.getGrafico());
-		
 
-		return granada.getGrafico();
+		
 
 	}
 
@@ -333,6 +324,11 @@ public class Logica {
 					eliminarTanque(enemigos[i].getCelda().getFila(), enemigos[i].getCelda().getCol());
 					sumarPuntos(enemigos[i].getPuntos());
 					enemigos[i] = null;
+					enemigos_kill++;
+
+					if (enemigos_kill % 4 == 0) {
+						insertarPowerUp();
+					}
 					reponerTanque(i);
 				}
 			}
@@ -365,14 +361,22 @@ public class Logica {
 		int x = jugador.getCelda().getFila();
 		int y = jugador.getCelda().getCol();
 
-		Matriz[x][y].setTanque(null);
-		jugador.setGrafico();
+		if (jugador.getVidas() > 0) {
 
-		jugador.getCelda().setFila(12);
-		jugador.getCelda().setColumna(4);
+			Matriz[x][y].setTanque(null);
+			jugador.setGrafico();
 
-		Matriz[12][4].setTanque(jugador);
-		jugador.setImagen(1);
+			jugador.getCelda().setFila(12);
+			jugador.getCelda().setColumna(4);
+
+			Matriz[12][4].setTanque(jugador);
+			jugador.setImagen(1);
+		} else {
+
+			gui.gameOver();
+
+			System.out.println("Game Over");
+		}
 
 	}
 
@@ -382,6 +386,7 @@ public class Logica {
 		}
 		Bala nueva = t.disparo();
 		if (nueva != null) {
+			
 
 			if (getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getObstaculo() != null) {
 				getCelda(nueva.getCelda().getFila(), nueva.getCelda().getCol()).getObstaculo().acept(nueva);
@@ -598,7 +603,7 @@ public class Logica {
 		gui.add(p5.getGrafico());
 
 	}
-	
+
 	public void ponerLadrillos() {
 
 		eliminarBloque(12, 5);
@@ -632,10 +637,15 @@ public class Logica {
 		gui.add(p5.getGrafico());
 
 	}
-	
-	public void aumentarVida(){
+
+	public void aumentarVida() {
 		System.out.println("La vida es " + jugador.getVidas());
 		jugador.aumentarVida();
 		System.out.println("La vida es " + jugador.getVidas());
 	}
+
+	public void gameOver() {
+		gui.gameOver();
+	}
+	
 }

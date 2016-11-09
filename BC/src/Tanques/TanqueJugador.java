@@ -95,6 +95,7 @@ public class TanqueJugador extends Tanque implements Visitante {
 	@Override
 	public boolean visitar(Granada gra) {
 		gra.afectar();
+		gra.setAgarrado(true);
 		return true;
 	}
 
@@ -107,6 +108,7 @@ public class TanqueJugador extends Tanque implements Visitante {
 	@Override
 	public boolean visitarEst(Estrella est) {
 		est.afectar();
+		est.setAgarrado(true);
 		return true;
 	}
 
@@ -144,26 +146,28 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public boolean visitarCasco(Casco c) {
 
 		c.afectar();
-
+		c.setAgarrado(true);
 		return true;
 	}
 
 	@Override
 	public boolean visitarReloj(Reloj r) {
 		r.afectar();
-		
+		r.setAgarrado(true);
 		return true;
 	}
 
 	@Override
 	public boolean visitarPala(Pala p) {
 		p.afectar();
+		p.setAgarrado(true);
 		return true;
 	}
 
 	@Override
 	public boolean visitarTanquePw(TanquePw t) {
 		t.afectar();
+		t.setAgarrado(true);
 		return true;
 	}
 	

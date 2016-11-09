@@ -1,5 +1,6 @@
 package Game;
 
+import Obstaculo.Aguila;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
 import PowerUp.Casco;
@@ -107,6 +108,13 @@ public class BalaJugador extends Bala{
 	public boolean visitarTanquePw(TanquePw t) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public boolean visitarAguila(Aguila a) {
+		a.morir();
+		
+		return true;
 	}
 
 }

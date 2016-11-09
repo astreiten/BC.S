@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import Game.Celda;
 import Game.Logica;
 import Game.Visitante;
+import Obstaculo.Aguila;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
 import PowerUp.Casco;
@@ -97,6 +98,12 @@ public class TanqueBasico extends TanqueEnemigo {
 	public boolean visitarTanquePw(TanquePw t) {
 		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public boolean visitarAguila(Aguila a) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

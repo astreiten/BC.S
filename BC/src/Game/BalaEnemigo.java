@@ -3,6 +3,7 @@ package Game;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import Obstaculo.Aguila;
 import Obstaculo.Arboles;
 import Obstaculo.ParedLadrillos;
 import PowerUp.Casco;
@@ -85,6 +86,8 @@ public class BalaEnemigo extends Bala {
 
 			cont.setLabel(eti);
 			cont.start();
+			
+			t.decrementarVidas();
 
 			lg.reespawn();
 		}
@@ -118,6 +121,12 @@ public class BalaEnemigo extends Bala {
 	@Override
 	public boolean visitarTanquePw(TanquePw t) {
 		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean visitarAguila(Aguila a) {
+		a.morir();
 		return false;
 	}
 
