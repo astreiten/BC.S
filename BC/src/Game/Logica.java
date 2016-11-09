@@ -59,7 +59,7 @@ public class Logica {
 			arregloCont[i] = new ContadorMovimiento(null);
 			arregloCont[i].start();
 		}
-		
+
 		contDisp = new ContadorDisparo[7];
 		for (int i = 0; i < 7; i++) {
 			contDisp[i] = new ContadorDisparo(null);
@@ -246,29 +246,24 @@ public class Logica {
 		PowerUp granada = new Granada(celdita, this);
 		Matriz[0][7].setObject(granada);
 		granada.setImagen(0);
-		
-		
+
 		Celda celdita1 = new Celda(5, 12);
 		PowerUp estrella = new Estrella(celdita1, this);
 		Matriz[5][12].setObject(estrella);
 		estrella.setImagen(0);
 		gui.add(estrella.getGrafico());
-		
-		Celda celdita2 = new Celda(0,1);
+
+		Celda celdita2 = new Celda(0, 1);
 		PowerUp casco = new Casco(celdita2, this);
 		Matriz[0][1].setObject(casco);
 		casco.setImagen(0);
 		gui.add(casco.getGrafico());
-		
-//		Celda celdita3 = new Celda(0,4);
-//		PowerUp reloj = new Reloj(celdita3, this);
-//		Matriz[0][1].setObject(reloj);
-//		reloj.setImagen(0);
-//		gui.add(reloj.getGrafico());
-		
-		
-		
-		
+
+		Celda celdita3 = new Celda(0, 4);
+		PowerUp reloj = new Reloj(celdita3, this);
+		Matriz[0][4].setObject(reloj);
+		reloj.setImagen(0);
+		gui.add(reloj.getGrafico());
 
 		return granada.getGrafico();
 
@@ -543,19 +538,14 @@ public class Logica {
 		}
 
 	}
-	
-	public void setInvul( boolean a){
+
+	public void setInvul(boolean a) {
 		jugador.setInvul(a);
 	}
 
 	public void detenerEnemigos() {
-		
-		try {
-			controlEnemigos.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
+		controlEnemigos.frenar();
+
 	}
 }
