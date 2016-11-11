@@ -108,6 +108,34 @@ public class Logica {
 
 		return jugador.getGrafico();
 	}
+	 private PowerUp gimmePw(int t) {
+		  PowerUp nuevo = null;
+		  Celda celd = new Celda(2, 6);
+		  switch (t) {
+
+		  case 0:
+		   nuevo = new Granada(celd, this);
+		   break;
+		  case 1:
+		   nuevo = new Pala(celd, this);
+		   break;
+		  case 2:
+		   nuevo = new Casco(celd, this);
+		   break;
+		  case 3:
+		   nuevo = new Reloj(celd, this);
+		   break;
+		  case 4:
+		   nuevo = new TanquePw(celd, this);
+		   break;
+		  case 5:
+		   nuevo = new Estrella(celd, this);
+		   break;
+
+		  }
+
+		  return nuevo;
+		 }
 
 	public Celda getCelda(int f, int c) {
 		return Matriz[f][c];
@@ -279,12 +307,13 @@ public class Logica {
 
 		Random rnd = new Random();
 		int i = (int) (rnd.nextDouble() * 6 + 0);
-		Matriz[2][6].setObject(powers[i]);
-		powers[i].setImagen(0);
-		gui.add(powers[i].getGrafico());
+		PowerUp pp= gimmePw(i);
+		Matriz[2][6].setObject(pp);
+		pp.setImagen(0);
+		gui.add(pp.getGrafico());
 
 		Timer time = new Timer(this);
-		time.setPw(powers[i]);
+		time.setPw(pp);
 		time.start();
 
 	}
@@ -347,6 +376,7 @@ public class Logica {
 						insertarPowerUp();
 					}
 					reponerTanque(i);
+					System.out.println("Repuse");
 				}
 			}
 
@@ -357,24 +387,42 @@ public class Logica {
 		if(enemigos_kill % 9 == 0){
 			fabrica = cola.remove();
 		}
-		 
-		Celda nueva = new Celda(apariciones[i].getFila(), apariciones[i].getFila());
-		Inteligencia intel = new Inteligencia(this);
-		enemigos[i] = fabrica.crearTanque(nueva, intel, this);
-		intel.setTanque(enemigos[i]);
-		ContadorAnimaciones cont = new ContadorAnimaciones();
-		JLabel eti = new JLabel();
-		eti.setBounds(enemigos[i].getCelda().getCol() * 50, enemigos[i].getCelda().getFila() * 50, 50, 50);
-		ImageIcon nuevaIm = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
-		eti.setIcon(nuevaIm);
-		gui.add(eti);
-		cont.setLabel(eti);
-		cont.start();
+		int aux=i;
+		Celda nueva = new Celda(apariciones[aux].getFila(), apariciones[aux].getFila());
+	    boolean meti=false;
+	    while (!meti){
+	    	System.out.println("AUX INICIAL "+aux);
+	    
+		if (Matriz[nueva.getFila()][nueva.getCol()].getTanque()==null)
+			{ 
+				Inteligencia intel = new Inteligencia(this);
+				enemigos[i] = fabrica.crearTanque(nueva, intel, this);
+				intel.setTanque(enemigos[i]);
+				ContadorAnimaciones cont = new ContadorAnimaciones();
+				JLabel eti = new JLabel();
+				eti.setBounds(enemigos[i].getCelda().getCol() * 50, enemigos[i].getCelda().getFila() * 50, 50, 50);
+				ImageIcon nuevaIm = new ImageIcon(this.getClass().getResource("/Imagenes/Aparicion.gif"));
+				eti.setIcon(nuevaIm);
+				gui.add(eti);
+				cont.setLabel(eti);
+				cont.start();
 
-		Matriz[nueva.getFila()][nueva.getCol()].setTanque(enemigos[i]);
-		gui.add(enemigos[i].getGrafico());
+				Matriz[nueva.getFila()][nueva.getCol()].setTanque(enemigos[i]);
+				gui.add(enemigos[i].getGrafico());
+				meti=true;
+			}
+	    else{
+	    	aux=aux+1;
+	        if (aux>3){ aux=0;}
+	    			
+	    	nueva=new Celda(apariciones[(aux)%4].getFila(), apariciones[(aux)%4].getCol());
+	    	
+	    }
+	    }
 
-	}
+
+		
+  }
 
 	public void reespawn() {
 		int x = jugador.getCelda().getFila();
@@ -384,12 +432,17 @@ public class Logica {
 
 			Matriz[x][y].setTanque(null);
 			jugador.setGrafico();
+            boolean meti=false;
+            while (!meti){
+            	if(Matriz[12][4].getTanque()==null){
+            		jugador.getCelda().setFila(12);
+        			jugador.getCelda().setColumna(4);
 
-			jugador.getCelda().setFila(12);
-			jugador.getCelda().setColumna(4);
-
-			Matriz[12][4].setTanque(jugador);
-			jugador.setImagen(1);
+        			Matriz[12][4].setTanque(jugador);
+        			jugador.setImagen(1);
+        			meti=true;
+            	}
+            }
 		} else {
 
 			gui.gameOver();

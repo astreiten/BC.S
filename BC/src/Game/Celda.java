@@ -65,16 +65,5 @@ public class Celda {
 		columna = c;
 	}
 
-	public String toString() {
-		if (objeto == null) {
-			return " piso ";
-		} else {
-			if (objeto instanceof ParedLadrillos) {
-				return " ladrillos ";
-			}
-		}
-		return "asd";
-
-	}
 
 }

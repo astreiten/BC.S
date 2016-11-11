@@ -27,7 +27,7 @@ public class TanqueJugador extends Tanque implements Visitante {
 		nivel = 1;
 		estado = new Nivel3(this);
 		dir = 0;
-		disparos_simul = 2;
+		disparos_simul = 1;
 		realizados = 0;
 		vidas = 3;
 		invul = false;

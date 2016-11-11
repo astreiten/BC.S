@@ -23,8 +23,8 @@ public class Pala extends PowerUpTemp {
 
 	@Override
 	public boolean acept(Visitante v) {
-		v.visitarPala(this);
-		return false;
+		return v.visitarPala(this);
+	
 	}
 	
 

@@ -26,13 +26,11 @@ public abstract class TanqueEnemigo extends Tanque{
 	@Override
 	public boolean acept(Visitante v) {
 		v.visitarEnemigo(this);
-		System.out.println("Quiero aceptar");
 		return false;
 	}
 	
 	public boolean decrementarResistencia(){
 		resistencia--;
-		System.out.println("Res "+ resistencia);
 	
 		return resistencia == 0;
 	}

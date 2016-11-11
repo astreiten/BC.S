@@ -20,8 +20,8 @@ public class TanquePw extends PowerUp {
 
 	@Override
 	public boolean acept(Visitante v) {
-		v.visitarTanquePw(this);
-		return false;
+		return v.visitarTanquePw(this);
+		
 	}
 
 	@Override
