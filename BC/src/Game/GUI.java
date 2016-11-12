@@ -16,6 +16,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class GUI extends JFrame {
 
@@ -35,6 +38,10 @@ public class GUI extends JFrame {
 	private final JLabel lblNewLabel = new JLabel();
 	private JPanel panel_1;
 	private JPanel panel;
+	private final JLabel label_4 = new JLabel("");
+	private JButton btnNewButton;
+	private JLabel lblNewLabel_1;
+	private JLabel label_5 = new JLabel("");
 
 	/**
 	 * Launch the application.
@@ -52,16 +59,28 @@ public class GUI extends JFrame {
 		});
 	}
 
+	private class OyenteTeclado extends KeyAdapter {
+		protected GUI gui;
+
+		public OyenteTeclado(GUI gui) {
+			this.gui = gui;
+		}
+
+		public void keyPressed(KeyEvent arg0) {
+			gui.mover(arg0);
+		}
+	}
+
 	/**
 	 * Create the frame.
 	 */
 	public GUI() {
 		super("Super Battle City Reborned");
-		addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent arg0) {
-				mover(arg0);
-			}
-		});
+
+		addKeyListener(new OyenteTeclado(this));
+		setFocusable(true);
+		setFocusTraversalKeysEnabled(false);
+
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 680);
@@ -69,30 +88,6 @@ public class GUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setBackground(Color.BLACK);
-		contentPane.setLayout(null);
-		lg = new Logica("Nivel1.txt", this);
-		int i;
-		for (i = 0; i < 13; i++) {
-			int j = 0;
-			for (j = 0; j < 13; j++) {
-				if (lg.getCelda(i, j).getObstaculo() != null) {
-					getContentPane().add(lg.getCelda(i, j).getObstaculo().getGrafico());
-				}
-
-			}
-		}
-
-		contentPane.add(lg.cargarTanque());
-		long millis = System.currentTimeMillis() + 500;
-		while (System.currentTimeMillis() <= millis) {
-		}
-		lg.jugador.setImagen(0);
-
-		panel = new JPanel();
-		panel.setBounds(652, 0, 125, 657);
-		contentPane.add(panel);
-		panel.setBackground(Color.GRAY);
-		panel.setLayout(null);
 
 		arreglo2[0] = new ImageIcon(this.getClass().getResource("/Imagenes/0.png"));
 		arreglo2[1] = new ImageIcon(this.getClass().getResource("/Imagenes/1.png"));
@@ -104,8 +99,39 @@ public class GUI extends JFrame {
 		arreglo2[7] = new ImageIcon(this.getClass().getResource("/Imagenes/7.png"));
 		arreglo2[8] = new ImageIcon(this.getClass().getResource("/Imagenes/8.png"));
 		arreglo2[9] = new ImageIcon(this.getClass().getResource("/Imagenes/9.png"));
+		contentPane.setLayout(null);
 
-		lg.cargarEnemigos();
+		panel_1 = new JPanel();
+		panel_1.setBounds(0, 0, 777, 657);
+		contentPane.add(panel_1);
+		panel_1.setVisible(false);
+		panel_1.setBackground(Color.BLACK);
+		panel_1.setLayout(null);
+		lblNewLabel.setBounds(0, 0, 777, 646);
+
+		panel_1.add(lblNewLabel);
+
+		lblNewLabel_1 = new JLabel();
+		lblNewLabel_1.setBounds(0, 0, 777, 657);
+		contentPane.add(lblNewLabel_1);
+		lblNewLabel_1.setIcon(new ImageIcon(this.getClass().getResource("/Imagenes/InicioJuego.png")));
+
+		btnNewButton = new JButton("");
+		btnNewButton.setIcon(new ImageIcon(GUI.class.getResource("/Imagenes/Boton.png")));
+		btnNewButton.setSelectedIcon(null);
+		btnNewButton.addMouseListener(new OyenteComenzar());
+
+		btnNewButton.setBounds(201, 473, 394, 58);
+		contentPane.add(btnNewButton);
+		
+		panel = new JPanel();
+		panel.setBounds(652, 0, 125, 657);
+		contentPane.add(panel);
+		
+		panel.setVisible(false);
+		
+		panel.setBackground(Color.GRAY);
+		panel.setLayout(null);
 
 		label.setBounds(21, 309, 20, 20);
 		label.setIcon(arreglo2[0]);
@@ -119,22 +145,22 @@ public class GUI extends JFrame {
 		label_2.setIcon(arreglo2[0]);
 		panel.add(label_2);
 		
-		JLabel label_3 = new JLabel("");
-		label_3.setBounds(36, 74, 20, 20);
-		panel.add(label_3);
-		
 		
 
-		panel_1 = new JPanel();
-		panel_1.setBounds(0, 0, 777, 657);
-		contentPane.add(panel_1);
-		panel_1.setVisible(false);
-		panel_1.setBackground(Color.BLACK);
-		panel_1.setLayout(null);
-		lblNewLabel.setBounds(108, 149, 586, 325);
+		
+		label_5.setBounds(688, 397, 25, 46);
+		label_5.setIcon(new ImageIcon(GUI.class.getResource("/Imagenes/Vidas.png")));
+		panel.add(label_5);
 
-		panel_1.add(lblNewLabel);
+	}
 
+	private class OyenteComenzar extends MouseAdapter {
+		public void mouseClicked(MouseEvent arg0) {
+			btnNewButton.setVisible(false);
+			lblNewLabel_1.setVisible(false);
+			comenzarJuego();
+
+		}
 	}
 
 	protected void mover(KeyEvent tecla) {
@@ -172,9 +198,7 @@ public class GUI extends JFrame {
 			n /= 10;
 		}
 
-		label.setIcon(nuevo[2]);
-		label_1.setIcon(nuevo[1]);
-		label_2.setIcon(nuevo[0]);
+	
 
 		return nuevo;
 
@@ -183,9 +207,42 @@ public class GUI extends JFrame {
 	public void gameOver() {
 		contentPane.removeAll();
 		contentPane.repaint();
+		lg.destruirHilos();
+		contentPane.add(panel_1);
 		panel_1.setVisible(true);
 		lblNewLabel.setIcon(new ImageIcon(this.getClass().getResource("/Imagenes/GameOver.png")));
-		panel.setVisible(false);
 
+	}
+
+	public void ganar() {
+		contentPane.removeAll();
+		contentPane.repaint();
+		lg.destruirHilos();
+
+	}
+
+	public void comenzarJuego() {
+		
+		panel.setVisible(true);
+
+		JLabel label_3 = new JLabel("");
+		label_3.setBounds(36, 74, 20, 20);
+		panel.add(label_3);
+
+		lg = new Logica("Nivel1.txt", this);
+		int i;
+		for (i = 0; i < 13; i++) {
+			int j = 0;
+			for (j = 0; j < 13; j++) {
+				if (lg.getCelda(i, j).getObstaculo() != null) {
+					getContentPane().add(lg.getCelda(i, j).getObstaculo().getGrafico());
+				}
+
+			}
+		}
+
+		contentPane.add(lg.cargarTanque());
+		lg.jugador.setImagen(0);
+		lg.cargarEnemigos();
 	}
 }

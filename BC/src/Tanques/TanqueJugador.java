@@ -25,7 +25,7 @@ public class TanqueJugador extends Tanque implements Visitante {
 	public TanqueJugador(Celda celdita, Logica lg) {
 		super(celdita, lg);
 		nivel = 1;
-		estado = new Nivel3(this);
+		estado = new Nivel1(this);
 		dir = 0;
 		disparos_simul = 1;
 		realizados = 0;
