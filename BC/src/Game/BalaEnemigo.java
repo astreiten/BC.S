@@ -127,7 +127,7 @@ public class BalaEnemigo extends Bala {
 
 	@Override
 	public boolean visitarAguila(Aguila a) {
-		//a.morir();
+		a.morir();
 		return false;
 	}
 

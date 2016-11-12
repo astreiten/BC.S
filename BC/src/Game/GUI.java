@@ -281,5 +281,6 @@ public class GUI extends JFrame {
 	
 	public void decrementarVidas(){
 		lblNewLabel_2.setIcon(arreglo2[vidas--]);
+		lblNewLabel_2.repaint();
 	}
 }
