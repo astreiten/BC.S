@@ -31,7 +31,7 @@ public class GUI extends JFrame {
 
 	private JPanel contentPane;
 
-	private Icon[] arreglo2 = new Icon[10];
+	private Icon[] arreglo2 = new Icon[11];
 	private JLabel label = new JLabel("");
 	private JLabel label_1 = new JLabel("");
 	private JLabel label_2 = new JLabel("");
@@ -42,6 +42,10 @@ public class GUI extends JFrame {
 	private JButton btnNewButton;
 	private JLabel lblNewLabel_1;
 	private JLabel label_5 = new JLabel("");
+	private JLabel label_3 = new JLabel("");
+	private final JLabel label_6 = new JLabel("");
+	private final JLabel lblNewLabel_2 = new JLabel("");
+	private int vidas = 3;
 
 	/**
 	 * Launch the application.
@@ -99,6 +103,7 @@ public class GUI extends JFrame {
 		arreglo2[7] = new ImageIcon(this.getClass().getResource("/Imagenes/7.png"));
 		arreglo2[8] = new ImageIcon(this.getClass().getResource("/Imagenes/8.png"));
 		arreglo2[9] = new ImageIcon(this.getClass().getResource("/Imagenes/9.png"));
+		arreglo2[10] = new ImageIcon(this.getClass().getResource("/Imagenes/Vidas.png"));
 		contentPane.setLayout(null);
 
 		panel_1 = new JPanel();
@@ -133,24 +138,37 @@ public class GUI extends JFrame {
 		panel.setBackground(Color.GRAY);
 		panel.setLayout(null);
 
-		label.setBounds(21, 309, 20, 20);
+		label.setBounds(60, 309, 20, 20);
 		label.setIcon(arreglo2[0]);
 		panel.add(label);
 
-		label_1.setBounds(51, 309, 20, 20);
+		label_1.setBounds(80, 309, 20, 20);
 		label_1.setIcon(arreglo2[0]);
 		panel.add(label_1);
 
-		label_2.setBounds(83, 309, 20, 20);
+		label_2.setBounds(100, 309, 20, 20);
 		label_2.setIcon(arreglo2[0]);
 		panel.add(label_2);
 		
 		
 
 		
-		label_5.setBounds(688, 397, 25, 46);
-		label_5.setIcon(new ImageIcon(GUI.class.getResource("/Imagenes/Vidas.png")));
+		label_5.setBounds(21, 487, 25, 46);
+		label_5.setIcon(arreglo2[10]);
+		label_5.setVisible(true);
 		panel.add(label_5);
+		
+		
+		label_3.setBounds(40, 309, 20, 20);
+		label_3.setIcon(arreglo2[0]);
+		panel.add(label_3);
+		label_6.setBounds(20, 309, 20, 20);
+		label_6.setIcon(arreglo2[10]);
+		panel.add(label_6);
+		lblNewLabel_2.setIcon(arreglo2[3]);
+		lblNewLabel_2.setBounds(50, 487, 20, 20);
+		
+		panel.add(lblNewLabel_2);
 
 	}
 
@@ -191,12 +209,20 @@ public class GUI extends JFrame {
 	}
 
 	public Icon[] armarEtiqueta(int n) {
-		Icon[] nuevo = new Icon[3];
+		Icon[] nuevo = new Icon[5];
 
 		for (int i = 0; i < nuevo.length; i++) {
 			nuevo[i] = arreglo2[n % 10];
 			n /= 10;
 		}
+		
+		label_6.setIcon(nuevo[4]);
+		label_3.setIcon(nuevo[3]);
+		label.setIcon(nuevo[2]);
+		label_1.setIcon(nuevo[1]);
+		label_2.setIcon(nuevo[0]);
+		
+		
 
 	
 
@@ -217,6 +243,9 @@ public class GUI extends JFrame {
 	public void ganar() {
 		contentPane.removeAll();
 		contentPane.repaint();
+		contentPane.add(panel_1);
+		panel_1.setVisible(true);
+		lblNewLabel.setIcon(new ImageIcon(this.getClass().getResource("/Imagenes/Ganar.png")));
 		lg.destruirHilos();
 
 	}
@@ -244,5 +273,13 @@ public class GUI extends JFrame {
 		contentPane.add(lg.cargarTanque());
 		lg.jugador.setImagen(0);
 		lg.cargarEnemigos();
+	}
+	
+	public void incrementarVidas(){
+		lblNewLabel_2.setIcon(arreglo2[vidas++]);
+	}
+	
+	public void decrementarVidas(){
+		lblNewLabel_2.setIcon(arreglo2[vidas--]);
 	}
 }

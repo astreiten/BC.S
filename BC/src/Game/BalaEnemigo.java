@@ -88,6 +88,7 @@ public class BalaEnemigo extends Bala {
 			cont.start();
 			
 			t.decrementarVidas();
+			lg.gui.decrementarVidas();
 
 			lg.reespawn();
 		}

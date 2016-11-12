@@ -133,7 +133,7 @@ public class Logica {
 
 		}
 
-		return new Reloj(celd, this);
+		return nuevo;
 	}
 
 	public Celda getCelda(int f, int c) {
@@ -389,14 +389,15 @@ public class Logica {
 	}
 
 	public void reponerTanque(int i) {
-		if (enemigos_kill % 9 == 0) {
-			fabrica = cola.remove();
+		if (enemigos_kill % 4 == 0) {
+			if (!cola.isEmpty()) {
+				fabrica = cola.remove();
+			}
 		}
 		int aux = i;
 		Celda nueva = new Celda(apariciones[aux].getFila(), apariciones[aux].getFila());
 		boolean meti = false;
 		while (!meti) {
-			System.out.println("AUX INICIAL " + aux);
 
 			if (Matriz[nueva.getFila()][nueva.getCol()].getTanque() == null) {
 				Inteligencia intel = new Inteligencia(this);
@@ -475,11 +476,7 @@ public class Logica {
 					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()] = new Celda(
 							nueva.getCelda().getFila(), nueva.getCelda().getCol());
 					Matriz[nueva.getCelda().getFila()][nueva.getCelda().getCol()].setTanque(nueva);
-					// t.setImagen(5);
-					// long millis = System.currentTimeMillis() + 500;
-					// while(System.currentTimeMillis() <= millis){
-					// }
-					// t.setImagen(0);
+
 					instPrimerLibre(nueva);
 				}
 			}
